@@ -1,14 +1,14 @@
 {
-  "name": "entity-ci-core",
-  "description": "Provides the Entity CI core.",
+  "name": "entity-core",
+  "description": "Provides the Entity core.",
   "keywords": [
-    "Entity CI"
+    "Entity"
   ],
   "author": "Orgun109uk <orgun109uk@gmail.com>",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "git://github.com/entity-ci/entity-ci-core.git"
+    "url": "git://github.com/entity-js/entity-core.git"
   },
   "scripts": {
     "test": "mocha --require ./index.js ./tests/** ./tests/**/**",
