@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">entity-ci-core/lib/Database/index.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">entity-ci-core/lib/Database/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+/**
+ * Provides the Database class managing connections.
+ *
+ * @author Orgun109uk &lt;orgun109uk@gmail.com&gt;
+ */
+
+var loader = require(&apos;nsloader&apos;),
+    Connection = loader(&apos;EntityCI/Database/Connection&apos;),
+    EUndefinedConnection = loader(
+      &apos;EntityCI/Database/Errors/EUndefinedConnection&apos;
+    ),
+    EDefinedConnection = loader(&apos;EntityCI/Database/Errors/EDefinedConnection&apos;);
+
+var sDefaultConnection = Symbol(&apos;Database.defaultConnection&apos;),
+    sConnections = Symbol(&apos;Database.connections&apos;);
+
+/**
+ * The database manager class.
+ *
+ * @class
+ */
+module.exports = class Database {
+
+  /**
+   * The class constructor.
+   *
+   * @constructor
+   */
+  constructor() {
+    &apos;use strict&apos;;
+
+    this[sDefaultConnection] = &apos;&apos;;
+    this[sConnections] = {};
+  }
+
+  /**
+   * The default connection name.
+   *
+   * @property defaultConnection
+   * @type String
+   */
+  get defaultConnection() {
+    &apos;use strict&apos;;
+
+    return this[sDefaultConnection];
+  }
+
+  /**
+   * The default connection name.
+   *
+   * @property defaultConnection
+   * @type String
+   */
+  set defaultConnection(name) {
+    &apos;use strict&apos;;
+
+    if (!this[sConnections][name]) {
+      throw new EUndefinedConnection(name);
+    }
+
+    this[sDefaultConnection] = name;
+  }
+
+  /**
+   * Get a list of the defined connection names.
+   *
+   * @property connections
+   * @type Array
+   * @readOnly
+   */
+  get connections() {
+    &apos;use strict&apos;;
+
+    return Object.keys(this[sConnections]);
+  }
+
+  /**
+   * Connect to a database.
+   *
+   * @method connect
+   * @param {String} name The name to give the connection.
+   * @param {Object} config The database connection config.
+   * @param {Boolean} [def=false] Make this the default connection.
+   * @return {Database} Returns self.
+   * @throws {EDefinedConnection} Thrown if the connection has already been
+   *   defined.
+   * @chainable
+   */
+  connect(name, config, def) {
+    &apos;use strict&apos;;
+
+    if (this[sConnections][name] !== undefined) {
+      throw new EDefinedConnection(name);
+    }
+
+    if (Object.keys(this[sConnections]).length === 0) {
+      def = true;
+    }
+
+    this[sConnections][name] = new Connection(name, config);
+    if (def === true) {
+      this[sDefaultConnection] = name;
+    }
+
+    return this;
+  }
+
+  /**
+   * Disconnect and destroys the specified connection.
+   *
+   * @method disconnect
+   * @param {String} [name] The connection name, if not specified the default
+   *   connection name is used.
+   * @return {Database} Returns self.
+   * @throws {EUndefinedConnection} Thrown if the connection doesnt exist.
+   * @chainable
+   */
+  disconnect(name) {
+    &apos;use strict&apos;;
+
+    name = name || this.defaultConnection;
+
+    if (this[sConnections][name] === undefined) {
+      throw new EUndefinedConnection(name);
+    }
+
+    this[sConnections][name].disconnect();
+    delete this[sConnections][name];
+
+    if (this[sDefaultConnection] === name) {
+      this[sDefaultConnection] = &apos;&apos;;
+    }
+
+    return this;
+  }
+
+  /**
+   * Get the defined connection.
+   *
+   * @method connection
+   * @param {String} [name] The connection name, if not provided the default
+   *   connection name is assumed.
+   * @return {Connection} The connection.
+   * @throws {EUndefinedConnection} Thrown if the connection hasnt been defined.
+   */
+  connection(name) {
+    &apos;use strict&apos;;
+
+    name = name || this.defaultConnection;
+    if (this[sConnections][name] === undefined) {
+      throw new EUndefinedConnection(name);
+    }
+
+    return this[sConnections][name];
+  }
+
+  /**
+   * Gets a mongo collection.
+   *
+   * @method collection
+   * @param {String} name The name of the collection to return.
+   * @param {String} [connection] The name of the collection, if not provided
+   *   the default connection will be used.
+   * @return {Collection} Returns a mongodb collection.
+   * @throws {EUndefinedConnection} Thrown if the connection is undefined.
+   */
+  collection(name, connection) {
+    &apos;use strict&apos;;
+
+    connection = connection || this.defaultConnection;
+    if (this[sConnections][connection] === undefined) {
+      throw new EUndefinedConnection(connection);
+    }
+
+    return this[sConnections][connection].collection(name);
+  }
+
+};
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

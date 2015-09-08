@@ -1,0 +1,1080 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "loader",
+            "range": [
+              694,
+              700
+            ],
+            "loc": {
+              "start": {
+                "line": 21,
+                "column": 4
+              },
+              "end": {
+                "line": 21,
+                "column": 10
+              }
+            }
+          },
+          "init": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "require",
+              "range": [
+                703,
+                710
+              ],
+              "loc": {
+                "start": {
+                  "line": 21,
+                  "column": 13
+                },
+                "end": {
+                  "line": 21,
+                  "column": 20
+                }
+              }
+            },
+            "arguments": [
+              {
+                "type": "Literal",
+                "value": "nsloader",
+                "raw": "'nsloader'",
+                "range": [
+                  711,
+                  721
+                ],
+                "loc": {
+                  "start": {
+                    "line": 21,
+                    "column": 21
+                  },
+                  "end": {
+                    "line": 21,
+                    "column": 31
+                  }
+                }
+              }
+            ],
+            "range": [
+              703,
+              722
+            ],
+            "loc": {
+              "start": {
+                "line": 21,
+                "column": 13
+              },
+              "end": {
+                "line": 21,
+                "column": 32
+              }
+            }
+          },
+          "range": [
+            694,
+            722
+          ],
+          "loc": {
+            "start": {
+              "line": 21,
+              "column": 4
+            },
+            "end": {
+              "line": 21,
+              "column": 32
+            }
+          }
+        },
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "EInvalidEmail",
+            "range": [
+              728,
+              741
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 4
+              },
+              "end": {
+                "line": 22,
+                "column": 17
+              }
+            }
+          },
+          "init": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "loader",
+              "range": [
+                744,
+                750
+              ],
+              "loc": {
+                "start": {
+                  "line": 22,
+                  "column": 20
+                },
+                "end": {
+                  "line": 22,
+                  "column": 26
+                }
+              }
+            },
+            "arguments": [
+              {
+                "type": "Literal",
+                "value": "EntityCI/Validators/Errors/EInvalidEmail",
+                "raw": "'EntityCI/Validators/Errors/EInvalidEmail'",
+                "range": [
+                  751,
+                  793
+                ],
+                "loc": {
+                  "start": {
+                    "line": 22,
+                    "column": 27
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 69
+                  }
+                }
+              }
+            ],
+            "range": [
+              744,
+              794
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 20
+              },
+              "end": {
+                "line": 22,
+                "column": 70
+              }
+            }
+          },
+          "range": [
+            728,
+            794
+          ],
+          "loc": {
+            "start": {
+              "line": 22,
+              "column": 4
+            },
+            "end": {
+              "line": 22,
+              "column": 70
+            }
+          }
+        }
+      ],
+      "kind": "var",
+      "range": [
+        690,
+        795
+      ],
+      "loc": {
+        "start": {
+          "line": 21,
+          "column": 0
+        },
+        "end": {
+          "line": 22,
+          "column": 71
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n *  ____            __        __                ____    ______\n * /\\  _`\\         /\\ \\__  __/\\ \\__            /\\  _`\\ /\\__  _\\\n * \\ \\ \\L\\_\\    ___\\ \\ ,_\\/\\_\\ \\ ,_\\  __  __   \\ \\ \\/\\_\\/_/\\ \\/\n *  \\ \\  _\\L  /' _ `\\ \\ \\/\\/\\ \\ \\ \\/ /\\ \\/\\ \\   \\ \\ \\/_/_ \\ \\ \\\n *   \\ \\ \\L\\ \\/\\ \\/\\ \\ \\ \\_\\ \\ \\ \\ \\_\\ \\ \\_\\ \\   \\ \\ \\L\\ \\ \\_\\ \\__\n *    \\ \\____/\\ \\_\\ \\_\\ \\__\\\\ \\_\\ \\__\\\\/`____ \\   \\ \\____/ /\\_____\\\n *     \\/___/  \\/_/\\/_/\\/__/ \\/_/\\/__/ `/___/> \\   \\/___/  \\/_____/\n *                                        /\\___/\n *                                        \\/__/\n *\n * Entity CI - Core\n ",
+          "range": [
+            0,
+            585
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 13,
+              "column": 3
+            }
+          }
+        },
+        {
+          "type": "Block",
+          "value": "*\n * Provides the email address validator rule.\n *\n * @author Orgun109uk <orgun109uk@gmail.com>\n ",
+          "range": [
+            587,
+            688
+          ],
+          "loc": {
+            "start": {
+              "line": 15,
+              "column": 0
+            },
+            "end": {
+              "line": 19,
+              "column": 3
+            }
+          }
+        }
+      ],
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Validate email address.\n *\n * @param {Mixed} value The value to validate.\n * @param {Object} options The options passed to the validator.\n * @param {Function} next The next callback.\n * @param {Error} next.err Any raised errors.\n * @throws {EInvalidEmail} Thrown if the value is an invalid email address.\n ",
+          "range": [
+            797,
+            1112
+          ],
+          "loc": {
+            "start": {
+              "line": 24,
+              "column": 0
+            },
+            "end": {
+              "line": 32,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "FunctionDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "validateEmail",
+          "range": [
+            1137,
+            1150
+          ],
+          "loc": {
+            "start": {
+              "line": 33,
+              "column": 24
+            },
+            "end": {
+              "line": 33,
+              "column": 37
+            }
+          }
+        },
+        "params": [
+          {
+            "type": "Identifier",
+            "name": "value",
+            "range": [
+              1151,
+              1156
+            ],
+            "loc": {
+              "start": {
+                "line": 33,
+                "column": 38
+              },
+              "end": {
+                "line": 33,
+                "column": 43
+              }
+            }
+          },
+          {
+            "type": "Identifier",
+            "name": "options",
+            "range": [
+              1158,
+              1165
+            ],
+            "loc": {
+              "start": {
+                "line": 33,
+                "column": 45
+              },
+              "end": {
+                "line": 33,
+                "column": 52
+              }
+            }
+          },
+          {
+            "type": "Identifier",
+            "name": "next",
+            "range": [
+              1167,
+              1171
+            ],
+            "loc": {
+              "start": {
+                "line": 33,
+                "column": 54
+              },
+              "end": {
+                "line": 33,
+                "column": 58
+              }
+            }
+          }
+        ],
+        "body": {
+          "type": "BlockStatement",
+          "body": [
+            {
+              "type": "ExpressionStatement",
+              "expression": {
+                "type": "Literal",
+                "value": "use strict",
+                "raw": "'use strict'",
+                "range": [
+                  1177,
+                  1189
+                ],
+                "loc": {
+                  "start": {
+                    "line": 34,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 34,
+                    "column": 14
+                  }
+                }
+              },
+              "range": [
+                1177,
+                1190
+              ],
+              "loc": {
+                "start": {
+                  "line": 34,
+                  "column": 2
+                },
+                "end": {
+                  "line": 34,
+                  "column": 15
+                }
+              },
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "jshint ignore:start,-W101",
+                  "range": [
+                    1194,
+                    1223
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 36,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 36,
+                      "column": 31
+                    }
+                  }
+                },
+                {
+                  "type": "Block",
+                  "value": "eslint-disable",
+                  "range": [
+                    1226,
+                    1244
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 37,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 37,
+                      "column": 20
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "IfStatement",
+              "test": {
+                "type": "UnaryExpression",
+                "operator": "!",
+                "argument": {
+                  "type": "CallExpression",
+                  "callee": {
+                    "type": "MemberExpression",
+                    "computed": false,
+                    "object": {
+                      "type": "Literal",
+                      "value": {},
+                      "raw": "/^(([^<>()[\\]\\\\.,;:\\s@\\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\\"]+)*)|(\\\".+\\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$/",
+                      "regex": {
+                        "pattern": "^(([^<>()[\\]\\\\.,;:\\s@\\\"]+(\\.[^<>()[\\]\\\\.,;:\\s@\\\"]+)*)|(\\\".+\\\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$",
+                        "flags": ""
+                      },
+                      "range": [
+                        1253,
+                        1408
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 38,
+                          "column": 8
+                        },
+                        "end": {
+                          "line": 38,
+                          "column": 163
+                        }
+                      }
+                    },
+                    "property": {
+                      "type": "Identifier",
+                      "name": "test",
+                      "range": [
+                        1409,
+                        1413
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 38,
+                          "column": 164
+                        },
+                        "end": {
+                          "line": 38,
+                          "column": 168
+                        }
+                      }
+                    },
+                    "range": [
+                      1253,
+                      1413
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 38,
+                        "column": 8
+                      },
+                      "end": {
+                        "line": 38,
+                        "column": 168
+                      }
+                    }
+                  },
+                  "arguments": [
+                    {
+                      "type": "Identifier",
+                      "name": "value",
+                      "range": [
+                        1414,
+                        1419
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 38,
+                          "column": 169
+                        },
+                        "end": {
+                          "line": 38,
+                          "column": 174
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1253,
+                    1420
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 38,
+                      "column": 8
+                    },
+                    "end": {
+                      "line": 38,
+                      "column": 175
+                    }
+                  }
+                },
+                "prefix": true,
+                "range": [
+                  1251,
+                  1420
+                ],
+                "loc": {
+                  "start": {
+                    "line": 38,
+                    "column": 6
+                  },
+                  "end": {
+                    "line": 38,
+                    "column": 175
+                  }
+                }
+              },
+              "consequent": {
+                "type": "BlockStatement",
+                "body": [
+                  {
+                    "type": "ReturnStatement",
+                    "argument": {
+                      "type": "CallExpression",
+                      "callee": {
+                        "type": "Identifier",
+                        "name": "next",
+                        "range": [
+                          1435,
+                          1439
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 39,
+                            "column": 11
+                          },
+                          "end": {
+                            "line": 39,
+                            "column": 15
+                          }
+                        }
+                      },
+                      "arguments": [
+                        {
+                          "type": "NewExpression",
+                          "callee": {
+                            "type": "Identifier",
+                            "name": "EInvalidEmail",
+                            "range": [
+                              1444,
+                              1457
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 39,
+                                "column": 20
+                              },
+                              "end": {
+                                "line": 39,
+                                "column": 33
+                              }
+                            }
+                          },
+                          "arguments": [
+                            {
+                              "type": "Identifier",
+                              "name": "value",
+                              "range": [
+                                1458,
+                                1463
+                              ],
+                              "loc": {
+                                "start": {
+                                  "line": 39,
+                                  "column": 34
+                                },
+                                "end": {
+                                  "line": 39,
+                                  "column": 39
+                                }
+                              }
+                            }
+                          ],
+                          "range": [
+                            1440,
+                            1464
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 39,
+                              "column": 16
+                            },
+                            "end": {
+                              "line": 39,
+                              "column": 40
+                            }
+                          }
+                        }
+                      ],
+                      "range": [
+                        1435,
+                        1465
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 39,
+                          "column": 11
+                        },
+                        "end": {
+                          "line": 39,
+                          "column": 41
+                        }
+                      }
+                    },
+                    "range": [
+                      1428,
+                      1466
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 39,
+                        "column": 4
+                      },
+                      "end": {
+                        "line": 39,
+                        "column": 42
+                      }
+                    }
+                  }
+                ],
+                "range": [
+                  1422,
+                  1470
+                ],
+                "loc": {
+                  "start": {
+                    "line": 38,
+                    "column": 177
+                  },
+                  "end": {
+                    "line": 40,
+                    "column": 3
+                  }
+                }
+              },
+              "alternate": null,
+              "range": [
+                1247,
+                1470
+              ],
+              "loc": {
+                "start": {
+                  "line": 38,
+                  "column": 2
+                },
+                "end": {
+                  "line": 40,
+                  "column": 3
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "jshint ignore:start,-W101",
+                  "range": [
+                    1194,
+                    1223
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 36,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 36,
+                      "column": 31
+                    }
+                  }
+                },
+                {
+                  "type": "Block",
+                  "value": "eslint-disable",
+                  "range": [
+                    1226,
+                    1244
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 37,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 37,
+                      "column": 20
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "eslint-enable",
+                  "range": [
+                    1473,
+                    1490
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 41,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 41,
+                      "column": 19
+                    }
+                  }
+                },
+                {
+                  "type": "Block",
+                  "value": "jshint ignore:end,+W101",
+                  "range": [
+                    1493,
+                    1520
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 42,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 42,
+                      "column": 29
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "ExpressionStatement",
+              "expression": {
+                "type": "CallExpression",
+                "callee": {
+                  "type": "Identifier",
+                  "name": "next",
+                  "range": [
+                    1524,
+                    1528
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 44,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 44,
+                      "column": 6
+                    }
+                  }
+                },
+                "arguments": [],
+                "range": [
+                  1524,
+                  1530
+                ],
+                "loc": {
+                  "start": {
+                    "line": 44,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 44,
+                    "column": 8
+                  }
+                }
+              },
+              "range": [
+                1524,
+                1531
+              ],
+              "loc": {
+                "start": {
+                  "line": 44,
+                  "column": 2
+                },
+                "end": {
+                  "line": 44,
+                  "column": 9
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "eslint-enable",
+                  "range": [
+                    1473,
+                    1490
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 41,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 41,
+                      "column": 19
+                    }
+                  }
+                },
+                {
+                  "type": "Block",
+                  "value": "jshint ignore:end,+W101",
+                  "range": [
+                    1493,
+                    1520
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 42,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 42,
+                      "column": 29
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "range": [
+            1173,
+            1533
+          ],
+          "loc": {
+            "start": {
+              "line": 33,
+              "column": 60
+            },
+            "end": {
+              "line": 45,
+              "column": 1
+            }
+          }
+        },
+        "generator": false,
+        "expression": false,
+        "range": [
+          1128,
+          1533
+        ],
+        "loc": {
+          "start": {
+            "line": 33,
+            "column": 15
+          },
+          "end": {
+            "line": 45,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * Validate email address.\n *\n * @param {Mixed} value The value to validate.\n * @param {Object} options The options passed to the validator.\n * @param {Function} next The next callback.\n * @param {Error} next.err Any raised errors.\n * @throws {EInvalidEmail} Thrown if the value is an invalid email address.\n ",
+            "range": [
+              797,
+              1112
+            ],
+            "loc": {
+              "start": {
+                "line": 24,
+                "column": 0
+              },
+              "end": {
+                "line": 32,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "range": [
+        1113,
+        1533
+      ],
+      "loc": {
+        "start": {
+          "line": 33,
+          "column": 0
+        },
+        "end": {
+          "line": 45,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Validate email address.\n *\n * @param {Mixed} value The value to validate.\n * @param {Object} options The options passed to the validator.\n * @param {Function} next The next callback.\n * @param {Error} next.err Any raised errors.\n * @throws {EInvalidEmail} Thrown if the value is an invalid email address.\n ",
+          "range": [
+            797,
+            1112
+          ],
+          "loc": {
+            "start": {
+              "line": 24,
+              "column": 0
+            },
+            "end": {
+              "line": 32,
+              "column": 3
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    690,
+    1533
+  ],
+  "loc": {
+    "start": {
+      "line": 21,
+      "column": 0
+    },
+    "end": {
+      "line": 45,
+      "column": 1
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\n *  ____            __        __                ____    ______\n * /\\  _`\\         /\\ \\__  __/\\ \\__            /\\  _`\\ /\\__  _\\\n * \\ \\ \\L\\_\\    ___\\ \\ ,_\\/\\_\\ \\ ,_\\  __  __   \\ \\ \\/\\_\\/_/\\ \\/\n *  \\ \\  _\\L  /' _ `\\ \\ \\/\\/\\ \\ \\ \\/ /\\ \\/\\ \\   \\ \\ \\/_/_ \\ \\ \\\n *   \\ \\ \\L\\ \\/\\ \\/\\ \\ \\ \\_\\ \\ \\ \\ \\_\\ \\ \\_\\ \\   \\ \\ \\L\\ \\ \\_\\ \\__\n *    \\ \\____/\\ \\_\\ \\_\\ \\__\\\\ \\_\\ \\__\\\\/`____ \\   \\ \\____/ /\\_____\\\n *     \\/___/  \\/_/\\/_/\\/__/ \\/_/\\/__/ `/___/> \\   \\/___/  \\/_____/\n *                                        /\\___/\n *                                        \\/__/\n *\n * Entity CI - Core\n ",
+      "range": [
+        0,
+        585
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 13,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n * Provides the email address validator rule.\n *\n * @author Orgun109uk <orgun109uk@gmail.com>\n ",
+      "range": [
+        587,
+        688
+      ],
+      "loc": {
+        "start": {
+          "line": 15,
+          "column": 0
+        },
+        "end": {
+          "line": 19,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n * Validate email address.\n *\n * @param {Mixed} value The value to validate.\n * @param {Object} options The options passed to the validator.\n * @param {Function} next The next callback.\n * @param {Error} next.err Any raised errors.\n * @throws {EInvalidEmail} Thrown if the value is an invalid email address.\n ",
+      "range": [
+        797,
+        1112
+      ],
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 0
+        },
+        "end": {
+          "line": 32,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "jshint ignore:start,-W101",
+      "range": [
+        1194,
+        1223
+      ],
+      "loc": {
+        "start": {
+          "line": 36,
+          "column": 2
+        },
+        "end": {
+          "line": 36,
+          "column": 31
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "eslint-disable",
+      "range": [
+        1226,
+        1244
+      ],
+      "loc": {
+        "start": {
+          "line": 37,
+          "column": 2
+        },
+        "end": {
+          "line": 37,
+          "column": 20
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "eslint-enable",
+      "range": [
+        1473,
+        1490
+      ],
+      "loc": {
+        "start": {
+          "line": 41,
+          "column": 2
+        },
+        "end": {
+          "line": 41,
+          "column": 19
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "jshint ignore:end,+W101",
+      "range": [
+        1493,
+        1520
+      ],
+      "loc": {
+        "start": {
+          "line": 42,
+          "column": 2
+        },
+        "end": {
+          "line": 42,
+          "column": 29
+        }
+      }
+    }
+  ]
+}

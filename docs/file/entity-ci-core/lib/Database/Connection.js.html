@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">entity-ci-core/lib/Database/Connection.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">entity-ci-core/lib/Database/Connection.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+/**
+ * Provides the database Connection class.
+ *
+ * @author Orgun109uk &lt;orgun109uk@gmail.com&gt;
+ */
+
+var mongojs = require(&apos;mongojs&apos;),
+    loader = require(&apos;nsloader&apos;);
+
+var sDb = Symbol(&apos;Connection.db&apos;),
+    sName = Symbol(&apos;Connection.name&apos;),
+    sConfigToURI = Symbol.for(&apos;Connection.configToURI&apos;);
+
+/**
+ * The Connection class.
+ *
+ * @class Connection
+ */
+module.exports = class Connection {
+
+  /**
+   * The connection class constructor.
+   *
+   * @constructor
+   * @param {String} name The unique ID of the database connection.
+   * @param {Object} config The database config object.
+   *   @param {String} [config.user] The database username.
+   *   @param {String} [config.pass] The database password.
+   *   @param {String} [config.host=&apos;0.0.0.0&apos;] The database host.
+   *   @param {Integer} [config.port=27017] The database port.
+   *   @param {String} config.name The name of the database to use.
+   */
+  constructor(name, config) {
+    &apos;use strict&apos;;
+
+    Object.assign(config, {
+      host: &apos;0.0.0.0&apos;,
+      port: 27017
+    });
+
+    this[sName] = name;
+    this[sDb] = mongojs(this[sConfigToURI](config));
+
+    var me = this;
+    this[sDb].on(&apos;error&apos;, function (err) {
+      loader(&apos;EntityCI&apos;).eventManager.fire(&apos;database.connection.error&apos;, null, {
+        connection: me,
+        err: err
+      });
+    });
+
+    this[sDb].on(&apos;ready&apos;, function () {
+      loader(&apos;EntityCI&apos;).eventManager.fire(&apos;database.connection.ready&apos;, null, {
+        connection: me
+      });
+    });
+  }
+
+  /**
+   * The name of the connection.
+   *
+   * @property name
+   * @type String
+   * @readOnly
+   */
+  get name() {
+    &apos;use strict&apos;;
+
+    return this[sName];
+  }
+
+  /**
+   * The mongo database connection.
+   *
+   * @property database
+   * @type MongoDB
+   * @readOnly
+   */
+  get database() {
+    &apos;use strict&apos;;
+
+    return this[sDb];
+  }
+
+  /**
+   * Build a connection URI from a config bject.
+   *
+   * @method configToURI
+   * @param {Object} config The config object.
+   * @return {String} The generated connection URI.
+   * @private
+   */
+  [sConfigToURI](config) {
+    &apos;use strict&apos;;
+
+    var uri = &apos;&apos;;
+    if (config.user) {
+      uri += config.user;
+
+      if (config.pass) {
+        uri += &apos;:&apos; + config.pass;
+      }
+
+      uri += &apos;@&apos;;
+    }
+
+    uri += config.host ? config.host : &apos;0.0.0.0&apos;;
+    if (config.port) {
+      uri += &apos;:&apos; + config.port;
+    }
+
+    uri += &apos;/&apos; + config.name;
+    return uri;
+  }
+
+  /**
+   * Get a collection from the mongo database.
+   *
+   * @method collection
+   * @param {String} collection The name of the collection to return.
+   * @returns {Collection} A mongodb collection.
+   */
+  collection(name) {
+    &apos;use strict&apos;;
+
+    return this[sDb].collection(name);
+  }
+
+  /**
+   * Disconnects the database connection.
+   *
+   * @method disconnect
+   * @returns {Connection} Returns self.
+   * @chainable
+   */
+  disconnect() {
+    &apos;use strict&apos;;
+
+    this[sDb].close();
+    return this;
+  }
+
+};
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

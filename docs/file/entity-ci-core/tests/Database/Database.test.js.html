@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">entity-ci-core/tests/Database/Database.test.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">entity-ci-core/tests/Database/Database.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+var async = require(&apos;async&apos;),
+    test = require(&apos;unit.js&apos;),
+    loader = require(&apos;nsloader&apos;),
+    Database = loader(&apos;EntityCI/Database&apos;),
+    Connection = loader(&apos;EntityCI/Database/Connection&apos;),
+    EDefinedConnection = loader(&apos;EntityCI/Database/Errors/EDefinedConnection&apos;),
+    EUndefinedConnection = loader(
+      &apos;EntityCI/Database/Errors/EUndefinedConnection&apos;
+    );
+
+var database = null;
+
+describe(&apos;entity-ci/entity-ci-core/Database&apos;, function () {
+
+  &apos;use strict&apos;;
+
+  afterEach(function (done) {
+
+    var queue = [],
+        connections = database ? database.connections : [];
+
+    function clearAndDrop(name) {
+      return function (next) {
+        database.collection(&apos;test&apos;, name).drop(function () {
+          database.disconnect(name);
+          next();
+        });
+      };
+    }
+
+    for (var i = 0, len = connections.length; i &lt; len; i++) {
+      queue.push(clearAndDrop(connections[i]));
+    }
+
+    async.series(queue, done);
+
+  });
+
+  describe(&apos;Database.connect()&apos;, function () {
+
+    it(&apos;shouldConnectAndMakeDefault&apos;, function () {
+
+      database = new Database();
+      database.connect(&apos;default&apos;, {
+        name: &apos;test&apos;
+      });
+
+      test.string(
+        database.defaultConnection
+      ).is(&apos;default&apos;);
+
+    });
+
+    it(&apos;shouldThrowAnErrorIfConnectionExists&apos;, function () {
+
+      database = new Database();
+      database.connect(&apos;default&apos;, {
+        name: &apos;test&apos;
+      });
+
+      test.error(function () {
+        database.connect(&apos;default&apos;, {
+          name: &apos;test&apos;
+        });
+      }).isInstanceOf(EDefinedConnection);
+
+    });
+
+  });
+
+  describe(&apos;Database.disconnect()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfConnectionsUndefined&apos;, function () {
+
+      var database = new Database();
+      test.exception(function () {
+
+        database.disconnect(&apos;test&apos;);
+
+      }).isInstanceOf(EUndefinedConnection);
+
+    });
+
+    it(&apos;shouldDisconnectDefinedConnection&apos;, function () {
+
+      var database = new Database();
+      database.connect(&apos;test&apos;, {
+        name: &apos;test&apos;
+      });
+
+      database.disconnect(&apos;test&apos;);
+
+      test.error(function () {
+        database.connection(&apos;test&apos;);
+      }).isInstanceOf(EUndefinedConnection);
+
+    });
+
+    it(&apos;shouldDisconnectDefaultConnection&apos;, function () {
+
+      var database = new Database();
+      database.connect(&apos;test&apos;, {
+        name: &apos;test&apos;
+      });
+
+      database.connect(&apos;test2&apos;, {
+        name: &apos;test2&apos;
+      });
+
+      database.disconnect();
+
+      test.error(function () {
+        database.connection(&apos;test&apos;);
+      }).isInstanceOf(EUndefinedConnection);
+
+      test.object(
+        database.connection(&apos;test2&apos;)
+      ).isInstanceOf(Connection);
+
+    });
+
+  });
+
+  describe(&apos;Database.collection()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfConnectionsUndefined&apos;, function () {
+
+      var database = new Database();
+      test.exception(function () {
+        database.collection(&apos;test&apos;);
+      }).isInstanceOf(EUndefinedConnection);
+
+    });
+
+    it(&apos;shouldReturnCollectionObject&apos;, function () {
+
+      var database = new Database();
+      database.connect(&apos;test&apos;, {
+        name: &apos;test&apos;
+      });
+
+      test.object(
+        database.collection(&apos;test&apos;)
+      );
+
+    });
+
+  });
+
+  describe(&apos;Database.connection()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfConnectionsUndefined&apos;, function () {
+
+      var database = new Database();
+      test.error(function () {
+        database.connection(&apos;test&apos;);
+      }).isInstanceOf(EUndefinedConnection);
+
+    });
+
+    it(&apos;shouldReturnConnectionObjectIfExists&apos;, function () {
+
+      var database = new Database();
+      database.connect(&apos;test&apos;, {
+        name: &apos;test&apos;
+      });
+
+      test.object(
+        database.connection(&apos;test&apos;)
+      ).isInstanceOf(Connection);
+
+    });
+
+  });
+
+  describe(&apos;Database.connections&apos;, function () {
+
+    it(&apos;shouldReturnAnArrayOfConnectionNames&apos;, function () {
+
+      var database = new Database();
+      database.connect(&apos;default&apos;, {
+        name: &apos;test&apos;
+      });
+
+      database.connect(&apos;test&apos;, {
+        name: &apos;test&apos;
+      });
+
+      test.array(
+        database.connections
+      ).hasLength(2).is([&apos;default&apos;, &apos;test&apos;]);
+
+    });
+
+  });
+
+  describe(&apos;Database.defaultConnection&apos;, function () {
+
+    it(&apos;shouldReturnUndefinedIfNotSet&apos;, function () {
+
+      var database = new Database();
+      test.string(
+        database.defaultConnection
+      ).is(&apos;&apos;);
+
+    });
+
+    it(&apos;shouldReturnTheNameOfTheDefaultConnection&apos;, function () {
+
+      var database = new Database();
+      database.connect(&apos;default&apos;, {
+        name: &apos;test&apos;
+      });
+
+      database.connect(&apos;test&apos;, {
+        name: &apos;test&apos;
+      }, true);
+
+      database.connect(&apos;test2&apos;, {
+        name: &apos;test&apos;
+      });
+
+      test.string(
+        database.defaultConnection
+      ).is(&apos;test&apos;);
+
+    });
+
+    it(&apos;shouldSetTheDefault&apos;, function () {
+
+      var database = new Database();
+      database.connect(&apos;default&apos;, {
+        name: &apos;test&apos;
+      });
+
+      database.connect(&apos;test&apos;, {
+        name: &apos;test&apos;
+      });
+
+      test.string(
+        database.defaultConnection
+      ).is(&apos;default&apos;);
+
+      database.defaultConnection = &apos;test&apos;;
+
+      test.string(
+        database.defaultConnection
+      ).is(&apos;test&apos;);
+
+    });
+
+  });
+
+});
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

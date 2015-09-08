@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for entity-ci-core/lib/Validators/Rules/Url.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">entity-ci-core/lib/Validators/Rules/Url.js</span></h1>
+    <h2>
+        Statements: <span class="metric">100% <small>(9 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(2 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(1 / 1)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(9 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">entity-ci-core/lib/Validators/Rules/</a> &#187; Url.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /' _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+&nbsp;
+/**
+ * Provides the URL address validator rule.
+ *
+ * @author Orgun109uk &lt;orgun109uk@gmail.com&gt;
+ */
+&nbsp;
+'use strict';
+&nbsp;
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+exports['default'] = validateUrl;
+var loader = require('nsloader'),
+    EInvalidURL = loader('EntityCI/Validators/Errors/EInvalidURL');
+&nbsp;
+/**
+ * Validate URL address.
+ *
+ * @param {Mixed} value The value to validate.
+ * @param {Object} options The options passed to the validator.
+ * @param {Function} next The next callback.
+ * @param {Error} next.err Any raised errors.
+ * @throws {EInvalidUrl} Thrown if the value is an invalid url address.
+ */
+&nbsp;
+function validateUrl(value, options, next) {
+  'use strict';
+&nbsp;
+  var rx = new RegExp('^' +
+  // protocol identifier
+  '(?:(?:https?|ftp)://)' +
+  // user:pass authentication
+  '(?:\\S+(?::\\S*)?@)?' + '(?:' +
+  // IP address exclusion
+  // private &amp; local networks
+  '(?!(?:10|127)(?:\\.\\d{1,3}){3})' + '(?!(?:169\\.254|192\\.168)(?:\\.\\d{1,3}){2})' + '(?!172\\.(?:1[6-9]|2\\d|3[0-1])(?:\\.\\d{1,3}){2})' +
+  // IP address dotted notation octets
+  // excludes loopback network 0.0.0.0
+  // excludes reserved space &gt;= 224.0.0.0
+  // excludes network &amp; broacast addresses
+  // (first &amp; last IP address of each class)
+  '(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])' + '(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}' + '(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))' + '|' +
+  // host name
+  '(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)' +
+  // domain name
+  '(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*' +
+  // TLD identifier
+  '(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))' + ')' +
+  // port number
+  '(?::\\d{2,5})?' +
+  // resource path
+  '(?:/\\S*)?' + '$', 'i');
+&nbsp;
+  if (!rx.test(value)) {
+    return next(new EInvalidURL(value));
+  }
+&nbsp;
+  next();
+}
+&nbsp;
+module.exports = exports['default'];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3VidW50dS93b3Jrc3BhY2UvZW50aXR5LWNpLWNvcmUvbGliL1ZhbGlkYXRvcnMvUnVsZXMvVXJsLmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7cUJBZ0N3QixXQUFXO0FBWm5DLElBQUksTUFBTSxHQUFHLE9BQU8sQ0FBQyxVQUFVLENBQUM7SUFDNUIsV0FBVyxHQUFHLE1BQU0sQ0FBQyx3Q0FBd0MsQ0FBQyxDQUFDOzs7Ozs7Ozs7Ozs7QUFXcEQsU0FBUyxXQUFXLENBQUUsS0FBSyxFQUFFLE9BQU8sRUFBRSxJQUFJLEVBQUU7QUFDekQsY0FBWSxDQUFDOztBQUViLE1BQUksRUFBRSxHQUFHLElBQUksTUFBTSxDQUNqQixHQUFHOztBQUVILHlCQUF1Qjs7QUFFdkIsd0JBQXNCLEdBQ3RCLEtBQUs7OztBQUdMLG9DQUFrQyxHQUNsQywrQ0FBK0MsR0FDL0Msb0RBQW9EOzs7Ozs7QUFNcEQsMENBQXdDLEdBQ3hDLDRDQUE0QyxHQUM1QyxnREFBZ0QsR0FDaEQsR0FBRzs7QUFFSCw4REFBNEQ7O0FBRTVELGtFQUFnRTs7QUFFaEUsdUNBQXFDLEdBQ3JDLEdBQUc7O0FBRUgsa0JBQWdCOztBQUVoQixjQUFZLEdBQ1osR0FBRyxFQUFFLEdBQUcsQ0FBQyxDQUFDOztBQUVaLE1BQUksQ0FBQyxFQUFFLENBQUMsSUFBSSxDQUFDLEtBQUssQ0FBQyxFQUFFO0FBQ25CLFdBQU8sSUFBSSxDQUFDLElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUM7R0FDckM7O0FBRUQsTUFBSSxFQUFFLENBQUM7Q0FDUiIsImZpbGUiOiIvaG9tZS91YnVudHUvd29ya3NwYWNlL2VudGl0eS1jaS1jb3JlL2xpYi9WYWxpZGF0b3JzL1J1bGVzL1VybC5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogIF9fX18gICAgICAgICAgICBfXyAgICAgICAgX18gICAgICAgICAgICAgICAgX19fXyAgICBfX19fX19cbiAqIC9cXCAgX2BcXCAgICAgICAgIC9cXCBcXF9fICBfXy9cXCBcXF9fICAgICAgICAgICAgL1xcICBfYFxcIC9cXF9fICBfXFxcbiAqIFxcIFxcIFxcTFxcX1xcICAgIF9fX1xcIFxcICxfXFwvXFxfXFwgXFwgLF9cXCAgX18gIF9fICAgXFwgXFwgXFwvXFxfXFwvXy9cXCBcXC9cbiAqICBcXCBcXCAgX1xcTCAgLycgXyBgXFwgXFwgXFwvXFwvXFwgXFwgXFwgXFwvIC9cXCBcXC9cXCBcXCAgIFxcIFxcIFxcL18vXyBcXCBcXCBcXFxuICogICBcXCBcXCBcXExcXCBcXC9cXCBcXC9cXCBcXCBcXCBcXF9cXCBcXCBcXCBcXCBcXF9cXCBcXCBcXF9cXCBcXCAgIFxcIFxcIFxcTFxcIFxcIFxcX1xcIFxcX19cbiAqICAgIFxcIFxcX19fXy9cXCBcXF9cXCBcXF9cXCBcXF9fXFxcXCBcXF9cXCBcXF9fXFxcXC9gX19fXyBcXCAgIFxcIFxcX19fXy8gL1xcX19fX19cXFxuICogICAgIFxcL19fXy8gIFxcL18vXFwvXy9cXC9fXy8gXFwvXy9cXC9fXy8gYC9fX18vPiBcXCAgIFxcL19fXy8gIFxcL19fX19fL1xuICogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgL1xcX19fL1xuICogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXFwvX18vXG4gKlxuICogRW50aXR5IENJIC0gQ29yZVxuICovXG5cbi8qKlxuICogUHJvdmlkZXMgdGhlIFVSTCBhZGRyZXNzIHZhbGlkYXRvciBydWxlLlxuICpcbiAqIEBhdXRob3IgT3JndW4xMDl1ayA8b3JndW4xMDl1a0BnbWFpbC5jb20+XG4gKi9cblxudmFyIGxvYWRlciA9IHJlcXVpcmUoJ25zbG9hZGVyJyksXG4gICAgRUludmFsaWRVUkwgPSBsb2FkZXIoJ0VudGl0eUNJL1ZhbGlkYXRvcnMvRXJyb3JzL0VJbnZhbGlkVVJMJyk7XG5cbi8qKlxuICogVmFsaWRhdGUgVVJMIGFkZHJlc3MuXG4gKlxuICogQHBhcmFtIHtNaXhlZH0gdmFsdWUgVGhlIHZhbHVlIHRvIHZhbGlkYXRlLlxuICogQHBhcmFtIHtPYmplY3R9IG9wdGlvbnMgVGhlIG9wdGlvbnMgcGFzc2VkIHRvIHRoZSB2YWxpZGF0b3IuXG4gKiBAcGFyYW0ge0Z1bmN0aW9ufSBuZXh0IFRoZSBuZXh0IGNhbGxiYWNrLlxuICogQHBhcmFtIHtFcnJvcn0gbmV4dC5lcnIgQW55IHJhaXNlZCBlcnJvcnMuXG4gKiBAdGhyb3dzIHtFSW52YWxpZFVybH0gVGhyb3duIGlmIHRoZSB2YWx1ZSBpcyBhbiBpbnZhbGlkIHVybCBhZGRyZXNzLlxuICovXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiB2YWxpZGF0ZVVybCAodmFsdWUsIG9wdGlvbnMsIG5leHQpIHtcbiAgJ3VzZSBzdHJpY3QnO1xuXG4gIHZhciByeCA9IG5ldyBSZWdFeHAoXG4gICAgJ14nICtcbiAgICAvLyBwcm90b2NvbCBpZGVudGlmaWVyXG4gICAgJyg/Oig/Omh0dHBzP3xmdHApOi8vKScgK1xuICAgIC8vIHVzZXI6cGFzcyBhdXRoZW50aWNhdGlvblxuICAgICcoPzpcXFxcUysoPzo6XFxcXFMqKT9AKT8nICtcbiAgICAnKD86JyArXG4gICAgLy8gSVAgYWRkcmVzcyBleGNsdXNpb25cbiAgICAvLyBwcml2YXRlICYgbG9jYWwgbmV0d29ya3NcbiAgICAnKD8hKD86MTB8MTI3KSg/OlxcXFwuXFxcXGR7MSwzfSl7M30pJyArXG4gICAgJyg/ISg/OjE2OVxcXFwuMjU0fDE5MlxcXFwuMTY4KSg/OlxcXFwuXFxcXGR7MSwzfSl7Mn0pJyArXG4gICAgJyg/ITE3MlxcXFwuKD86MVs2LTldfDJcXFxcZHwzWzAtMV0pKD86XFxcXC5cXFxcZHsxLDN9KXsyfSknICtcbiAgICAvLyBJUCBhZGRyZXNzIGRvdHRlZCBub3RhdGlvbiBvY3RldHNcbiAgICAvLyBleGNsdWRlcyBsb29wYmFjayBuZXR3b3JrIDAuMC4wLjBcbiAgICAvLyBleGNsdWRlcyByZXNlcnZlZCBzcGFjZSA+PSAyMjQuMC4wLjBcbiAgICAvLyBleGNsdWRlcyBuZXR3b3JrICYgYnJvYWNhc3QgYWRkcmVzc2VzXG4gICAgLy8gKGZpcnN0ICYgbGFzdCBJUCBhZGRyZXNzIG9mIGVhY2ggY2xhc3MpXG4gICAgJyg/OlsxLTldXFxcXGQ/fDFcXFxcZFxcXFxkfDJbMDFdXFxcXGR8MjJbMC0zXSknICtcbiAgICAnKD86XFxcXC4oPzoxP1xcXFxkezEsMn18MlswLTRdXFxcXGR8MjVbMC01XSkpezJ9JyArXG4gICAgJyg/OlxcXFwuKD86WzEtOV1cXFxcZD98MVxcXFxkXFxcXGR8MlswLTRdXFxcXGR8MjVbMC00XSkpJyArXG4gICAgJ3wnICtcbiAgICAvLyBob3N0IG5hbWVcbiAgICAnKD86KD86W2EtelxcXFx1MDBhMS1cXFxcdWZmZmYwLTldLSopKlthLXpcXFxcdTAwYTEtXFxcXHVmZmZmMC05XSspJyArXG4gICAgLy8gZG9tYWluIG5hbWVcbiAgICAnKD86XFxcXC4oPzpbYS16XFxcXHUwMGExLVxcXFx1ZmZmZjAtOV0tKikqW2EtelxcXFx1MDBhMS1cXFxcdWZmZmYwLTldKykqJyArXG4gICAgLy8gVExEIGlkZW50aWZpZXJcbiAgICAnKD86XFxcXC4oPzpbYS16XFxcXHUwMGExLVxcXFx1ZmZmZl17Mix9KSknICtcbiAgICAnKScgK1xuICAgIC8vIHBvcnQgbnVtYmVyXG4gICAgJyg/OjpcXFxcZHsyLDV9KT8nICtcbiAgICAvLyByZXNvdXJjZSBwYXRoXG4gICAgJyg/Oi9cXFxcUyopPycgK1xuICAgICckJywgJ2knKTtcblxuICBpZiAoIXJ4LnRlc3QodmFsdWUpKSB7XG4gICAgcmV0dXJuIG5leHQobmV3IEVJbnZhbGlkVVJMKHZhbHVlKSk7XG4gIH1cblxuICBuZXh0KCk7XG59XG4iXX0=</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Sep 04 2015 07:59:28 GMT+0000 (UTC)</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

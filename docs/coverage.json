@@ -1,0 +1,199 @@
+{
+  "coverage": "100%",
+  "expectCount": 254,
+  "actualCount": 254,
+  "files": {
+    "lib/EntityManager/BaseEntity.js": {
+      "expectCount": 24,
+      "actualCount": 24
+    },
+    "lib/Utils/Config.js": {
+      "expectCount": 5,
+      "actualCount": 5
+    },
+    "lib/Database/Connection.js": {
+      "expectCount": 7,
+      "actualCount": 7
+    },
+    "lib/Utils/Data.js": {
+      "expectCount": 10,
+      "actualCount": 10
+    },
+    "lib/Database/index.js": {
+      "expectCount": 9,
+      "actualCount": 9
+    },
+    "lib/EntityManager/Errors/ECantFindEntity.js": {
+      "expectCount": 4,
+      "actualCount": 4
+    },
+    "lib/Database/Errors/EDefinedConnection.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/EError.js": {
+      "expectCount": 4,
+      "actualCount": 4
+    },
+    "lib/EntityManager/Errors/EFailedEntity.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/Validators/Errors/EInvalidCharacters.js": {
+      "expectCount": 4,
+      "actualCount": 4
+    },
+    "lib/Validators/Errors/EInvalidEmail.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/EntityManager/Errors/EInvalidEntity.js": {
+      "expectCount": 1,
+      "actualCount": 1
+    },
+    "lib/Validators/Errors/EInvalidLength.js": {
+      "expectCount": 5,
+      "actualCount": 5
+    },
+    "lib/Validators/Errors/EInvalidURL.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/Sanitizers/Errors/EInvalidValue.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/EntityManager/Errors/EMachineNameExists.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/EntityManager/Errors/EMissingMachineName.js": {
+      "expectCount": 1,
+      "actualCount": 1
+    },
+    "lib/Validators/Errors/EMustContainDigit.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/Validators/Errors/EMustContainLowercase.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/Validators/Errors/EMustContainUppercase.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/PluginManager/Errors/EPluginDisabled.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/PluginManager/Errors/EPluginEnabled.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/PluginManager/Errors/EPluginUnmetDependencies.js": {
+      "expectCount": 4,
+      "actualCount": 4
+    },
+    "lib/EntityManager/Errors/ESchemaFieldDefined.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/Database/Errors/EUndefinedConnection.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/EventManager/Errors/EUndefinedEvent.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/EntityManager/Errors/EUnknownFieldType.js": {
+      "expectCount": 4,
+      "actualCount": 4
+    },
+    "lib/Sanitizers/Errors/EUnknownSanitizer.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/EntityManager/Errors/EUnknownSchemaField.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/Validators/Errors/EUnknownValidator.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/PluginManager/Errors/EUnknownPlugin.js": {
+      "expectCount": 3,
+      "actualCount": 3
+    },
+    "lib/EntityManager/Entity.js": {
+      "expectCount": 9,
+      "actualCount": 9
+    },
+    "lib/index.js": {
+      "expectCount": 12,
+      "actualCount": 12
+    },
+    "lib/EntityManager/index.js": {
+      "expectCount": 14,
+      "actualCount": 14
+    },
+    "lib/EventManager/index.js": {
+      "expectCount": 7,
+      "actualCount": 7
+    },
+    "lib/Locale/index.js": {
+      "expectCount": 13,
+      "actualCount": 13
+    },
+    "lib/PluginManager/Plugin.js": {
+      "expectCount": 7,
+      "actualCount": 7
+    },
+    "lib/PluginManager/index.js": {
+      "expectCount": 15,
+      "actualCount": 15
+    },
+    "lib/Sanitizers/index.js": {
+      "expectCount": 7,
+      "actualCount": 7
+    },
+    "lib/EntityManager/Schema.js": {
+      "expectCount": 20,
+      "actualCount": 20
+    },
+    "lib/Validators/index.js": {
+      "expectCount": 7,
+      "actualCount": 7
+    },
+    "lib/Sanitizers/Rules/Trim.js": {
+      "expectCount": 1,
+      "actualCount": 1
+    },
+    "lib/Utils/SortBy.js": {
+      "expectCount": 1,
+      "actualCount": 1
+    },
+    "lib/Validators/Rules/Email.js": {
+      "expectCount": 1,
+      "actualCount": 1
+    },
+    "lib/EntityManager/Validators/Entity.js": {
+      "expectCount": 1,
+      "actualCount": 1
+    },
+    "lib/Validators/Rules/MachineName.js": {
+      "expectCount": 1,
+      "actualCount": 1
+    },
+    "lib/Validators/Rules/Password.js": {
+      "expectCount": 1,
+      "actualCount": 1
+    },
+    "lib/Validators/Rules/Url.js": {
+      "expectCount": 1,
+      "actualCount": 1
+    }
+  }
+}

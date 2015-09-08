@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for entity-ci-core/lib/Sanitizers/Errors/EInvalidValue.js</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../../../prettify.css">
+    <link rel="stylesheet" href="../../../../base.css">
+    <style type='text/css'>
+        div.coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">entity-ci-core/lib/Sanitizers/Errors/EInvalidValue.js</span></h1>
+    <h2>
+        Statements: <span class="metric">100% <small>(63 / 63)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Branches: <span class="metric">100% <small>(30 / 30)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Functions: <span class="metric">100% <small>(9 / 9)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Lines: <span class="metric">100% <small>(18 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        Ignored: <span class="metric">17 statements, 15 branches</span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">entity-ci-core/lib/Sanitizers/Errors/</a> &#187; EInvalidValue.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /' _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+&nbsp;
+/**
+ * Provides the EInvalidValue error which is thrown when the provided value
+ * is not a valid for the sanitizer.
+ *
+ * @author Orgun109uk &lt;orgun109uk@gmail.com&gt;
+ */
+&nbsp;
+'use strict';
+&nbsp;
+Object.defineProperty(exports, '__esModule', {
+  value: true
+});
+// istanbul ignore next
+&nbsp;
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i &lt; props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; <span class="skip-if-branch" title="if path not taken" >I</span>if ('value' in descriptor) <span class="cstat-skip" title="statement not covered" >descriptor.writable = true; </span>Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { <span class="skip-if-branch" title="else path not taken" >E</span>if (protoProps) defineProperties(Constructor.prototype, protoProps); <span class="skip-if-branch" title="if path not taken" >I</span>if (staticProps) <span class="cstat-skip" title="statement not covered" >defineProperties(Constructor, staticProps); </span>return Constructor; }; })();
+&nbsp;
+// istanbul ignore next
+&nbsp;
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; <span class="skip-if-branch" title="if path not taken" >I</span>if (object === null) <span class="cstat-skip" title="statement not covered" >object = Function.prototype; </span>var desc = Object.getOwnPropertyDescriptor(object, property); <span class="skip-if-branch" title="if path not taken" >I</span>if (desc === undefined) { <span class="cstat-skip" title="statement not covered" >var parent = Object.getPrototypeOf(object); <span class="cstat-skip" title="statement not covered" ></span>if (parent === null) { <span class="cstat-skip" title="statement not covered" >return undefined; </span>} else { <span class="cstat-skip" title="statement not covered" >_x = parent; <span class="cstat-skip" title="statement not covered" ></span>_x2 = property; <span class="cstat-skip" title="statement not covered" ></span>_x3 = receiver; <span class="cstat-skip" title="statement not covered" ></span>_again = true; <span class="cstat-skip" title="statement not covered" ></span>continue _function; </span>} </span>} else <span class="skip-if-branch" title="else path not taken" >E</span>if ('value' in desc) { return desc.value; } else { <span class="cstat-skip" title="statement not covered" >var getter = desc.get; <span class="cstat-skip" title="statement not covered" ></span>if (getter === undefined) { <span class="cstat-skip" title="statement not covered" >return undefined; </span>} <span class="cstat-skip" title="statement not covered" ></span>return getter.call(receiver); </span>} } };
+&nbsp;
+// istanbul ignore next
+&nbsp;
+function _classCallCheck(instance, Constructor) { <span class="skip-if-branch" title="if path not taken" >I</span>if (!(instance instanceof Constructor)) { <span class="cstat-skip" title="statement not covered" >throw new TypeError('Cannot call a class as a function'); </span>} }
+&nbsp;
+// istanbul ignore next
+&nbsp;
+function _inherits(subClass, superClass) { <span class="skip-if-branch" title="if path not taken" >I</span>if (typeof superClass !== 'function' &amp;&amp; <span class="branch-1 cbranch-skip" title="branch not covered" >superClass !== null)</span> { <span class="cstat-skip" title="statement not covered" >throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); </span>} subClass.prototype = Object.create(superClass &amp;&amp; superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); <span class="skip-if-branch" title="else path not taken" >E</span>if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : <span class="branch-1 cbranch-skip" title="branch not covered" >subClass.__proto__ = superClass;</span> }
+&nbsp;
+var loader = require('nsloader'),
+    EError = loader('EntityCI/EError');
+&nbsp;
+var sValue = Symbol('EInvalidValue.value');
+&nbsp;
+/**
+ * Thrown when trying to sanitize an unsupported value.
+ *
+ * @extends {EError}
+ */
+&nbsp;
+var EInvalidValue = (function (_EError) {
+  _inherits(EInvalidValue, _EError);
+&nbsp;
+  /**
+   * The error constructor.
+   *
+   * @param {String} value The value being validated.
+   */
+&nbsp;
+  function EInvalidValue(value) {
+    'use strict';
+&nbsp;
+    _classCallCheck(this, EInvalidValue);
+&nbsp;
+    _get(Object.getPrototypeOf(EInvalidValue.prototype), 'constructor', this).call(this);
+    this[sValue] = value;
+  }
+&nbsp;
+  /**
+   * The value causing the error.
+   *
+   * @type {String}
+   */
+&nbsp;
+  _createClass(EInvalidValue, [{
+    key: 'value',
+    get: function get() {
+      'use strict';
+&nbsp;
+      return this[sValue];
+    }
+  }]);
+&nbsp;
+  return EInvalidValue;
+})(EError);
+&nbsp;
+exports['default'] = EInvalidValue;
+module.exports = exports['default'];
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9ob21lL3VidW50dS93b3Jrc3BhY2UvZW50aXR5LWNpLWNvcmUvbGliL1Nhbml0aXplcnMvRXJyb3JzL0VJbnZhbGlkVmFsdWUuanMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBcUJBLElBQUksTUFBTSxHQUFHLE9BQU8sQ0FBQyxVQUFVLENBQUM7SUFDNUIsTUFBTSxHQUFHLE1BQU0sQ0FBQyxpQkFBaUIsQ0FBQyxDQUFDOztBQUV2QyxJQUFJLE1BQU0sR0FBRyxNQUFNLENBQUMscUJBQXFCLENBQUMsQ0FBQzs7Ozs7Ozs7SUFPdEIsYUFBYTtZQUFiLGFBQWE7Ozs7Ozs7O0FBT3JCLFdBUFEsYUFBYSxDQU9wQixLQUFLLEVBQUU7QUFDakIsZ0JBQVksQ0FBQzs7MEJBUkksYUFBYTs7QUFVOUIsK0JBVmlCLGFBQWEsNkNBVXRCO0FBQ1IsUUFBSSxDQUFDLE1BQU0sQ0FBQyxHQUFHLEtBQUssQ0FBQztHQUN0Qjs7Ozs7Ozs7ZUFaa0IsYUFBYTs7U0FtQnZCLGVBQUc7QUFDVixrQkFBWSxDQUFDOztBQUViLGFBQU8sSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO0tBQ3JCOzs7U0F2QmtCLGFBQWE7R0FBUyxNQUFNOztxQkFBNUIsYUFBYSIsImZpbGUiOiIvaG9tZS91YnVudHUvd29ya3NwYWNlL2VudGl0eS1jaS1jb3JlL2xpYi9TYW5pdGl6ZXJzL0Vycm9ycy9FSW52YWxpZFZhbHVlLmpzIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiAgX19fXyAgICAgICAgICAgIF9fICAgICAgICBfXyAgICAgICAgICAgICAgICBfX19fICAgIF9fX19fX1xuICogL1xcICBfYFxcICAgICAgICAgL1xcIFxcX18gIF9fL1xcIFxcX18gICAgICAgICAgICAvXFwgIF9gXFwgL1xcX18gIF9cXFxuICogXFwgXFwgXFxMXFxfXFwgICAgX19fXFwgXFwgLF9cXC9cXF9cXCBcXCAsX1xcICBfXyAgX18gICBcXCBcXCBcXC9cXF9cXC9fL1xcIFxcL1xuICogIFxcIFxcICBfXFxMICAvJyBfIGBcXCBcXCBcXC9cXC9cXCBcXCBcXCBcXC8gL1xcIFxcL1xcIFxcICAgXFwgXFwgXFwvXy9fIFxcIFxcIFxcXG4gKiAgIFxcIFxcIFxcTFxcIFxcL1xcIFxcL1xcIFxcIFxcIFxcX1xcIFxcIFxcIFxcIFxcX1xcIFxcIFxcX1xcIFxcICAgXFwgXFwgXFxMXFwgXFwgXFxfXFwgXFxfX1xuICogICAgXFwgXFxfX19fL1xcIFxcX1xcIFxcX1xcIFxcX19cXFxcIFxcX1xcIFxcX19cXFxcL2BfX19fIFxcICAgXFwgXFxfX19fLyAvXFxfX19fX1xcXG4gKiAgICAgXFwvX19fLyAgXFwvXy9cXC9fL1xcL19fLyBcXC9fL1xcL19fLyBgL19fXy8+IFxcICAgXFwvX19fLyAgXFwvX19fX18vXG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvXFxfX18vXG4gKiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcXC9fXy9cbiAqXG4gKiBFbnRpdHkgQ0kgLSBDb3JlXG4gKi9cblxuLyoqXG4gKiBQcm92aWRlcyB0aGUgRUludmFsaWRWYWx1ZSBlcnJvciB3aGljaCBpcyB0aHJvd24gd2hlbiB0aGUgcHJvdmlkZWQgdmFsdWVcbiAqIGlzIG5vdCBhIHZhbGlkIGZvciB0aGUgc2FuaXRpemVyLlxuICpcbiAqIEBhdXRob3IgT3JndW4xMDl1ayA8b3JndW4xMDl1a0BnbWFpbC5jb20+XG4gKi9cblxudmFyIGxvYWRlciA9IHJlcXVpcmUoJ25zbG9hZGVyJyksXG4gICAgRUVycm9yID0gbG9hZGVyKCdFbnRpdHlDSS9FRXJyb3InKTtcblxudmFyIHNWYWx1ZSA9IFN5bWJvbCgnRUludmFsaWRWYWx1ZS52YWx1ZScpO1xuXG4vKipcbiAqIFRocm93biB3aGVuIHRyeWluZyB0byBzYW5pdGl6ZSBhbiB1bnN1cHBvcnRlZCB2YWx1ZS5cbiAqXG4gKiBAZXh0ZW5kcyB7RUVycm9yfVxuICovXG5leHBvcnQgZGVmYXVsdCBjbGFzcyBFSW52YWxpZFZhbHVlIGV4dGVuZHMgRUVycm9yIHtcblxuICAvKipcbiAgICogVGhlIGVycm9yIGNvbnN0cnVjdG9yLlxuICAgKlxuICAgKiBAcGFyYW0ge1N0cmluZ30gdmFsdWUgVGhlIHZhbHVlIGJlaW5nIHZhbGlkYXRlZC5cbiAgICovXG4gIGNvbnN0cnVjdG9yKHZhbHVlKSB7XG4gICAgJ3VzZSBzdHJpY3QnO1xuXG4gICAgc3VwZXIoKTtcbiAgICB0aGlzW3NWYWx1ZV0gPSB2YWx1ZTtcbiAgfVxuXG4gIC8qKlxuICAgKiBUaGUgdmFsdWUgY2F1c2luZyB0aGUgZXJyb3IuXG4gICAqXG4gICAqIEB0eXBlIHtTdHJpbmd9XG4gICAqL1xuICBnZXQgdmFsdWUoKSB7XG4gICAgJ3VzZSBzdHJpY3QnO1xuXG4gICAgcmV0dXJuIHRoaXNbc1ZhbHVlXTtcbiAgfVxuXG59XG4iXX0=</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Sep 04 2015 07:59:28 GMT+0000 (UTC)</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

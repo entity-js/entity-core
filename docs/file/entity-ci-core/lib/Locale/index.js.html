@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">entity-ci-core/lib/Locale/index.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">entity-ci-core/lib/Locale/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">
+var path = require(&apos;path&apos;),
+    glob = require(&apos;glob&apos;),
+    async = require(&apos;async&apos;);
+
+var sLocales = Symbol(&apos;Locale.locales&apos;),
+    sDatabase = Symbol.for(&apos;Locale.database&apos;),
+    sAddFromDatabase = Symbol.for(&apos;Locale.addFromDatabase&apos;),
+    sProcessFile = Symbol.for(&apos;Locale.processFile&apos;),
+    sStrtr = Symbol.for(&apos;Locale.strtr&apos;);
+
+module.exports = class Locale {
+
+  /**
+   * The Locale class constructor.
+   *
+   * @constructor
+   * @param {Database} database The database manager.
+   */
+  constructor(database) {
+    &apos;use strict&apos;;
+
+    this[sLocales] = {};
+    this[sDatabase] = database;
+  }
+
+  /**
+   * Get the defined language names.
+   *
+   * @property languages
+   * @type Array
+   * @readOnly
+   */
+  get languages() {
+    &apos;use strict&apos;;
+
+    return Object.keys(this[sLocales]);
+  }
+
+  /**
+   * Add translations stored in the database.
+   *
+   * @method addFromDatabase
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any raised errors.
+   * @async
+   */
+  [sAddFromDatabase](done) {
+    &apos;use strict&apos;;
+
+    var me = this;
+    this[sDatabase].collection(&apos;locales&apos;).find({}, function (err, docs) {
+      if (err) {
+        return done(err);
+      }
+
+      docs.forEach(function (doc) {
+        if (me[sLocales][doc.language] === undefined) {
+          me[sLocales][doc.language] = {};
+        }
+
+        me[sLocales][doc.language][doc.msg] = doc.translation;
+      });
+
+      done(null);
+    });
+  }
+
+  /**
+   * Processes the given JSON filename.
+   *
+   * @method processFile
+   * @param {String} filename The translation file filename, note that it must
+   *   be in the format *.LANGUAGE.json.
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any raised errors.
+   * @async
+   * @private
+   */
+  [sProcessFile](filename, done) {
+    &apos;use strict&apos;;
+
+    try {
+      var locale = require(filename),
+          language = filename.split(&apos;.&apos;)[1];
+
+      if (this[sLocales][language] === undefined) {
+        this[sLocales][language] = {};
+      }
+
+      for (var msg in locale) {
+        if (this[sLocales][language][msg]) {
+          continue;
+        }
+
+        this[sLocales][language][msg] = locale[msg];
+      }
+
+      done(null);
+    } catch (err) {
+      done(err);
+    }
+  }
+
+  /**
+   * Perform token string replacement, this is based upon the PHP.js strtr
+   * script.
+   *
+   * @method strtr
+   * @param {String} str The string to replace.
+   * @param {Object} params The token params.
+   * @return {String} The replaced string.
+   * @private
+   */
+  [sStrtr](str, params) {
+    &apos;use strict&apos;;
+
+    var i, len,
+        j, frm,
+        from = [],
+        to = [],
+        ret = &apos;&apos;,
+        match = false;
+
+    for (var arg in params) {
+      from.push(&apos;:&apos; + arg);
+      to.push(params[arg]);
+    }
+
+    for (i = 0, len = str.length; i &lt; len; i++) {
+      match = false;
+      for (j = 0, frm = from.length; j &lt; frm; j++) {
+        if (str.substr(i, from[j].length) === from[j]) {
+          match = true;
+          i = (i + from[j].length) - 1;
+
+          break;
+        }
+      }
+
+      ret += match ? to[j] : str.charAt(i);
+    }
+
+    return ret;
+  }
+
+  /**
+   * Add translations from a JSON file.
+   *
+   * @method addFromFile
+   * @param {String} filename The translation file filename, note that it must
+   *   be in the format *.LANGUAGE.json.
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any raised errors.
+   * @async
+   */
+  addFromFile(filename, done) {
+    &apos;use strict&apos;;
+
+    this[sProcessFile](filename, done);
+  }
+
+  /**
+   * Add translation files from the given directory.
+   *
+   * @method addFromDir
+   * @param {String} dir The directory to scan.
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any raised errors.
+   * @async
+   */
+  addFromDir(dir, done) {
+    &apos;use strict&apos;;
+
+    var me = this;
+
+    function processFile(filename) {
+      return function (next) {
+        me.addFromFile(filename, next);
+      };
+    }
+
+    glob(path.join(dir, &apos;**&apos;, &apos;*.json&apos;), function (err, files) {
+      if (err) {
+        return done(err);
+      }
+
+      var queue = [];
+      files.forEach(function (item) {
+        var splt = item.split(&apos;.&apos;);
+        if (splt.length === 3 &amp;&amp; splt[1].length === 2) {
+          queue.push(processFile(item));
+        }
+      });
+
+      async.series(queue, function (err) {
+        done(err ? err : null);
+      });
+    });
+  }
+
+  /**
+   * Returns all defined translations for the given language.
+   *
+   * @method locales
+   * @param {String} language The language to return.
+   * @return {Object} An object containing the translation strings.
+   * @throws {Error} If the language is undefined.
+   */
+  locales(language) {
+    &apos;use strict&apos;;
+
+    if (this[sLocales][language] === undefined) {
+      throw new Error(); // @todo
+    }
+
+    return this[sLocales][language];
+  }
+
+  /**
+   * Initializes the locale, collection translations from the database and
+   * provided directory.
+   *
+   * @method initialize
+   * @param {String} dir The directory to read from.
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any raised errors.
+   * @async
+   */
+  initialize(dir, done) {
+    &apos;use strict&apos;;
+
+    var me = this,
+        queue = [];
+
+    if (dir &amp;&amp; dir !== &apos;&apos;) {
+      queue.push(function (next) {
+        me.addFromDir(dir, next);
+      });
+    }
+
+    queue.push(function (next) {
+      me[sAddFromDatabase](next);
+    });
+
+    async.series(queue, function (err) {
+      done(err ? err : null);
+    });
+  }
+
+  /**
+   * Translates a given msg in the given language and stores in the database.
+   *
+   * @method translate
+   * @param {String} language The language the translation belongs to.
+   * @param {String} str The english message that this is translating.
+   * @param {String} translation The translated message to save.
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any raised errors.
+   * @async
+   */
+  translate(language, str, translation, done) {
+    &apos;use strict&apos;;
+
+    var me = this;
+
+    this[sDatabase].collection(&apos;locales&apos;).findOne({
+      language: language,
+      msg: str
+    }, function (err, doc) {
+      if (err) {
+        return done(err);
+      }
+
+      if (!doc) {
+        doc = {
+          language: language,
+          msg: str
+        };
+      }
+
+      doc.translation = translation;
+
+      if (me[sLocales][language] === undefined) {
+        me[sLocales][language] = {};
+      }
+      me[sLocales][language][str] = translation;
+
+      me[sDatabase].collection(&apos;locales&apos;).save(doc, function (err2) {
+        done(err2 ? err2 : null);
+      });
+    });
+  }
+
+  /**
+   * Translate the given string.
+   *
+   * @method t
+   * @param {String} language The language to translate to.
+   * @param {String} str The string to translate to.
+   * @param {Object} [params] The params for token replacement.
+   * @return {String} The translated and token replaced string.
+   */
+  t(language, str, params) {
+    &apos;use strict&apos;;
+
+    if (this[sLocales][language] &amp;&amp; this[sLocales][language][str]) {
+      str = this[sLocales][language][str];
+    }
+
+    return this[sStrtr](str, params);
+  }
+
+};
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

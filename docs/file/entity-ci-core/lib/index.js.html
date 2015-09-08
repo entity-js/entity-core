@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">entity-ci-core/lib/index.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">entity-ci-core/lib/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+/**
+ * The entity ci core component.
+ *
+ * @author Orgun109uk &lt;orgun109uk@gmail.com&gt;
+ */
+
+var path = require(&apos;path&apos;),
+    async = require(&apos;async&apos;),
+    loader = require(&apos;nsloader&apos;),
+    Config = loader(&apos;EntityCI/Utils/Config&apos;),
+    Locale = loader(&apos;EntityCI/Locale&apos;),
+    Database = loader(&apos;EntityCI/Database&apos;),
+    Validators = loader(&apos;EntityCI/Validators&apos;),
+    Sanitizers = loader(&apos;EntityCI/Sanitizers&apos;),
+    EventManager = loader(&apos;EntityCI/EventManager&apos;),
+    PluginManager = loader(&apos;EntityCI/PluginManager&apos;),
+    EntityManager = loader(&apos;EntityCI/EntityManager&apos;);
+
+var sConfig = Symbol(&apos;EntityCICore.config&apos;),
+    sLocale = Symbol(&apos;EntityCICore.locale&apos;),
+    sDatabase = Symbol(&apos;EntityCICore.database&apos;),
+    sValidators = Symbol(&apos;EntityCICore.validators&apos;),
+    sSanitizers = Symbol(&apos;EntityCICore.sanitizers&apos;),
+    sEventManager = Symbol(&apos;EntityCICore.eventManager&apos;),
+    sPluginManager = Symbol(&apos;EntityCICore.pluginManager&apos;),
+    sEntityManager = Symbol(&apos;EntityCICore.entityManager&apos;),
+    sIsInitialized = Symbol(&apos;EntityCICore.isInitialized&apos;),
+    sLoadConfig = Symbol.for(&apos;EntityCICore.loadConfig&apos;),
+    sConnectToMongo = Symbol.for(&apos;EntityCICore.connectToMongo&apos;),
+    sPlugins = Symbol.for(&apos;EntityCICore.plugins&apos;);
+
+class EntityCICore {
+
+  /**
+   * The EntityCI Core class.
+   */
+  constructor() {
+    &apos;use strict&apos;;
+
+    this[sIsInitialized] = false;
+    this[sConfig] = null;
+    this[sDatabase] = new Database();
+    this[sValidators] = new Validators();
+    this[sSanitizers] = new Sanitizers();
+    this[sEventManager] = new EventManager();
+    this[sPluginManager] = new PluginManager();
+    this[sEntityManager] = new EntityManager(
+      this[sDatabase],
+      this[sValidators],
+      this[sSanitizers]
+    );
+  }
+
+  /**
+   * Determine if the core has been initialized.
+   *
+   * @type Boolean
+   * @default false
+   * @readonly
+   */
+  get initialized() {
+    &apos;use strict&apos;;
+
+    return this[sIsInitialized];
+  }
+
+  /**
+   * Get the config object.
+   *
+   * @type Config
+   * @readOnly
+   */
+  get config() {
+    &apos;use strict&apos;;
+
+    return this[sConfig];
+  }
+
+  /**
+   * Get the locale object.
+   *
+   * @type Locale
+   * @readOnly
+   */
+  get locale() {
+    &apos;use strict&apos;;
+
+    return this[sLocale];
+  }
+
+  /**
+   * Get the database manager object.
+   *
+   * @type Database
+   * @readOnly
+   */
+  get database() {
+    &apos;use strict&apos;;
+
+    return this[sDatabase];
+  }
+
+  /**
+   * Get the event manager object.
+   *
+   * @type EventManager
+   * @readOnly
+   */
+  get eventManager() {
+    &apos;use strict&apos;;
+
+    return this[sEventManager];
+  }
+
+  /**
+   * Get the plugin manager object.
+   *
+   * @type PluginManager
+   * @readOnly
+   */
+  get pluginManager() {
+    &apos;use strict&apos;;
+
+    return this[sPluginManager];
+  }
+
+  /**
+   * Load the configuration file.
+   *
+   * @name loadConfig
+   * @function
+   * @memberof EntityCICore
+   * @param {String} filename The config filename.
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any errors raised.
+   */
+  [sLoadConfig](filename, done) {
+    &apos;use strict&apos;;
+
+    this[sConfig] = new Config(filename);
+    this[sConfig].load(done);
+  }
+
+  /**
+   * Connects to the MongoDB, details provided by the config.
+   *
+   * @function connectToMongo
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any errors raised.
+   * @private
+   */
+  [sConnectToMongo](done) {
+    &apos;use strict&apos;;
+
+    var me = this,
+        queue = [];
+
+    function connect(name) {
+      return function (next) {
+        me[sDatabase].connect(
+          name,
+          me[sConfig].get(&apos;database.&apos; + name, {
+            host: &apos;0.0.0.0&apos;,
+            name: &apos;entityci&apos;
+          })
+        );
+
+        next();
+      };
+    }
+
+    // @todo - multiple connections?
+    queue.push(connect(&apos;default&apos;));
+
+    async.series(queue, function (err) {
+      done(err ? err : null);
+    });
+  }
+
+  /**
+   * Indexes and initializes the plugin manager and enabled plugins.
+   *
+   * @name plugins
+   * @memberof EntityCICore
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any errors raised.
+   * @private
+   */
+  [sPlugins](done) {
+    &apos;use strict&apos;;
+
+    var me = this,
+        queue = [];
+
+    queue.push(function (next) {
+      me[sPluginManager].index(
+        me[sConfig].get(
+          &apos;plugins.path&apos;,
+          path.join(__dirname, &apos;..&apos;, &apos;plugins&apos;)
+        ),
+        next
+      );
+    });
+
+    queue.push(function (next) {
+      me[sPluginManager].initialize(
+        me[sConfig].get(&apos;plugins.enabled&apos;, []),
+        next
+      );
+    });
+
+    async.series(queue, function (err) {
+      done(err ? err : null);
+    });
+  }
+
+  /**
+   * Initializes the core application.
+   *
+   * @memberof EntityCICore
+   * @param {String} filename The filename of the config file to load.
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any errors raised.
+   */
+  initialize(filename, done) {
+    &apos;use strict&apos;;
+
+    var me = this,
+        queue = [];
+
+    queue.push(function (next) {
+      me[sLoadConfig](filename, next);
+    });
+
+    queue.push(function (next) {
+      me[sConnectToMongo](next);
+    });
+
+    queue.push(function (next) {
+      me[sLocale] = new Locale(me[sDatabase]);
+      me[sLocale].initialize(me[sConfig].get(&apos;locale.dir&apos;), next);
+    });
+
+    queue.push(function (next) {
+      me[sPlugins](next);
+    });
+
+    queue.push(function (next) {
+      me[sEventManager].fire(&apos;initialized&apos;, next, {
+        core: me
+      });
+    });
+
+    async.series(queue, function (err) {
+      if (!err) {
+        me[sIsInitialized] = true;
+      }
+
+      done(err ? err : null);
+    });
+  }
+
+}
+
+module.exports = EntityCICore;
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

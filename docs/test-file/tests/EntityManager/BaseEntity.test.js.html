@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">tests/EntityManager/BaseEntity.test.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div data-ice="classWrap">
+  <h2>Class</h2>
+  <ul>
+    
+  <li data-ice="classDoc"><span><a href="class/lib/EntityManager/BaseEntity.js~BaseEntity.html">BaseEntity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Utils/Config.js~Config.html">Config</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Database/Connection.js~Connection.html">Connection</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Utils/Data.js~Data.html">Data</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Database/index.js~Database.html">Database</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/ECantFindEntity.js~ECantFindEntity.html">ECantFindEntity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Database/Errors/EDefinedConnection.js~EDefinedConnection.html">EDefinedConnection</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EError.js~EError.html">EError</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/EFailedEntity.js~EFailedEntity.html">EFailedEntity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EInvalidCharacters.js~EInvalidCharacters.html">EInvalidCharacters</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EInvalidEmail.js~EInvalidEmail.html">EInvalidEmail</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/EInvalidEntity.js~EInvalidEntity.html">EInvalidEntity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EInvalidLength.js~EInvalidLength.html">EInvalidLength</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EInvalidURL.js~EInvalidURL.html">EInvalidURL</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Sanitizers/Errors/EInvalidValue.js~EInvalidValue.html">EInvalidValue</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/EMachineNameExists.js~EMachineNameExists.html">EMachineNameExists</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/EMissingMachineName.js~EMissingMachineName.html">EMissingMachineName</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EMustContainDigit.js~EMustContainDigit.html">EMustContainDigit</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EMustContainLowercase.js~EMustContainLowercase.html">EMustContainLowercase</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EMustContainUppercase.js~EMustContainUppercase.html">EMustContainUppercase</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/PluginManager/Errors/EPluginDisabled.js~EPluginDisabled.html">EPluginDisabled</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/PluginManager/Errors/EPluginEnabled.js~EPluginEnabled.html">EPluginEnabled</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/PluginManager/Errors/EPluginUnmetDependencies.js~EPluginUnmetDependencies.html">EPluginUnmetDependencies</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/ESchemaFieldDefined.js~ESchemaFieldDefined.html">ESchemaFieldDefined</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Database/Errors/EUndefinedConnection.js~EUndefinedConnection.html">EUndefinedConnection</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EventManager/Errors/EUndefinedEvent.js~EUndefinedEvent.html">EUndefinedEvent</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/EUnknownFieldType.js~EUnknownFieldType.html">EUnknownFieldType</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Sanitizers/Errors/EUnknownSanitizer.js~EUnknownSanitizer.html">EUnknownSanitizer</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/EUnknownSchemaField.js~EUnknownSchemaField.html">EUnknownSchemaField</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EUnknownValidator.js~EUnknownValidator.html">EUnknownValidator</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/PluginManager/Errors/EUnknownPlugin.js~EUnkownPlugin.html">EUnkownPlugin</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Entity.js~Entity.html">Entity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/index.js~EntityCICore.html">EntityCICore</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/index.js~EntityManager.html">EntityManager</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EventManager/index.js~EventManager.html">EventManager</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Locale/index.js~Locale.html">Locale</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/PluginManager/Plugin.js~Plugin.html">Plugin</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/PluginManager/index.js~PluginManager.html">PluginManager</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Sanitizers/index.js~Sanitizers.html">Sanitizers</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Schema.js~Schema.html">Schema</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/index.js~Validators.html">Validators</a></span></li>
+</ul>
+</div>
+
+
+
+<div data-ice="functionWrap">
+  <h2><a href="function/">Function</a></h2>
+  <ul>
+    
+  <li data-ice="functionDoc"><span><a href="function/index.html#static-function-sanitizeTrim">sanitizeTrim</a></span></li>
+<li data-ice="functionDoc"><span><a href="function/index.html#static-function-sortBy">sortBy</a></span></li>
+<li data-ice="functionDoc"><span><a href="function/index.html#static-function-validateEmail">validateEmail</a></span></li>
+<li data-ice="functionDoc"><span><a href="function/index.html#static-function-validateEntity">validateEntity</a></span></li>
+<li data-ice="functionDoc"><span><a href="function/index.html#static-function-validateMachineName">validateMachineName</a></span></li>
+<li data-ice="functionDoc"><span><a href="function/index.html#static-function-validatePassword">validatePassword</a></span></li>
+<li data-ice="functionDoc"><span><a href="function/index.html#static-function-validateUrl">validateUrl</a></span></li>
+</ul>
+</div>
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">tests/EntityManager/BaseEntity.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+var async = require(&apos;async&apos;),
+    test = require(&apos;unit.js&apos;),
+    loader = require(&apos;nsloader&apos;),
+    Database = loader(&apos;EntityCI/Database&apos;),
+    EntityManager = loader(&apos;EntityCI/EntityManager&apos;),
+    Validators = loader(&apos;EntityCI/Validators&apos;),
+    Sanitizers = loader(&apos;EntityCI/Sanitizers&apos;),
+    BaseEntity = loader(&apos;EntityCI/EntityManager/BaseEntity&apos;),
+    EMissingMachineName = loader(
+      &apos;EntityCI/EntityManager/Errors/EMissingMachineName&apos;
+    ),
+    EMachineNameExists = loader(
+      &apos;EntityCI/EntityManager/Errors/EMachineNameExists&apos;
+    ),
+    ECantFindEntity = loader(
+      &apos;EntityCI/EntityManager/Errors/ECantFindEntity&apos;
+    );
+
+var database, entityManager, validators, sanitizers,
+    collectionName = &apos;entity-test&apos;;
+
+function createBaseEntity() {
+  &apos;use strict&apos;;
+
+  var entity = new BaseEntity(entityManager);
+  entity.collectionName = function () {
+    return collectionName;
+  };
+
+  return entity;
+}
+
+describe(&apos;entity-ci/entity-ci-core/EntityManager/BaseEntity&apos;, function () {
+
+  &apos;use strict&apos;;
+
+  beforeEach(function (done) {
+
+    database = new Database();
+    database.connect(&apos;test&apos;, {
+      name: &apos;test&apos;,
+      host: &apos;0.0.0.0&apos;
+    }, true);
+
+    validators = new Validators();
+    sanitizers = new Sanitizers();
+    entityManager = new EntityManager(database, validators, sanitizers);
+
+    done();
+
+  });
+
+  afterEach(function (done) {
+
+    var queue = [];
+
+    queue.push(function (next) {
+      database.collection(collectionName).drop(function () {
+        next();
+      });
+    });
+
+    queue.push(function (next) {
+      entityManager.trashCollection.drop(function () {
+        next();
+      });
+    });
+
+    queue.push(function (next) {
+      database.disconnect(&apos;test&apos;);
+      next();
+    });
+
+    async.series(queue, done);
+
+  });
+
+  describe(&apos;BaseEntity.constructor()&apos;, function () {
+
+    it(&apos;shouldHaveNullIdAndMachineName&apos;, function () {
+
+      var entity = createBaseEntity();
+
+      test.value(
+        entity.id
+      ).isNull();
+
+      test.value(
+        entity.machineName
+      ).isNull();
+
+    });
+
+    it(&apos;shouldDefaultAsNew&apos;, function () {
+
+      var entity = createBaseEntity();
+
+      test.bool(
+        entity.isNew
+      ).isTrue();
+
+    });
+
+    it(&apos;shouldDefaultAsNotRenaming&apos;, function () {
+
+      var entity = createBaseEntity();
+
+      test.bool(
+        entity.isRenaming
+      ).isNotTrue();
+
+    });
+
+    it(&apos;shouldDefaultAsNotUpdated&apos;, function () {
+
+      var entity = createBaseEntity();
+
+      test.bool(
+        entity.isUpdated
+      ).isNotTrue();
+
+    });
+
+  });
+
+  describe(&apos;BaseEntity.validate()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfMachineNameIsMissing&apos;, function (done) {
+
+      var entity = createBaseEntity();
+
+      entity.validate(function (err) {
+
+        test.object(
+          err
+        ).isInstanceOf(EMissingMachineName);
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;shouldThrowAnErrorIfMachineNameIsInvalid&apos;, function (done) {
+
+      var entity = createBaseEntity();
+      entity.machineName = &apos;Not a valid machine name&apos;;
+
+      entity.validate(function (err) {
+
+        test.object(
+          err
+        ).isInstanceOf(Error).isNotInstanceOf(EMissingMachineName);
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;shouldValidate&apos;, function (done) {
+
+      var entity = createBaseEntity();
+      entity.machineName = &apos;test-entity&apos;;
+
+      entity.validate(function (err) {
+
+        test.value(
+          err
+        ).isNull();
+
+        done();
+
+      });
+
+    });
+
+  });
+
+  describe(&apos;BaseEntity.save()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfValidationFails&apos;, function (done) {
+
+      var entity = createBaseEntity();
+
+      entity.save(function (err) {
+
+        test.object(
+          err
+        ).isInstanceOf(Error);
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;shouldSuccessfullySave&apos;, function (done) {
+
+      var entity = createBaseEntity(),
+          queue = [];
+
+      entity.machineName = &apos;test-entity&apos;;
+
+      queue.push(function (next) {
+
+        entity.save(next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.collection.find({}, function (err, docs) {
+
+          test.value(
+            err
+          ).isNull();
+
+          test.array(
+            docs
+          ).hasLength(1);
+
+          test.object(
+            docs[0]
+          ).hasKey(&apos;machineName&apos;, &apos;test-entity&apos;);
+
+          next();
+
+        });
+
+      });
+
+      async.series(queue, done);
+
+    });
+
+    it(&apos;shouldRenameEntity&apos;, function (done) {
+
+      var entity = createBaseEntity(),
+          queue = [];
+
+      entity.machineName = &apos;test-entity&apos;;
+
+      queue.push(function (next) {
+
+        entity.save(next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.machineName = &apos;test-entity-2&apos;;
+        entity.save(next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.collection.find({}, function (err, docs) {
+
+          test.value(
+            err
+          ).isNull();
+
+          test.array(
+            docs
+          ).hasLength(1);
+
+          test.object(
+            docs[0]
+          ).hasKey(&apos;machineName&apos;, &apos;test-entity-2&apos;);
+
+          next();
+
+        });
+
+      });
+
+      async.series(queue, done);
+
+    });
+
+    it(&apos;shouldFailToSaveIfMachineNameExistsAndNotRenaming&apos;, function (done) {
+
+      var entity = createBaseEntity(),
+          entity2 = createBaseEntity(),
+          queue = [];
+
+      entity.machineName = &apos;test-entity&apos;;
+      entity2.machineName = &apos;test-entity&apos;;
+
+      queue.push(function (next) {
+
+        entity.save(next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity2.save(function (err) {
+
+          test.object(
+            err
+          ).isInstanceOf(EMachineNameExists);
+
+          next();
+
+        });
+
+      });
+
+      queue.push(function (next) {
+
+        entity.collection.find({}, function (err, docs) {
+
+          test.value(
+            err
+          ).isNull();
+
+          test.array(
+            docs
+          ).hasLength(1);
+
+          test.object(
+            docs[0]
+          ).hasKey(&apos;machineName&apos;, &apos;test-entity&apos;);
+
+          next();
+
+        });
+
+      });
+
+      async.series(queue, done);
+
+    });
+
+  });
+
+  describe(&apos;BaseEntity.load()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfInvalidConditions&apos;, function (done) {
+
+      var entity = createBaseEntity();
+
+      entity.load(function (err) {
+
+        test.object(
+          err
+        ).isInstanceOf(EMissingMachineName);
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;shouldThrowAnErrorIfNoDocumentsMatch&apos;, function (done) {
+
+      var entity = createBaseEntity();
+
+      entity.load(function (err) {
+
+        test.object(
+          err
+        ).isInstanceOf(ECantFindEntity);
+
+        done();
+
+      }, {
+        machineName: &apos;test-entity&apos;
+      });
+
+    });
+
+    it(&apos;shouldLoadByConditions&apos;, function (done) {
+
+      var entity = createBaseEntity(),
+          queue = [];
+
+      queue.push(function (next) {
+
+        entity.collection.save({
+          machineName: &apos;test-entity&apos;
+        }, next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.load(function (err) {
+
+          test.value(
+            err
+          ).isNull();
+
+          test.bool(
+            entity.isNew
+          ).isNotTrue();
+
+          test.string(
+            entity.machineName
+          ).is(&apos;test-entity&apos;);
+
+          done();
+
+        }, &apos;test-entity&apos;);
+
+      });
+
+      async.series(queue, done);
+
+    });
+
+    it(&apos;shouldLoadByMachineName&apos;, function (done) {
+
+      var entity = createBaseEntity(),
+          queue = [];
+
+      entity.machineName = &apos;test-entity&apos;;
+
+      queue.push(function (next) {
+
+        entity.collection.save({
+          machineName: &apos;test-entity&apos;
+        }, next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.load(function (err) {
+
+          test.value(
+            err
+          ).isNull();
+
+          test.bool(
+            entity.isNew
+          ).isNotTrue();
+
+          test.string(
+            entity.machineName
+          ).is(&apos;test-entity&apos;);
+
+          done();
+
+        });
+
+      });
+
+      async.series(queue, done);
+
+    });
+
+  });
+
+  describe(&apos;BaseEntity.delete()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfNoMachineName&apos;, function (done) {
+
+      var entity = createBaseEntity();
+
+      entity.delete(function (err) {
+
+        test.object(
+          err
+        ).isInstanceOf(EMissingMachineName);
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;shouldThrowAnErrorIfNoDocumentsMatch&apos;, function (done) {
+
+      var entity = createBaseEntity();
+      entity.machineName = &apos;test-entity&apos;;
+
+      entity.delete(function (err) {
+
+        test.object(
+          err
+        ).isInstanceOf(ECantFindEntity);
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;shouldMoveToTrash&apos;, function (done) {
+
+      var entity = createBaseEntity(),
+          queue = [];
+
+      queue.push(function (next) {
+
+        entity.collection.save({
+          machineName: &apos;test-entity&apos;
+        }, next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.machineName = &apos;test-entity&apos;;
+        entity.delete(next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.collection.find({}, function (err, docs) {
+
+          if (err) {
+            return next(err);
+          }
+
+          test.array(
+            docs
+          ).hasLength(0);
+
+          next();
+
+        });
+
+      });
+
+      queue.push(function (next) {
+
+        entity.manager.trashCollection.find({}, function (err, docs) {
+
+          if (err) {
+            return next(err);
+          }
+
+          test.array(
+            docs
+          ).hasLength(1);
+
+          test.object(docs[0])
+            .hasKey(&apos;collection&apos;, &apos;entity-test&apos;)
+            .hasKey(&apos;machineName&apos;, &apos;test-entity&apos;);
+
+          next();
+
+        });
+
+      });
+
+      async.series(queue, done);
+
+    });
+
+    it(&apos;shouldDeleteOnceTrashed&apos;, function (done) {
+
+      var entity = createBaseEntity(),
+          queue = [];
+
+      queue.push(function (next) {
+
+        entity.collection.save({
+          machineName: &apos;test-entity&apos;
+        }, next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.machineName = &apos;test-entity&apos;;
+        entity.delete(next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.delete(next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.manager.trashCollection.find({}, function (err, docs) {
+
+          if (err) {
+            return next(err);
+          }
+
+          test.array(
+            docs
+          ).hasLength(0);
+
+          next();
+
+        });
+
+      });
+
+      async.series(queue, done);
+
+    });
+
+    it(&apos;shouldDelete&apos;, function (done) {
+
+      var entity = createBaseEntity(),
+          queue = [];
+
+      queue.push(function (next) {
+
+        entity.collection.save({
+          machineName: &apos;test-entity&apos;
+        }, next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.machineName = &apos;test-entity&apos;;
+        entity.delete(next, null, true);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.collection.find({}, function (err, docs) {
+
+          if (err) {
+            return next(err);
+          }
+
+          test.array(
+            docs
+          ).hasLength(0);
+
+          next();
+
+        });
+
+      });
+
+      queue.push(function (next) {
+
+        entity.manager.trashCollection.find({}, function (err, docs) {
+
+          if (err) {
+            return next(err);
+          }
+
+          test.array(
+            docs
+          ).hasLength(0);
+
+          next();
+
+        });
+
+      });
+
+      async.series(queue, done);
+
+    });
+
+    it(&apos;shouldLoadEntityFromTrash&apos;, function (done) {
+
+      var entity = createBaseEntity(),
+          queue = [];
+
+      queue.push(function (next) {
+
+        entity.manager.trashCollection.save({
+          collection: collectionName,
+          machineName: &apos;test-entity&apos;,
+          doc: {}
+        }, next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.load(next, &apos;test-entity&apos;);
+
+      });
+
+      queue.push(function (next) {
+
+        test.bool(
+          entity.isTrashed
+        ).isTrue();
+
+        test.string(
+          entity.machineName
+        ).is(&apos;test-entity&apos;);
+
+        next();
+
+      });
+
+      async.series(queue, done);
+
+    });
+
+    it(&apos;shouldRestoreIfTheEntityIsSaved&apos;, function (done) {
+
+      var entity = createBaseEntity(),
+          queue = [];
+
+      queue.push(function (next) {
+
+        entity.manager.trashCollection.save({
+          collection: collectionName,
+          machineName: &apos;test-entity&apos;,
+          doc: {}
+        }, next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.load(next, &apos;test-entity&apos;);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.save(next);
+
+      });
+
+      queue.push(function (next) {
+
+        test.bool(
+          entity.isTrashed
+        ).isNotTrue();
+
+        next();
+
+      });
+
+      queue.push(function (next) {
+
+        entity.collection.find({}, function (err, docs) {
+
+          if (err) {
+            return next(err);
+          }
+
+          test.array(
+            docs
+          ).hasLength(1);
+
+          test.object(
+            docs[0]
+          ).hasKey(&apos;machineName&apos;, &apos;test-entity&apos;);
+
+          next();
+
+        });
+
+      });
+
+      queue.push(function (next) {
+
+        entity.manager.trashCollection.find({}, function (err, docs) {
+
+          if (err) {
+            return next(err);
+          }
+
+          test.array(
+            docs
+          ).hasLength(0);
+
+          next();
+
+        });
+
+      });
+
+      async.series(queue, done);
+
+    });
+
+  });
+
+});
+
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

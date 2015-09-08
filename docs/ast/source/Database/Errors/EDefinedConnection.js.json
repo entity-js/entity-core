@@ -1,0 +1,1148 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "loader",
+            "range": [
+              763,
+              769
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 4
+              },
+              "end": {
+                "line": 22,
+                "column": 10
+              }
+            }
+          },
+          "init": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "require",
+              "range": [
+                772,
+                779
+              ],
+              "loc": {
+                "start": {
+                  "line": 22,
+                  "column": 13
+                },
+                "end": {
+                  "line": 22,
+                  "column": 20
+                }
+              }
+            },
+            "arguments": [
+              {
+                "type": "Literal",
+                "value": "nsloader",
+                "raw": "'nsloader'",
+                "range": [
+                  780,
+                  790
+                ],
+                "loc": {
+                  "start": {
+                    "line": 22,
+                    "column": 21
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 31
+                  }
+                }
+              }
+            ],
+            "range": [
+              772,
+              791
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 13
+              },
+              "end": {
+                "line": 22,
+                "column": 32
+              }
+            }
+          },
+          "range": [
+            763,
+            791
+          ],
+          "loc": {
+            "start": {
+              "line": 22,
+              "column": 4
+            },
+            "end": {
+              "line": 22,
+              "column": 32
+            }
+          }
+        },
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "EError",
+            "range": [
+              797,
+              803
+            ],
+            "loc": {
+              "start": {
+                "line": 23,
+                "column": 4
+              },
+              "end": {
+                "line": 23,
+                "column": 10
+              }
+            }
+          },
+          "init": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "loader",
+              "range": [
+                806,
+                812
+              ],
+              "loc": {
+                "start": {
+                  "line": 23,
+                  "column": 13
+                },
+                "end": {
+                  "line": 23,
+                  "column": 19
+                }
+              }
+            },
+            "arguments": [
+              {
+                "type": "Literal",
+                "value": "EntityCI/EError",
+                "raw": "'EntityCI/EError'",
+                "range": [
+                  813,
+                  830
+                ],
+                "loc": {
+                  "start": {
+                    "line": 23,
+                    "column": 20
+                  },
+                  "end": {
+                    "line": 23,
+                    "column": 37
+                  }
+                }
+              }
+            ],
+            "range": [
+              806,
+              831
+            ],
+            "loc": {
+              "start": {
+                "line": 23,
+                "column": 13
+              },
+              "end": {
+                "line": 23,
+                "column": 38
+              }
+            }
+          },
+          "range": [
+            797,
+            831
+          ],
+          "loc": {
+            "start": {
+              "line": 23,
+              "column": 4
+            },
+            "end": {
+              "line": 23,
+              "column": 38
+            }
+          }
+        }
+      ],
+      "kind": "var",
+      "range": [
+        759,
+        832
+      ],
+      "loc": {
+        "start": {
+          "line": 22,
+          "column": 0
+        },
+        "end": {
+          "line": 23,
+          "column": 39
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n *  ____            __        __                ____    ______\n * /\\  _`\\         /\\ \\__  __/\\ \\__            /\\  _`\\ /\\__  _\\\n * \\ \\ \\L\\_\\    ___\\ \\ ,_\\/\\_\\ \\ ,_\\  __  __   \\ \\ \\/\\_\\/_/\\ \\/\n *  \\ \\  _\\L  /' _ `\\ \\ \\/\\/\\ \\ \\ \\/ /\\ \\/\\ \\   \\ \\ \\/_/_ \\ \\ \\\n *   \\ \\ \\L\\ \\/\\ \\/\\ \\ \\ \\_\\ \\ \\ \\ \\_\\ \\ \\_\\ \\   \\ \\ \\L\\ \\ \\_\\ \\__\n *    \\ \\____/\\ \\_\\ \\_\\ \\__\\\\ \\_\\ \\__\\\\/`____ \\   \\ \\____/ /\\_____\\\n *     \\/___/  \\/_/\\/_/\\/__/ \\/_/\\/__/ `/___/> \\   \\/___/  \\/_____/\n *                                        /\\___/\n *                                        \\/__/\n *\n * Entity CI - Core\n ",
+          "range": [
+            0,
+            585
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 13,
+              "column": 3
+            }
+          }
+        },
+        {
+          "type": "Block",
+          "value": "*\n * Provides the EDefinedConnection error which is used when attempting to create\n * an already defined connection.\n *\n * @author Orgun109uk <orgun109uk@gmail.com>\n ",
+          "range": [
+            587,
+            757
+          ],
+          "loc": {
+            "start": {
+              "line": 15,
+              "column": 0
+            },
+            "end": {
+              "line": 20,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "sConnectionName",
+            "range": [
+              838,
+              853
+            ],
+            "loc": {
+              "start": {
+                "line": 25,
+                "column": 4
+              },
+              "end": {
+                "line": 25,
+                "column": 19
+              }
+            }
+          },
+          "init": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "Symbol",
+              "range": [
+                856,
+                862
+              ],
+              "loc": {
+                "start": {
+                  "line": 25,
+                  "column": 22
+                },
+                "end": {
+                  "line": 25,
+                  "column": 28
+                }
+              }
+            },
+            "arguments": [
+              {
+                "type": "Literal",
+                "value": "EDefinedConnection.connectionName",
+                "raw": "'EDefinedConnection.connectionName'",
+                "range": [
+                  863,
+                  898
+                ],
+                "loc": {
+                  "start": {
+                    "line": 25,
+                    "column": 29
+                  },
+                  "end": {
+                    "line": 25,
+                    "column": 64
+                  }
+                }
+              }
+            ],
+            "range": [
+              856,
+              899
+            ],
+            "loc": {
+              "start": {
+                "line": 25,
+                "column": 22
+              },
+              "end": {
+                "line": 25,
+                "column": 65
+              }
+            }
+          },
+          "range": [
+            838,
+            899
+          ],
+          "loc": {
+            "start": {
+              "line": 25,
+              "column": 4
+            },
+            "end": {
+              "line": 25,
+              "column": 65
+            }
+          }
+        }
+      ],
+      "kind": "var",
+      "range": [
+        834,
+        900
+      ],
+      "loc": {
+        "start": {
+          "line": 25,
+          "column": 0
+        },
+        "end": {
+          "line": 25,
+          "column": 66
+        }
+      },
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Thrown when tryng to use an undefined connection.\n *\n * @extends {EError}\n ",
+          "range": [
+            902,
+            986
+          ],
+          "loc": {
+            "start": {
+              "line": 27,
+              "column": 0
+            },
+            "end": {
+              "line": 31,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "ClassDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "EDefinedConnection",
+          "range": [
+            1008,
+            1026
+          ],
+          "loc": {
+            "start": {
+              "line": 32,
+              "column": 21
+            },
+            "end": {
+              "line": 32,
+              "column": 39
+            }
+          }
+        },
+        "superClass": {
+          "type": "Identifier",
+          "name": "EError",
+          "range": [
+            1035,
+            1041
+          ],
+          "loc": {
+            "start": {
+              "line": 32,
+              "column": 48
+            },
+            "end": {
+              "line": 32,
+              "column": 54
+            }
+          }
+        },
+        "body": {
+          "type": "ClassBody",
+          "body": [
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "constructor",
+                "range": [
+                  1146,
+                  1157
+                ],
+                "loc": {
+                  "start": {
+                    "line": 39,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 39,
+                    "column": 13
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "name",
+                    "range": [
+                      1158,
+                      1162
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 39,
+                        "column": 14
+                      },
+                      "end": {
+                        "line": 39,
+                        "column": 18
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "Literal",
+                        "value": "use strict",
+                        "raw": "'use strict'",
+                        "range": [
+                          1170,
+                          1182
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 40,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 40,
+                            "column": 16
+                          }
+                        }
+                      },
+                      "range": [
+                        1170,
+                        1183
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 40,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 40,
+                          "column": 17
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "Super",
+                          "range": [
+                            1189,
+                            1194
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 42,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 42,
+                              "column": 9
+                            }
+                          }
+                        },
+                        "arguments": [],
+                        "range": [
+                          1189,
+                          1196
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 42,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 42,
+                            "column": 11
+                          }
+                        }
+                      },
+                      "range": [
+                        1189,
+                        1197
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 42,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 42,
+                          "column": 12
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "computed": true,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              1202,
+                              1206
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 43,
+                                "column": 4
+                              },
+                              "end": {
+                                "line": 43,
+                                "column": 8
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "sConnectionName",
+                            "range": [
+                              1207,
+                              1222
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 43,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 43,
+                                "column": 24
+                              }
+                            }
+                          },
+                          "range": [
+                            1202,
+                            1223
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 43,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 43,
+                              "column": 25
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Identifier",
+                          "name": "name",
+                          "range": [
+                            1226,
+                            1230
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 43,
+                              "column": 28
+                            },
+                            "end": {
+                              "line": 43,
+                              "column": 32
+                            }
+                          }
+                        },
+                        "range": [
+                          1202,
+                          1230
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 43,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 43,
+                            "column": 32
+                          }
+                        }
+                      },
+                      "range": [
+                        1202,
+                        1231
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 43,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 43,
+                          "column": 33
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1164,
+                    1235
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 39,
+                      "column": 20
+                    },
+                    "end": {
+                      "line": 44,
+                      "column": 3
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1157,
+                  1235
+                ],
+                "loc": {
+                  "start": {
+                    "line": 39,
+                    "column": 13
+                  },
+                  "end": {
+                    "line": 44,
+                    "column": 3
+                  }
+                }
+              },
+              "kind": "constructor",
+              "computed": false,
+              "range": [
+                1146,
+                1235
+              ],
+              "loc": {
+                "start": {
+                  "line": 39,
+                  "column": 2
+                },
+                "end": {
+                  "line": 44,
+                  "column": 3
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * The error constructor.\n   *\n   * @param {String} name The name of the connection.\n   ",
+                  "range": [
+                    1047,
+                    1143
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 34,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 38,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * The connection name causing the error.\n   *\n   * @type {String}\n   ",
+                  "range": [
+                    1239,
+                    1317
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 46,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 50,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "connectionName",
+                "range": [
+                  1324,
+                  1338
+                ],
+                "loc": {
+                  "start": {
+                    "line": 51,
+                    "column": 6
+                  },
+                  "end": {
+                    "line": 51,
+                    "column": 20
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "Literal",
+                        "value": "use strict",
+                        "raw": "'use strict'",
+                        "range": [
+                          1347,
+                          1359
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 52,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 52,
+                            "column": 16
+                          }
+                        }
+                      },
+                      "range": [
+                        1347,
+                        1360
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 52,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 52,
+                          "column": 17
+                        }
+                      }
+                    },
+                    {
+                      "type": "ReturnStatement",
+                      "argument": {
+                        "type": "MemberExpression",
+                        "computed": true,
+                        "object": {
+                          "type": "ThisExpression",
+                          "range": [
+                            1373,
+                            1377
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 54,
+                              "column": 11
+                            },
+                            "end": {
+                              "line": 54,
+                              "column": 15
+                            }
+                          }
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "sConnectionName",
+                          "range": [
+                            1378,
+                            1393
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 54,
+                              "column": 16
+                            },
+                            "end": {
+                              "line": 54,
+                              "column": 31
+                            }
+                          }
+                        },
+                        "range": [
+                          1373,
+                          1394
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 54,
+                            "column": 11
+                          },
+                          "end": {
+                            "line": 54,
+                            "column": 32
+                          }
+                        }
+                      },
+                      "range": [
+                        1366,
+                        1395
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 54,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 54,
+                          "column": 33
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1341,
+                    1399
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 51,
+                      "column": 23
+                    },
+                    "end": {
+                      "line": 55,
+                      "column": 3
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1338,
+                  1399
+                ],
+                "loc": {
+                  "start": {
+                    "line": 51,
+                    "column": 20
+                  },
+                  "end": {
+                    "line": 55,
+                    "column": 3
+                  }
+                }
+              },
+              "kind": "get",
+              "computed": false,
+              "range": [
+                1320,
+                1399
+              ],
+              "loc": {
+                "start": {
+                  "line": 51,
+                  "column": 2
+                },
+                "end": {
+                  "line": 55,
+                  "column": 3
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * The connection name causing the error.\n   *\n   * @type {String}\n   ",
+                  "range": [
+                    1239,
+                    1317
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 46,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 50,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "static": false
+            }
+          ],
+          "range": [
+            1042,
+            1402
+          ],
+          "loc": {
+            "start": {
+              "line": 32,
+              "column": 55
+            },
+            "end": {
+              "line": 57,
+              "column": 1
+            }
+          }
+        },
+        "range": [
+          1002,
+          1402
+        ],
+        "loc": {
+          "start": {
+            "line": 32,
+            "column": 15
+          },
+          "end": {
+            "line": 57,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * Thrown when tryng to use an undefined connection.\n *\n * @extends {EError}\n ",
+            "range": [
+              902,
+              986
+            ],
+            "loc": {
+              "start": {
+                "line": 27,
+                "column": 0
+              },
+              "end": {
+                "line": 31,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "range": [
+        987,
+        1402
+      ],
+      "loc": {
+        "start": {
+          "line": 32,
+          "column": 0
+        },
+        "end": {
+          "line": 57,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * Thrown when tryng to use an undefined connection.\n *\n * @extends {EError}\n ",
+          "range": [
+            902,
+            986
+          ],
+          "loc": {
+            "start": {
+              "line": 27,
+              "column": 0
+            },
+            "end": {
+              "line": 31,
+              "column": 3
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    759,
+    1402
+  ],
+  "loc": {
+    "start": {
+      "line": 22,
+      "column": 0
+    },
+    "end": {
+      "line": 57,
+      "column": 1
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\n *  ____            __        __                ____    ______\n * /\\  _`\\         /\\ \\__  __/\\ \\__            /\\  _`\\ /\\__  _\\\n * \\ \\ \\L\\_\\    ___\\ \\ ,_\\/\\_\\ \\ ,_\\  __  __   \\ \\ \\/\\_\\/_/\\ \\/\n *  \\ \\  _\\L  /' _ `\\ \\ \\/\\/\\ \\ \\ \\/ /\\ \\/\\ \\   \\ \\ \\/_/_ \\ \\ \\\n *   \\ \\ \\L\\ \\/\\ \\/\\ \\ \\ \\_\\ \\ \\ \\ \\_\\ \\ \\_\\ \\   \\ \\ \\L\\ \\ \\_\\ \\__\n *    \\ \\____/\\ \\_\\ \\_\\ \\__\\\\ \\_\\ \\__\\\\/`____ \\   \\ \\____/ /\\_____\\\n *     \\/___/  \\/_/\\/_/\\/__/ \\/_/\\/__/ `/___/> \\   \\/___/  \\/_____/\n *                                        /\\___/\n *                                        \\/__/\n *\n * Entity CI - Core\n ",
+      "range": [
+        0,
+        585
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 13,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n * Provides the EDefinedConnection error which is used when attempting to create\n * an already defined connection.\n *\n * @author Orgun109uk <orgun109uk@gmail.com>\n ",
+      "range": [
+        587,
+        757
+      ],
+      "loc": {
+        "start": {
+          "line": 15,
+          "column": 0
+        },
+        "end": {
+          "line": 20,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n * Thrown when tryng to use an undefined connection.\n *\n * @extends {EError}\n ",
+      "range": [
+        902,
+        986
+      ],
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 0
+        },
+        "end": {
+          "line": 31,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n   * The error constructor.\n   *\n   * @param {String} name The name of the connection.\n   ",
+      "range": [
+        1047,
+        1143
+      ],
+      "loc": {
+        "start": {
+          "line": 34,
+          "column": 2
+        },
+        "end": {
+          "line": 38,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n   * The connection name causing the error.\n   *\n   * @type {String}\n   ",
+      "range": [
+        1239,
+        1317
+      ],
+      "loc": {
+        "start": {
+          "line": 46,
+          "column": 2
+        },
+        "end": {
+          "line": 50,
+          "column": 5
+        }
+      }
+    }
+  ]
+}

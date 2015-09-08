@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">entity-ci-core/tests/EntityCICore.test.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">entity-ci-core/tests/EntityCICore.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+var path = require(&apos;path&apos;),
+    fs = require(&apos;fs&apos;),
+    os = require(&apos;os&apos;),
+    test = require(&apos;unit.js&apos;),
+    loader = require(&apos;nsloader&apos;),
+    EntityCICore = loader(&apos;EntityCI/index&apos;),
+    Config = loader(&apos;EntityCI/Utils/Config&apos;);
+
+describe(&apos;entity-ci/entity-ci-core/EntityCICore&apos;, function () {
+
+  &apos;use strict&apos;;
+
+  var tmpPath = path.join(
+        os.tmpdir(), &apos;entityci-tests--config--&apos; + process.pid
+      ),
+      cfgFilename = path.join(tmpPath, &apos;config.json&apos;),
+      cfgData = {
+        test: {value: &apos;hello&apos;}
+      };
+
+  beforeEach(function () {
+
+    fs.mkdirSync(tmpPath);
+    fs.writeFileSync(cfgFilename, JSON.stringify(cfgData));
+
+  });
+
+  afterEach(function () {
+
+      fs.unlinkSync(cfgFilename);
+      fs.rmdirSync(tmpPath);
+
+    });
+
+  describe(&apos;EntityCICore&apos;, function () {
+
+    it(&apos;loadConfigShouldBeAlmostPrivate&apos;, function () {
+
+      var entityCICore = new EntityCICore(),
+          loadConfig = Symbol.for(&apos;EntityCICore.loadConfig&apos;);
+
+      test.value(
+        entityCICore.loadConfig
+      ).isUndefined();
+
+      test.function(
+        entityCICore[loadConfig]
+      );
+
+    });
+
+    it(&apos;connectToMongoShouldBeAlmostPrivate&apos;, function () {
+
+      var entityCICore = new EntityCICore(),
+          connectToMongo = Symbol.for(&apos;EntityCICore.connectToMongo&apos;);
+
+      test.value(
+        entityCICore.connectToMongo
+      ).isUndefined();
+
+      test.function(
+        entityCICore[connectToMongo]
+      );
+
+    });
+
+  });
+
+  describe(&apos;EntityCICore.loadConfig()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfConfigDoesntExist&apos;, function (done) {
+
+      var entityCICore = new EntityCICore(),
+          sLoadConfig = Symbol.for(&apos;EntityCICore.loadConfig&apos;);
+
+      entityCICore[sLoadConfig](cfgFilename, function (err) {
+
+        test.error(
+          err
+        ).isInstanceOf(Error);
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;shouldLoadConfig&apos;, function (done) {
+
+      var entityCICore = new EntityCICore(),
+          sLoadConfig = Symbol.for(&apos;EntityCICore.loadConfig&apos;);
+
+      entityCICore[sLoadConfig](cfgFilename, function (err) {
+
+        test.value(
+          err
+        ).isNull();
+
+        test.object(
+          entityCICore.config
+        ).isInstanceOf(Config);
+
+        test.object(
+          entityCICore.config.data
+        ).is(cfgData);
+
+        done();
+
+      });
+
+    });
+
+  });
+
+  describe(&apos;EntityCICore.initialize()&apos;, function () {
+
+    it(&apos;shouldInitializeWithoutIssues&apos;, function (done) {
+
+      var entityCICore = new EntityCICore();
+
+      test.bool(
+        entityCICore.initialized
+      ).isNotTrue();
+
+      entityCICore.initialize(cfgFilename, function (err) {
+
+        test.value(
+          err
+        ).isNull();
+
+        test.bool(
+          entityCICore.initialized
+        ).isTrue();
+
+        done();
+
+      });
+
+    });
+
+  });
+
+  describe(&apos;EntityCICore.config&apos;, function () {
+
+    it(&apos;shouldReturnNullBeforeInitialize&apos;, function () {
+
+      var entityCICore = new EntityCICore();
+
+      test.value(
+        entityCICore.config
+      ).isNull();
+
+    });
+
+    it(&apos;shouldInitializeWithoutIssues&apos;, function (done) {
+
+      var entityCICore = new EntityCICore();
+
+      entityCICore.initialize(&apos;&apos;, function (err) {
+
+        test.object(
+          entityCICore.config
+        ).isInstanceOf(Config);
+
+        done();
+
+      });
+
+    });
+
+  });
+
+});
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

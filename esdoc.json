@@ -1,0 +1,18 @@
+{
+  "source": "./lib/",
+  "destination": "./docs",
+  "excludes": ["node_modules", "docs", "coverage"],
+  "access": ["private", "public", "protected"],
+  "autoPrivate": true,
+  "unexportIdentifier": false,
+  "undocumentIdentifier": true,
+  "builtinExternal": true,
+  "index": "./README.md",
+  "package": "./package.json",
+  "coverage": true,
+  "test": {
+    "type": "mocha",
+    "source": "./tests"
+  },
+  "title": "EntityCI"
+}

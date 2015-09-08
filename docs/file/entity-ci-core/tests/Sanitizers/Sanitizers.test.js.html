@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">entity-ci-core/tests/Sanitizers/Sanitizers.test.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">entity-ci-core/tests/Sanitizers/Sanitizers.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+var test = require(&apos;unit.js&apos;),
+    loader = require(&apos;nsloader&apos;),
+    Sanitizers = loader(&apos;EntityCI/Sanitizers&apos;),
+    EUnknownSanitizer = loader(&apos;EntityCI/Sanitizers/Errors/EUnknownSanitizer&apos;);
+
+var sRules = Symbol.for(&apos;Sanitizers.rules&apos;);
+
+describe(&apos;entity-ci/entity-ci-core/Sanitizers&apos;, function () {
+
+  &apos;use strict&apos;;
+
+  describe(&apos;Sanitizers.register()&apos;, function () {
+
+    it(&apos;shouldBeAbleToRegisterNewSanitizer&apos;, function () {
+
+      var sanitizers = new Sanitizers(),
+          sanitizer = function () {};
+
+      sanitizers.register(&apos;test&apos;, sanitizer);
+
+      test.array(
+        sanitizers[sRules].test
+      ).hasLength(1).is([{
+        callback: sanitizer,
+        weight: 0
+      }]);
+
+    });
+
+    it(&apos;shouldBeAbleToRegisterMultipleCallbacks&apos;, function () {
+
+      var sanitizers = new Sanitizers(),
+          sanitizer1 = function () {},
+          sanitizer2 = function () {},
+          sanitizer3 = function () {};
+
+      sanitizers
+        .register(&apos;test&apos;, sanitizer1)
+        .register(&apos;test&apos;, sanitizer2)
+        .register(&apos;test&apos;, sanitizer3);
+
+      test.array(
+        sanitizers[sRules].test
+      ).hasLength(3).is([{
+        callback: sanitizer1,
+        weight: 0
+      }, {
+        callback: sanitizer2,
+        weight: 0
+      }, {
+        callback: sanitizer3,
+        weight: 0
+      }]);
+
+    });
+
+    it(&apos;multipleCallbacksShouldBeSortedByWeight&apos;, function () {
+
+      var sanitizers = new Sanitizers(),
+          sanitizer1 = function () {},
+          sanitizer2 = function () {},
+          sanitizer3 = function () {};
+
+      sanitizers.register(&apos;test&apos;, sanitizer1, 10)
+        .register(&apos;test&apos;, sanitizer2, -10)
+        .register(&apos;test&apos;, sanitizer3);
+
+      test.array(
+        sanitizers[sRules].test
+      ).hasLength(3).is([{
+        callback: sanitizer2,
+        weight: -10
+      }, {
+        callback: sanitizer3,
+        weight: 0
+      }, {
+        callback: sanitizer1,
+        weight: 10
+      }]);
+
+    });
+
+  });
+
+  describe(&apos;Sanitizers.registered()&apos;, function () {
+
+    it(&apos;shouldReturnFalseIfTheSanitizerHasntBeenRegistered&apos;, function () {
+
+      var sanitizers = new Sanitizers();
+
+      test.bool(
+        sanitizers.registered(&apos;test&apos;)
+      ).isNotTrue();
+
+    });
+
+    it(&apos;shouldReturnFalseIfTheSanitizerHasBeenRegisteredButEmpty&apos;, function () {
+
+      var sanitizers = new Sanitizers();
+
+      test.bool(
+        sanitizers.registered(&apos;test&apos;)
+      ).isNotTrue();
+
+    });
+
+    it(&apos;shouldReturnTrueIfSanitizerHasBeenRegistered&apos;, function () {
+
+      var sanitizers = new Sanitizers(),
+          sanitizer = function () {};
+
+      sanitizers.register(&apos;test&apos;, sanitizer);
+
+      test.bool(
+        sanitizers.registered(&apos;test&apos;)
+      ).isTrue();
+
+    });
+
+  });
+
+  describe(&apos;Sanitizers.unregister()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfSanitizerDoesntExist&apos;, function () {
+
+      var sanitizers = new Sanitizers();
+
+      test.error(function () {
+        sanitizers.unregister(&apos;test&apos;);
+      }).isInstanceOf(EUnknownSanitizer);
+
+    });
+
+    it(&apos;shouldUnregisterAllSanitizers&apos;, function () {
+
+      var sanitizers = new Sanitizers(),
+          sanitizer1 = function () {},
+          sanitizer2 = function () {},
+          sanitizer3 = function () {};
+
+      sanitizers
+        .register(&apos;test&apos;, sanitizer1, 10)
+        .register(&apos;test&apos;, sanitizer2, -10)
+        .register(&apos;test&apos;, sanitizer3);
+
+      sanitizers.unregister(&apos;test&apos;);
+      test.value(
+        sanitizers[sRules].test
+      ).isUndefined();
+
+    });
+
+    it(&apos;shouldUnregisterSpecifiedCallback&apos;, function () {
+
+      var sanitizers = new Sanitizers(),
+          sanitizer1 = function () {},
+          sanitizer2 = function () {},
+          sanitizer3 = function () {};
+
+      sanitizers
+        .register(&apos;test&apos;, sanitizer1, 10)
+        .register(&apos;test&apos;, sanitizer2, -10)
+        .register(&apos;test&apos;, sanitizer3);
+
+      sanitizers.unregister(&apos;test&apos;, sanitizer2);
+      test.array(
+        sanitizers[sRules].test
+      ).hasLength(2).is([{
+        callback: sanitizer3,
+        weight: 0
+      }, {
+        callback: sanitizer1,
+        weight: 10
+      }]);
+
+    });
+
+    it(&apos;shouldUnregisterSpecifiedCallbackDuplicates&apos;, function () {
+
+      var sanitizers = new Sanitizers(),
+          sanitizer1 = function () {},
+          sanitizer2 = function () {},
+          sanitizer3 = function () {};
+
+      sanitizers.register(&apos;test&apos;, sanitizer1, 10)
+        .register(&apos;test&apos;, sanitizer2, -10)
+        .register(&apos;test&apos;, sanitizer3)
+        .register(&apos;test&apos;, sanitizer2, 90);
+
+      sanitizers.unregister(&apos;test&apos;, sanitizer2);
+      test.array(
+        sanitizers[sRules].test
+      ).hasLength(2).is([{
+        callback: sanitizer3,
+        weight: 0
+      }, {
+        callback: sanitizer1,
+        weight: 10
+      }]);
+
+    });
+
+  });
+
+  describe(&apos;Sanitizers.sanitize()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfSanitizerDoesntExist&apos;, function (done) {
+
+      var sanitizers = new Sanitizers();
+
+      sanitizers.sanitize(function (err, orig, value) {
+
+        test.object(
+          err
+        ).isInstanceOf(EUnknownSanitizer);
+
+        done();
+
+      }, &apos;test&apos;, &apos;test&apos;);
+
+    });
+
+    it(&apos;shouldExecuteCorrectSanitizers&apos;, function (done) {
+
+      var sanitizers = new Sanitizers(),
+          s1 = false, s2 = false, s3 = false,
+          sanitizer1 = function (orig, value, options, next) {
+            s1 = true;
+            next(null, value);
+          },
+          sanitizer2 = function (orig, value, options, next) {
+            s2 = true;
+            next(null, value);
+          },
+          sanitizer3 = function (orig, value, options, next) {
+            s3 = true;
+            next(null, value);
+          };
+
+      sanitizers.register(&apos;test&apos;, sanitizer1)
+        .register(&apos;test2&apos;, sanitizer2)
+        .register(&apos;test&apos;, sanitizer3);
+
+      sanitizers.sanitize(function (err, orig, value) {
+
+        test.value(
+          err
+        ).isNull();
+
+        test.bool(
+          s1
+        ).isTrue();
+
+        test.bool(
+          s2
+        ).isNotTrue();
+
+        test.bool(
+          s3
+        ).isTrue();
+
+        done();
+
+      }, &apos;test&apos;, &apos;test&apos;);
+
+    });
+
+    it(&apos;shouldMarkAsInvalidIfAnErrorIsSubmitted&apos;, function (done) {
+
+      var sanitizers = new Sanitizers(),
+          s1 = false, s2 = false, s3 = false,
+          sanitizer1 = function (orig, value, options, next) {
+            s1 = true;
+            next(null, value);
+          },
+          sanitizer2 = function (orig, value, options, next) {
+            s2 = true;
+            next(new Error(), value);
+          },
+          sanitizer3 = function (orig, value, options, next) {
+            s3 = true;
+            next(null, value);
+          };
+
+      sanitizers.register(&apos;test&apos;, sanitizer1)
+        .register(&apos;test&apos;, sanitizer2)
+        .register(&apos;test&apos;, sanitizer3);
+
+      sanitizers.sanitize(function (err, orig, value) {
+
+        test.object(
+          err
+        ).isInstanceOf(Error);
+
+        test.bool(
+          s1
+        ).isTrue();
+
+        test.bool(
+          s2
+        ).isTrue();
+
+        test.bool(
+          s3
+        ).isNotTrue();
+
+        done();
+
+      }, &apos;test&apos;, &apos;test&apos;);
+
+    });
+
+    it(&apos;shouldCaptureExceptionsAndFail&apos;, function (done) {
+
+      var sanitizers = new Sanitizers(),
+          s1 = false, s2 = false, s3 = false,
+          sanitizer1 = function (orig, value, options, next) {
+            s1 = true;
+            next(null, value);
+          },
+          sanitizer2 = function (orig, value, options, next) {
+            throw new Error();
+          },
+          sanitizer3 = function (orig, value, options, next) {
+            s3 = true;
+            next(null, value);
+          };
+
+      sanitizers.register(&apos;test&apos;, sanitizer1)
+        .register(&apos;test&apos;, sanitizer2)
+        .register(&apos;test&apos;, sanitizer3);
+
+      sanitizers.sanitize(function (err, orig, value) {
+
+        test.object(
+          err
+        ).isInstanceOf(Error);
+
+        test.bool(
+          s1
+        ).isTrue();
+
+        test.bool(
+          s2
+        ).isNotTrue();
+
+        test.bool(
+          s3
+        ).isNotTrue();
+
+        done();
+
+      }, &apos;test&apos;, &apos;test&apos;);
+
+    });
+
+    it(&apos;shouldSanitizeValue&apos;, function (done) {
+
+      var sanitizers = new Sanitizers(),
+          sanitizer1 = function (orig, value, options, next) {
+            next(null, value.trim());
+          },
+          sanitizer2 = function (orig, value, options, next) {
+            next(null, value.toLowerCase());
+          },
+          sanitizer3 = function (orig, value, options, next) {
+            next(null, value.replace(&apos; &apos;, &apos;-&apos;));
+          };
+
+      sanitizers.register(&apos;test&apos;, sanitizer1)
+        .register(&apos;test&apos;, sanitizer2)
+        .register(&apos;test&apos;, sanitizer3);
+
+      sanitizers.sanitize(function (err, orig, value) {
+
+        test.value(
+          err
+        ).isNull();
+
+        test.string(
+          orig
+        ).is(&apos;  HELLO WORLD  &apos;);
+
+        test.string(
+          value
+        ).is(&apos;hello-world&apos;);
+
+        done();
+
+      }, &apos;test&apos;, &apos;  HELLO WORLD  &apos;);
+
+    });
+
+  });
+
+});
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

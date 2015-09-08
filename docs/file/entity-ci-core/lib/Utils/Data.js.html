@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">entity-ci-core/lib/Utils/Data.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">entity-ci-core/lib/Utils/Data.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+/**
+ * Provides a helper object which provides some data/eval manipulation.
+ *
+ * @author Orgun109uk &lt;orgun109uk@gmail.com&gt;
+ *
+ * @module entity-ci
+ * @submodule entity-ci-core
+ */
+
+var inData = Symbol(&apos;Data.data&apos;),
+    inSep = Symbol(&apos;Data.sep&apos;),
+    nameToXPath = Symbol.for(&apos;Data.nameToXPath&apos;);
+
+/**
+ * The data manipulation class.
+ *
+ * @class Data
+ */
+module.exports = class Data {
+
+  /**
+   * Construct the data object.
+   *
+   * @param {Object} [data=null] The data object to manipulate, if null then one
+   *   is created.
+   * @param {String} [sep=&quot;.&quot;] The seperator to use to seperate each xpath
+   *   element.
+   * @constructor
+   */
+  constructor(data, sep) {
+    &apos;use strict&apos;;
+
+    this[inData] = data || {};
+    this[inSep] = sep || &apos;.&apos;;
+  }
+
+  /**
+   * @todo
+   */
+  get data() {
+    return this[inData];
+  }
+
+  /**
+   * @todo
+   */
+  set data(data) {
+    this[inData] = data;
+  }
+
+  /**
+   * @todo
+   */
+  get seperator() {
+    return this[inSep];
+  }
+
+  /**
+   * Helper function to convert a property name to an XPath used through eval to
+   * get or set a config value.
+   *
+   * @method nameToXPath
+   * @param {String} name The name of the property.
+   * @return {String} The name converted to an eval xpath.
+   * @private
+   */
+  [nameToXPath](name) {
+    &apos;use strict&apos;;
+
+    return name.split(this[inSep]).join(&apos;&quot;][&quot;&apos;);
+  }
+
+  /**
+   * Determines if the provided property exists.
+   *
+   * @method has
+   * @param {String} name The name of the property to check.
+   * @return {Boolean} Returns true or false.
+   */
+  has(name) {
+    &apos;use strict&apos;;
+
+    var has = false;
+
+    /* jshint -W061 */
+    /* eslint-disable */
+    eval(&apos;try {\
+      has = this.data[&quot;&apos; + this[nameToXPath](name) + &apos;&quot;] !== undefined;\
+    } catch (err) {\
+      has = false;\
+    }&apos;);
+    /* eslint-enable */
+
+    return has;
+  }
+
+  /**
+   * Get the value of the property, or the default value.
+   *
+   * @method get
+   * @param {String} name The name of the property to get.
+   * @param {Mixed} [def=null] The default value to return if the property
+   *   doesnt exist.
+   * @return {Mixed} Returns the property value, otherwise the def value.
+   */
+  get(name, def) {
+    &apos;use strict&apos;;
+
+    if (def === undefined) {
+      def = null;
+    }
+
+    var n = this[nameToXPath](name),
+        val;
+
+    /* jshint -W061 */
+    /* eslint-disable */
+    eval(&apos;try {\
+      val = this.data[&quot;&apos; + n + &apos;&quot;] !== undefined ? \
+        this.data[&quot;&apos; + n + &apos;&quot;] : \
+        def;\
+    } catch (err) {\
+      val = def;\
+    }&apos;);
+    /* eslint-enable */
+
+    return val;
+  }
+
+  /**
+   * Set the value of a property.
+   *
+   * @method set
+   * @param {String} name The name of the property to set.
+   * @param {Mixed} value The value to assign.
+   * @returns {Data} Returns self.
+   * @chainable
+   */
+  set(name, value) {
+    &apos;use strict&apos;;
+
+    var ns = name.split(this[inSep]),
+        xpath = &apos;&apos;;
+
+    for (var i = 0, len = ns.length - 1; i &lt; len; i++) {
+      xpath += (i &gt; 0 ? &apos;&quot;][&quot;&apos; : &apos;&apos;) + ns[i];
+
+      /* jshint -W061 */
+      /* eslint-disable */
+      eval(&apos;if (this.data[&quot;&apos; + xpath + &apos;&quot;] === undefined) {\
+        this.data[&quot;&apos; + xpath + &apos;&quot;] = {};\
+      }&apos;);
+      /* eslint-enable */
+    }
+
+    /* jshint -W061 */
+    /* eslint-disable */
+    eval(&apos;this.data[&quot;&apos; + this[nameToXPath](name) + &apos;&quot;] = value;&apos;);
+    /* eslint-enable */
+
+    return this;
+  }
+
+  /**
+   * Deletes the value of a property.
+   *
+   * @method del
+   * @param {String} name The name of the property to delete.
+   * @returns {Data} Returns self.
+   * @chainable
+   */
+  del(name) {
+    &apos;use strict&apos;;
+
+    /* jshint -W061 */
+    /* eslint-disable */
+    eval(&apos;delete this.data[&quot;&apos; + this[nameToXPath](name) + &apos;&quot;];&apos;);
+    /* eslint-enable */
+
+    return this;
+  }
+
+};
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

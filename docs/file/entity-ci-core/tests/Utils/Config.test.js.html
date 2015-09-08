@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">entity-ci-core/tests/Utils/Config.test.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">entity-ci-core/tests/Utils/Config.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+var path = require(&apos;path&apos;),
+    fs = require(&apos;fs&apos;),
+    os = require(&apos;os&apos;),
+    test = require(&apos;unit.js&apos;),
+    loader = require(&apos;nsloader&apos;),
+    Config = loader(&apos;EntityCI/Utils/Config&apos;);
+
+describe(&apos;entity-ci/entity-ci-core/Utils/Config&apos;, function () {
+
+  &apos;use strict&apos;;
+
+  var tmpPath = path.join(
+        os.tmpdir(), &apos;entityci-tests--config--&apos; + process.pid
+      );
+
+  describe(&apos;Config.has()&apos;, function () {
+
+    it(&apos;hasShouldReturnFalseIfPropertyDoesntExist&apos;, function () {
+
+      var config = new Config();
+
+      test.bool(
+        config.has(&apos;test&apos;)
+      ).isNotTrue();
+
+    });
+
+    it(&apos;hasShouldFindTheFirstLevelPropertyOfSingleLevel&apos;, function () {
+
+      var config = new Config();
+      config.data.test = &apos;hello&apos;;
+
+      test.bool(
+        config.has(&apos;test&apos;)
+      ).isTrue();
+
+    });
+
+    it(&apos;hasShouldFindTheFirstLevelPropertyOfMultiLevel&apos;, function () {
+
+      var config = new Config();
+      config.data.test = {value: &apos;hello&apos;};
+
+      test.bool(
+        config.has(&apos;test&apos;)
+      ).isTrue();
+
+    });
+
+    it(&apos;hasShouldFindTheSecondLevelPropertyOfMultiLevel&apos;, function () {
+
+      var config = new Config();
+      config.data.test = {value: &apos;hello&apos;};
+
+      test.bool(
+        config.has(&apos;test.value&apos;)
+      ).isTrue();
+
+    });
+
+  });
+
+  describe(&apos;Config.get()&apos;, function () {
+
+    it(&apos;getWillReturnNullIfItDoesntExist&apos;, function () {
+
+      var config = new Config();
+
+      test.value(
+        config.get(&apos;test&apos;)
+      ).isNull();
+
+    });
+
+    it(&apos;getWillReturnTheDefaultValueIfItDoesntExist&apos;, function () {
+
+      var config = new Config();
+
+      test.bool(
+        config.get(&apos;test&apos;, false)
+      ).isNotTrue();
+
+    });
+
+    it(&apos;getTheFirstLevelPropertyOfSingleLevel&apos;, function () {
+
+      var config = new Config();
+      config.data.test = &apos;value&apos;;
+
+      test.string(
+        config.get(&apos;test&apos;)
+      ).is(&apos;value&apos;);
+
+    });
+
+    it(&apos;getTheFirstLevelPropertyOfMultiLevel&apos;, function () {
+
+      var config = new Config();
+      config.data.test = {value: &apos;hello&apos;};
+
+      test.object(
+        config.get(&apos;test&apos;)
+      ).is({value: &apos;hello&apos;});
+
+    });
+
+    it(&apos;getTheSecondLevelPropertyOfMultiLevel&apos;, function () {
+
+      var config = new Config();
+      config.data.test = {value: &apos;hello&apos;};
+
+      test.string(
+        config.get(&apos;test.value&apos;)
+      ).is(&apos;hello&apos;);
+
+    });
+
+  });
+
+  describe(&apos;Config.set()&apos;, function () {
+
+    it(&apos;setValue&apos;, function () {
+
+      var config = new Config();
+
+      config.set(&apos;test&apos;, &apos;hello&apos;);
+      test.object(
+        config.data
+      ).is({
+        test: &apos;hello&apos;
+      });
+
+    });
+
+    it(&apos;setMultiLevelValue&apos;, function () {
+
+      var config = new Config();
+
+      config.set(&apos;test.value&apos;, &apos;hello&apos;);
+      test.object(
+        config.data
+      ).is({
+        test: {
+          value: &apos;hello&apos;
+        }
+      });
+
+    });
+
+  });
+
+  describe(&apos;Config.del()&apos;, function () {
+
+    it(&apos;delValue&apos;, function () {
+
+      var config = new Config();
+      config.data.test = &apos;hello&apos;;
+
+      config.del(&apos;test&apos;);
+      test.object(
+        config.data
+      ).is({});
+
+    });
+
+    it(&apos;delAMultiValue&apos;, function () {
+
+      var config = new Config();
+      config.data.test = {value: &apos;hello&apos;};
+
+      config.del(&apos;test&apos;);
+      test.object(
+        config.data
+      ).is({});
+
+    });
+
+    it(&apos;delAMultiValueValue&apos;, function () {
+
+      var config = new Config();
+      config.data.test = {value: &apos;hello&apos;};
+
+      config.del(&apos;test.value&apos;);
+      test.object(
+        config.data
+      ).is({
+        test: {}
+      });
+
+    });
+
+  });
+
+  describe(&apos;Config.save()&apos;, function () {
+
+    beforeEach(function () {
+
+      fs.mkdirSync(tmpPath);
+
+    });
+
+    afterEach(function () {
+
+      if (fs.existsSync(path.join(tmpPath, &apos;config.json&apos;))) {
+        fs.unlinkSync(path.join(tmpPath, &apos;config.json&apos;));
+      }
+
+      fs.rmdirSync(path.join(tmpPath));
+
+    });
+
+    it(&apos;savesAnEmptyConfigFile&apos;, function (done) {
+
+      var config = new Config(path.join(tmpPath, &apos;config.json&apos;));
+
+      config.save(function (err) {
+
+        test.value(err).isNull();
+        test.bool(
+          fs.existsSync(config.filename)
+        ).isTrue();
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;savesPopulatedConfig&apos;, function (done) {
+
+      var config = new Config(path.join(tmpPath, &apos;config.json&apos;));
+      config.data.test = {value: &apos;hello&apos;};
+
+      config.save(function (err) {
+
+        test.value(err).isNull();
+
+        test.object(
+          JSON.parse(
+            fs.readFileSync(config.filename)
+          )
+        ).is(config.data);
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;throwsAnErrorIfUnableToSave&apos;, function (done) {
+
+      var config = new Config(path.join(&apos;/etc&apos;, &apos;config.json&apos;));
+
+      config.save(function (err) {
+
+        test.value(
+          err
+        ).isInstanceOf(Error);
+
+        done();
+
+      });
+
+    });
+
+  });
+
+  describe(&apos;Config.load()&apos;, function () {
+
+    beforeEach(function () {
+
+      fs.mkdirSync(tmpPath);
+      fs.writeFileSync(path.join(tmpPath, &apos;config.json&apos;), JSON.stringify({
+        test: {value: &apos;hello&apos;}
+      }));
+
+    });
+
+    afterEach(function () {
+
+      fs.unlinkSync(path.join(tmpPath, &apos;config.json&apos;));
+      fs.rmdirSync(path.join(tmpPath));
+
+    });
+
+    it(&apos;errorIsThrownIfTheConfigDoesntExist&apos;, function (done) {
+
+      var config = new Config(path.join(tmpPath, &apos;config2.json&apos;));
+
+      config.load(function (err) {
+
+        test.error(
+          err
+        ).isInstanceOf(Error);
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;loadFromConfigFile&apos;, function (done) {
+
+      var config = new Config(path.join(tmpPath, &apos;config.json&apos;));
+
+      config.load(function (err) {
+
+        test.value(err).isNull();
+
+        test.object(
+          config.data
+        ).is({
+          test: {value: &apos;hello&apos;}
+        });
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;loadFromConfigFileResetsExistingConfig&apos;, function (done) {
+
+      var config = new Config(path.join(tmpPath, &apos;config.json&apos;));
+      config.data.hello = &apos;world&apos;;
+
+      config.load(function (err) {
+
+        test.value(err).isNull();
+        test.object(
+          config.data
+        ).is({
+          test: {value: &apos;hello&apos;}
+        });
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;throwsAnErrorIfTheConfigFileIsNotValidJSON&apos;, function (done) {
+
+      fs.writeFileSync(path.join(tmpPath, &apos;config.json&apos;), &apos;test&apos;);
+
+      var config = new Config(path.join(tmpPath, &apos;config.json&apos;));
+
+      config.load(function (err) {
+
+        test.value(
+          err
+        ).isInstanceOf(Error);
+
+        done();
+
+      });
+
+    });
+
+  });
+
+});
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">tests/EntityCICore.test.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div data-ice="classWrap">
+  <h2>Class</h2>
+  <ul>
+    
+  <li data-ice="classDoc"><span><a href="class/lib/EntityManager/BaseEntity.js~BaseEntity.html">BaseEntity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Utils/Config.js~Config.html">Config</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Database/Connection.js~Connection.html">Connection</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Utils/Data.js~Data.html">Data</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Database/index.js~Database.html">Database</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/ECantFindEntity.js~ECantFindEntity.html">ECantFindEntity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Database/Errors/EDefinedConnection.js~EDefinedConnection.html">EDefinedConnection</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EError.js~EError.html">EError</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/EFailedEntity.js~EFailedEntity.html">EFailedEntity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EInvalidCharacters.js~EInvalidCharacters.html">EInvalidCharacters</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EInvalidEmail.js~EInvalidEmail.html">EInvalidEmail</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/EInvalidEntity.js~EInvalidEntity.html">EInvalidEntity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EInvalidLength.js~EInvalidLength.html">EInvalidLength</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EInvalidURL.js~EInvalidURL.html">EInvalidURL</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Sanitizers/Errors/EInvalidValue.js~EInvalidValue.html">EInvalidValue</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/EMachineNameExists.js~EMachineNameExists.html">EMachineNameExists</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/EMissingMachineName.js~EMissingMachineName.html">EMissingMachineName</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EMustContainDigit.js~EMustContainDigit.html">EMustContainDigit</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EMustContainLowercase.js~EMustContainLowercase.html">EMustContainLowercase</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EMustContainUppercase.js~EMustContainUppercase.html">EMustContainUppercase</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/PluginManager/Errors/EPluginDisabled.js~EPluginDisabled.html">EPluginDisabled</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/PluginManager/Errors/EPluginEnabled.js~EPluginEnabled.html">EPluginEnabled</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/PluginManager/Errors/EPluginUnmetDependencies.js~EPluginUnmetDependencies.html">EPluginUnmetDependencies</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/ESchemaFieldDefined.js~ESchemaFieldDefined.html">ESchemaFieldDefined</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Database/Errors/EUndefinedConnection.js~EUndefinedConnection.html">EUndefinedConnection</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EventManager/Errors/EUndefinedEvent.js~EUndefinedEvent.html">EUndefinedEvent</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/EUnknownFieldType.js~EUnknownFieldType.html">EUnknownFieldType</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Sanitizers/Errors/EUnknownSanitizer.js~EUnknownSanitizer.html">EUnknownSanitizer</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Errors/EUnknownSchemaField.js~EUnknownSchemaField.html">EUnknownSchemaField</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/Errors/EUnknownValidator.js~EUnknownValidator.html">EUnknownValidator</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/PluginManager/Errors/EUnknownPlugin.js~EUnkownPlugin.html">EUnkownPlugin</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Entity.js~Entity.html">Entity</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/index.js~EntityCICore.html">EntityCICore</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/index.js~EntityManager.html">EntityManager</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EventManager/index.js~EventManager.html">EventManager</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Locale/index.js~Locale.html">Locale</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/PluginManager/Plugin.js~Plugin.html">Plugin</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/PluginManager/index.js~PluginManager.html">PluginManager</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Sanitizers/index.js~Sanitizers.html">Sanitizers</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/EntityManager/Schema.js~Schema.html">Schema</a></span></li>
+<li data-ice="classDoc"><span><a href="class/lib/Validators/index.js~Validators.html">Validators</a></span></li>
+</ul>
+</div>
+
+
+
+<div data-ice="functionWrap">
+  <h2><a href="function/">Function</a></h2>
+  <ul>
+    
+  <li data-ice="functionDoc"><span><a href="function/index.html#static-function-sanitizeTrim">sanitizeTrim</a></span></li>
+<li data-ice="functionDoc"><span><a href="function/index.html#static-function-sortBy">sortBy</a></span></li>
+<li data-ice="functionDoc"><span><a href="function/index.html#static-function-validateEmail">validateEmail</a></span></li>
+<li data-ice="functionDoc"><span><a href="function/index.html#static-function-validateEntity">validateEntity</a></span></li>
+<li data-ice="functionDoc"><span><a href="function/index.html#static-function-validateMachineName">validateMachineName</a></span></li>
+<li data-ice="functionDoc"><span><a href="function/index.html#static-function-validatePassword">validatePassword</a></span></li>
+<li data-ice="functionDoc"><span><a href="function/index.html#static-function-validateUrl">validateUrl</a></span></li>
+</ul>
+</div>
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">tests/EntityCICore.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+var path = require(&apos;path&apos;),
+    fs = require(&apos;fs&apos;),
+    os = require(&apos;os&apos;),
+    test = require(&apos;unit.js&apos;),
+    loader = require(&apos;nsloader&apos;),
+    EntityCICore = loader(&apos;EntityCI/index&apos;),
+    Config = loader(&apos;EntityCI/Utils/Config&apos;);
+
+describe(&apos;entity-ci/entity-ci-core/EntityCICore&apos;, function () {
+
+  &apos;use strict&apos;;
+
+  var tmpPath = path.join(
+        os.tmpdir(), &apos;entityci-tests--config--&apos; + process.pid
+      ),
+      cfgFilename = path.join(tmpPath, &apos;config.json&apos;),
+      cfgData = {
+        test: {value: &apos;hello&apos;}
+      };
+
+  beforeEach(function () {
+
+    fs.mkdirSync(tmpPath);
+    fs.writeFileSync(cfgFilename, JSON.stringify(cfgData));
+
+  });
+
+  afterEach(function () {
+
+      fs.unlinkSync(cfgFilename);
+      fs.rmdirSync(tmpPath);
+
+    });
+
+  describe(&apos;EntityCICore.loadConfig()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfConfigDoesntExist&apos;, function (done) {
+
+      var entityCICore = new EntityCICore();
+
+      entityCICore._loadConfig(cfgFilename, function (err) {
+
+        test.error(
+          err
+        ).isInstanceOf(Error);
+
+        done();
+
+      });
+
+    });
+
+    it(&apos;shouldLoadConfig&apos;, function (done) {
+
+      var entityCICore = new EntityCICore();
+
+      entityCICore._loadConfig(cfgFilename, function (err) {
+
+        test.value(
+          err
+        ).isNull();
+
+        test.object(
+          entityCICore.config
+        ).isInstanceOf(Config);
+
+        test.object(
+          entityCICore.config.data
+        ).is(cfgData);
+
+        done();
+
+      });
+
+    });
+
+  });
+
+  describe(&apos;EntityCICore.initialize()&apos;, function () {
+
+    it(&apos;shouldInitializeWithoutIssues&apos;, function (done) {
+
+      var entityCICore = new EntityCICore();
+
+      test.bool(
+        entityCICore.initialized
+      ).isNotTrue();
+
+      entityCICore.initialize(cfgFilename, function (err) {
+
+        test.value(
+          err
+        ).isNull();
+
+        test.bool(
+          entityCICore.initialized
+        ).isTrue();
+
+        done();
+
+      });
+
+    });
+
+  });
+
+  describe(&apos;EntityCICore.config&apos;, function () {
+
+    it(&apos;shouldReturnNullBeforeInitialize&apos;, function () {
+
+      var entityCICore = new EntityCICore();
+
+      test.value(
+        entityCICore.config
+      ).isNull();
+
+    });
+
+    it(&apos;shouldInitializeWithoutIssues&apos;, function (done) {
+
+      var entityCICore = new EntityCICore();
+
+      entityCICore.initialize(&apos;&apos;, function (err) {
+
+        test.object(
+          entityCICore.config
+        ).isInstanceOf(Config);
+
+        done();
+
+      });
+
+    });
+
+  });
+
+});
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

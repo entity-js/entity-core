@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">entity-ci-core/lib/EntityManager/Schema.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">entity-ci-core/lib/EntityManager/Schema.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+/**
+ * Provides the Schema class.
+ *
+ * @author Orgun109uk &lt;orgun109uk@gmail.com&gt;
+ *
+ * @module entity-ci
+ * @submodule entity-ci-core
+ */
+
+var async = require(&apos;async&apos;),
+    loader = require(&apos;nsloader&apos;),
+    sortBy = loader(&apos;EntityCI/Utils/SortBy&apos;),
+    BaseEntity = loader(&apos;EntityCI/EntityManager/BaseEntity&apos;),
+    EUnknownFieldType = loader(
+      &apos;EntityCI/EntityManager/Errors/EUnknownFieldType&apos;
+    ),
+    ESchemaFieldDefined = loader(
+      &apos;EntityCI/EntityManager/Errors/ESchemaFieldDefined&apos;
+    ),
+    EUnknownSchemaField = loader(
+      &apos;EntityCI/EntityManager/Errors/EUnknownSchemaField&apos;
+    ),
+    EUnknownValidator = loader(
+      &apos;EntityCI/Validators/Errors/EUnknownValidator&apos;
+    ),
+    EUnknownSanitizer = loader(
+      &apos;EntityCI/Sanitizers/Errors/EUnknownSanitizer&apos;
+    );
+
+var sIsUpdated = Symbol.for(&apos;BaseEntity.isUpdated&apos;),
+    sDocToEntity = Symbol.for(&apos;BaseEntity.docToEntity&apos;),
+    sEntityToDoc = Symbol.for(&apos;BaseEntity.entityToDoc&apos;),
+    sTitle = Symbol(&apos;Schema.title&apos;),
+    sDescription = Symbol(&apos;Schema.description&apos;),
+    sFields = Symbol.for(&apos;Schema.fields&apos;);
+
+/**
+ * The entity schema class.
+ *
+ * @class Schema
+ * @extends BaseEntity
+ */
+module.exports = class Schema extends BaseEntity {
+
+  /**
+   * The schema constructor.
+   *
+   * @param {EntityManager} manager The entity manager.
+   * @constructor
+   */
+  constructor(manager) {
+    &apos;use strict&apos;;
+
+    super(manager);
+
+    this[sTitle] = &apos;&apos;;
+    this[sDescription] = &apos;&apos;;
+    this[sFields] = {};
+  }
+
+  /**
+   * Get the database collection name.
+   *
+   * @method collectionName
+   * @return {String} The collection name.
+   */
+  collectionName() {
+    &apos;use strict&apos;;
+
+    return &apos;schemas&apos;;
+  }
+
+  /**
+   * Get the database collection name for the entity.
+   *
+   * @method entityCollectionName
+   * @return {String} The entity collection name.
+   */
+  entityCollectionName() {
+    &apos;use strict&apos;;
+
+    return &apos;entity-&apos; + this.machineName;
+  }
+
+  /**
+   * Get the entity collection.
+   *
+   * @property entityCollection
+   * @type Collection
+   * @readOnly
+   */
+  get entityCollection() {
+    &apos;use strict&apos;;
+
+    var collectionName = this.entityCollectionName();
+    return this.manager.database.collection(collectionName);
+  }
+
+  /**
+   * Get the schemas title.
+   *
+   * @property title
+   * @type String
+   */
+  get title() {
+    &apos;use strict&apos;;
+
+    return this[sTitle];
+  }
+
+  /**
+   * Set the schemas title.
+   *
+   * @property title
+   * @type String
+   */
+  set title(value) {
+    &apos;use strict&apos;;
+
+    this[sIsUpdated] = true;
+    this[sTitle] = value;
+  }
+
+  /**
+   * Get the schemas description.
+   *
+   * @property description
+   * @type String
+   */
+  get description() {
+    &apos;use strict&apos;;
+
+    return this[sDescription];
+  }
+
+  /**
+   * Set the schemas description.
+   *
+   * @property description
+   * @type String
+   */
+  set description(value) {
+    &apos;use strict&apos;;
+
+    this[sIsUpdated] = true;
+    this[sDescription] = value;
+  }
+
+  /**
+   * Get an array of defined field names.
+   *
+   * @property fields
+   * @type Array
+   * @readOnly
+   */
+  get fields() {
+    &apos;use strict&apos;;
+
+    return Object.keys(this[sFields]);
+  }
+
+  /**
+   * {inheritdoc}
+   */
+  [sDocToEntity](doc, done) {
+    &apos;use strict&apos;;
+
+    var me = this;
+    super[sDocToEntity](doc, function (err) {
+      if (err) {
+        return done(err);
+      }
+
+      me[sFields] = doc.fields;
+      done();
+    });
+  }
+
+  /**
+   * {inheritdoc}
+   */
+  [sEntityToDoc](by, done) {
+    &apos;use strict&apos;;
+
+    var me = this;
+    super[sEntityToDoc](by, function (err, doc) {
+      if (err) {
+        return done(err);
+      }
+
+      doc.fields = me[sFields];
+      done(null, doc);
+    });
+  }
+
+  /**
+   * Determines if the field has been defined.
+   *
+   * @method hasField
+   * @param {String} name The name of the field.
+   * @return {Boolean} Returns true if the field has been defined.
+   */
+  hasField(name) {
+    &apos;use strict&apos;;
+
+    return this[sFields][name] !== undefined;
+  }
+
+  /**
+   * Add a new field config.
+   *
+   * @method addField
+   * @param {String} name The name of the field.
+   * @param {String} title The admin title of the field.
+   * @param {String} description The admin description of the field.
+   * @param {String} type The field type, see {EntityManager.fieldTypes}.
+   * @param {Object} [options={}] A set of options to pass to the field.
+   *   @param {String} [options.title] The UI title of the field.
+   *   @param {String} [options.description] The UI description of the field.
+   *   @param {Boolean} [options.required] Set to true if this is a required
+   *     field.
+   * @return {Schema} Returns self.
+   * @throws {ESchemaFieldDefined} Thrown if the field has already been defined.
+   * @throws {EUnknownFieldType} Thrown if the field type is unknown.
+   * @chainable
+   */
+  addField(name, title, description, type, options) {
+    &apos;use strict&apos;;
+
+    var EntityManager = loader(&apos;EntityCI/EntityManager&apos;);
+
+    if (this.hasField(name)) {
+      throw new ESchemaFieldDefined(name);
+    }
+
+    if (EntityManager.fieldTypes[type] === undefined) {
+      throw new EUnknownFieldType(name, type);
+    }
+
+    this[sIsUpdated] = true;
+    this[sFields][name] = {
+      type: type,
+      title: title,
+      description: description,
+      options: options || {},
+      validators: [],
+      sanitizers: []
+    };
+
+    return this;
+  }
+
+  /**
+   * Get the defined field.
+   *
+   * @method getField
+   * @param {String} name The name of the field.
+   * @return {Object} The field config.
+   * @throws {EUnknownSchemaField} If the field is unknown.
+   */
+  getField(name) {
+    &apos;use strict&apos;;
+
+    if (this[sFields][name] === undefined) {
+      throw new EUnknownSchemaField(name);
+    }
+
+    return this[sFields][name];
+  }
+
+  /**
+   * Delete the specified field config.
+   *
+   * @method delField
+   * @param {String} name The name of the field.
+   * @return {Schema} Returns self.
+   * @throws {EUnknownSchemaField} If the field is unknown.
+   * @chainable
+   */
+  delField(name) {
+    &apos;use strict&apos;;
+
+    if (this[sFields][name] === undefined) {
+      throw new EUnknownSchemaField(name);
+    }
+
+    this[sIsUpdated] = true;
+    delete this[sFields][name];
+
+    return this;
+  }
+
+  /**
+   * Add a validation rule to the given field.
+   *
+   * @method addFieldValidation
+   * @param {String} name The field name to add this rule to.
+   * @param {String} rule The validation rule.
+   * @param {Object} [options={}] Any options to apply to the rule.
+   * @param {Integer} [weight=0] The weight to apply to the rule.
+   * @return {Schema} Returns self.
+   * @chainable
+   */
+  addFieldValidation(name, rule, options, weight) {
+    &apos;use strict&apos;;
+
+    if (this[sFields][name] === undefined) {
+      throw new EUnknownSchemaField(name);
+    }
+
+    if (this.manager.validators.registered(rule) === false) {
+      throw new EUnknownValidator(rule);
+    }
+
+    this[sFields][name].validators.push({
+      rule: rule,
+      options: options || {},
+      weight: weight || 0
+    });
+
+    sortBy(this[sFields][name].validators, &apos;weight&apos;);
+
+    return this;
+  }
+
+  /**
+   * Add a sanitization rule to the given field.
+   *
+   * @method addFieldSanitization
+   * @param {String} name The field name to add this rule to.
+   * @param {String} rule The sanitization rule.
+   * @param {Object} [options={}] Any options to apply to the rule.
+   * @param {Integer} [weight=0] The weight to apply to the rule.
+   * @return {Schema} Returns self.
+   * @chainable
+   */
+  addFieldSanitization(name, rule, options, weight) {
+    &apos;use strict&apos;;
+
+    if (this[sFields][name] === undefined) {
+      throw new EUnknownSchemaField(name);
+    }
+
+    if (this.manager.sanitizers.registered(rule) === false) {
+      throw new EUnknownSanitizer(rule);
+    }
+
+    this[sFields][name].sanitizers.push({
+      rule: rule,
+      options: options || {},
+      weight: weight || 0
+    });
+
+    sortBy(this[sFields][name].sanitizers, &apos;weight&apos;);
+
+    return this;
+  }
+
+  /**
+   * Sanitizes the given field and value.
+   *
+   * @method sanitizeField
+   * @param {String} name The name of the field.
+   * @param {Mixed} value The value to sanitize.
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any raised errors.
+   *   @param {Mixed} done.value The sanitized value.
+   * @async
+   */
+  sanitizeField(name, value, done) {
+    &apos;use strict&apos;;
+
+    if (this[sFields][name] === undefined) {
+      return done(new EUnknownSchemaField(name));
+    }
+
+    var orig = value,
+        me = this,
+        queue = [];
+
+    function san(rule, options) {
+      return function (next) {
+        me.manager.sanitizers.sanitize(function (err, o, val) {
+          if (err) {
+            return next(err);
+          }
+
+          value = val;
+          next();
+        }, rule, value, options);
+      };
+    }
+
+    this[sFields][name].sanitizers.forEach(function (item) {
+      queue.push(san(item.rule, item.options));
+    });
+
+    async.series(queue, function (err) {
+      done(err ? err : null, orig, value);
+    });
+  }
+
+  /**
+   * Validates the given field and value.
+   *
+   * @method validateField
+   * @param {String} name The name of the field.
+   * @param {Mixed} value The value to validate.
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any raised errors.
+   *   @param {Mixed} done.value The validated value.
+   * @async
+   */
+  validateField(name, value, done) {
+    &apos;use strict&apos;;
+
+    if (this[sFields][name] === undefined) {
+      return done(new EUnknownSchemaField(name));
+    }
+
+    var me = this,
+        queue = [];
+
+    function val(rule, options) {
+      return function (next) {
+        me.manager.validators.validate(function (err, o, val) {
+          if (err) {
+            return next(err);
+          }
+
+          value = val;
+          next();
+        }, rule, value, options);
+      };
+    }
+
+    this[sFields][name].validators.forEach(function (item) {
+      queue.push(val(item.rule, item.options));
+    });
+
+    async.series(queue, function (err) {
+      done(err ? err : null, value);
+    });
+  }
+
+};
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

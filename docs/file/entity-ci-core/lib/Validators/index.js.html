@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">entity-ci-core/lib/Validators/index.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">entity-ci-core/lib/Validators/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+/**
+ * Provides the Validators class.
+ *
+ * @author Orgun109uk &lt;orgun109uk@gmail.com&gt;
+ *
+ * @module entity-ci
+ * @submodule entity-ci-core
+ */
+
+var async = require(&apos;async&apos;),
+    loader = require(&apos;nsloader&apos;),
+    sortBy = loader(&apos;EntityCI/Utils/SortBy&apos;),
+    EUnknownValidator = loader(&apos;EntityCI/Validators/Errors/EUnknownValidator&apos;);
+
+var sRules = Symbol.for(&apos;Validators.rules&apos;);
+
+/**
+ * The Validators class.
+ *
+ * @class Validators
+ */
+module.exports = class Validators {
+
+  /**
+   * The validators class constructor.
+   *
+   * @constructor
+   */
+  constructor() {
+    &apos;use strict&apos;;
+
+    this[sRules] = {};
+
+    this
+      .register(&apos;machine-name&apos;, loader(&apos;EntityCI/Validators/Rules/MachineName&apos;))
+      .register(&apos;email&apos;, loader(&apos;EntityCI/Validators/Rules/Email&apos;))
+      .register(&apos;url&apos;, loader(&apos;EntityCI/Validators/Rules/Url&apos;))
+      .register(&apos;password&apos;, loader(&apos;EntityCI/Validators/Rules/Password&apos;));
+  }
+
+  /**
+   * The names of the defined rules.
+   *
+   * @property rules
+   * @type Array
+   * @readOnly
+   */
+  get rules() {
+    &apos;use strict&apos;;
+
+    return Object.keys(this[sRules]);
+  }
+
+  /**
+   * Registers a new validator rule.
+   *
+   * @method register
+   * @param {String} name The name of the validator rule.
+   * @param {Function} cb The validator callback.
+   *   @param {Mixed} cb.value The value to be validated.
+   *   @param {Object} cb.options The options passed to the validator.
+   *   @param {Function} cb.next Call the next rule callback.
+   *     @param {Error} cb.next.err Any raised errors.
+   * @param {Integer} [weight=0] The weight to apply to the callback.
+   * @returns {Validators} Returns self.
+   * @chainable
+   */
+  register(name, cb, weight) {
+    &apos;use strict&apos;;
+
+    if (this[sRules][name] === undefined) {
+      this[sRules][name] = [];
+    }
+
+    this[sRules][name].push({
+      callback: cb,
+      weight: weight || 0
+    });
+
+    sortBy(this[sRules][name], &apos;weight&apos;);
+    return this;
+  }
+
+  /**
+   * Determines if a validator has been registered.
+   *
+   * @method registered
+   * @param {String} name The name of the validator.
+   * @returns {Boolean} Returns true or false.
+   */
+  registered(name) {
+    &apos;use strict&apos;;
+
+    return this[sRules][name] !== undefined;
+  }
+
+  /**
+   * Unregisters a validator or a validators callback.
+   *
+   * @method unregister
+   * @param {String} name The name of the validator to remove.
+   * @param {Function} [cb] The specific callback to remove.
+   * @returns {Validators} Returns self.
+   * @chainable
+   */
+  unregister(name, cb) {
+    &apos;use strict&apos;;
+
+    if (this[sRules][name] === undefined) {
+      throw new EUnknownValidator(name);
+    }
+
+    if (cb === undefined) {
+      delete this[sRules][name];
+    } else {
+      var tmp = [];
+
+      for (var i = 0, len = this[sRules][name].length; i &lt; len; i++) {
+        if (this[sRules][name][i].callback === cb) {
+          continue;
+        }
+
+        tmp.push(this[sRules][name][i]);
+      }
+
+      if (tmp.length &gt; 0) {
+        this[sRules][name] = tmp;
+      } else {
+        delete this[sRules][name];
+      }
+    }
+
+    return this;
+  }
+
+  /**
+   * Attempts to validate the value.
+   *
+   * @method validate
+   * @param {Function} done The done callback.
+   *   @param {Error} done.err Any raised errors.
+   *   @param {Mixed} done.value The value being validated.
+   * @param {String} name The name of the validator rule to run.
+   * @param {Mixed} value The value to validate.
+   * @param {Object} [options] Any options to pass to the validator.
+   * @async
+   */
+  validate(done, name, value, options) {
+    &apos;use strict&apos;;
+
+    if (this[sRules][name] === undefined) {
+      return done(new EUnknownValidator(name));
+    }
+
+    function execValidator(validator) {
+      return function (next) {
+        try {
+          validator.callback.call(null, value, options || {}, next);
+        } catch (e) {
+          next(e);
+        }
+      };
+    }
+
+    var queue = [];
+    for (var i = 0, len = this[sRules][name].length; i &lt; len; i++) {
+      queue.push(execValidator(this[sRules][name][i]));
+    }
+
+    async.series(queue, function (err) {
+      done(err ? err : null, value);
+    });
+  }
+
+};
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

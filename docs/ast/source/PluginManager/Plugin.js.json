@@ -1,0 +1,2300 @@
+{
+  "type": "Program",
+  "body": [
+    {
+      "type": "VariableDeclaration",
+      "declarations": [
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "sName",
+            "range": [
+              674,
+              679
+            ],
+            "loc": {
+              "start": {
+                "line": 21,
+                "column": 4
+              },
+              "end": {
+                "line": 21,
+                "column": 9
+              }
+            }
+          },
+          "init": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "Symbol",
+              "range": [
+                682,
+                688
+              ],
+              "loc": {
+                "start": {
+                  "line": 21,
+                  "column": 12
+                },
+                "end": {
+                  "line": 21,
+                  "column": 18
+                }
+              }
+            },
+            "arguments": [
+              {
+                "type": "Literal",
+                "value": "Plugin.name",
+                "raw": "'Plugin.name'",
+                "range": [
+                  689,
+                  702
+                ],
+                "loc": {
+                  "start": {
+                    "line": 21,
+                    "column": 19
+                  },
+                  "end": {
+                    "line": 21,
+                    "column": 32
+                  }
+                }
+              }
+            ],
+            "range": [
+              682,
+              703
+            ],
+            "loc": {
+              "start": {
+                "line": 21,
+                "column": 12
+              },
+              "end": {
+                "line": 21,
+                "column": 33
+              }
+            }
+          },
+          "range": [
+            674,
+            703
+          ],
+          "loc": {
+            "start": {
+              "line": 21,
+              "column": 4
+            },
+            "end": {
+              "line": 21,
+              "column": 33
+            }
+          }
+        },
+        {
+          "type": "VariableDeclarator",
+          "id": {
+            "type": "Identifier",
+            "name": "sInfo",
+            "range": [
+              709,
+              714
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 4
+              },
+              "end": {
+                "line": 22,
+                "column": 9
+              }
+            }
+          },
+          "init": {
+            "type": "CallExpression",
+            "callee": {
+              "type": "Identifier",
+              "name": "Symbol",
+              "range": [
+                717,
+                723
+              ],
+              "loc": {
+                "start": {
+                  "line": 22,
+                  "column": 12
+                },
+                "end": {
+                  "line": 22,
+                  "column": 18
+                }
+              }
+            },
+            "arguments": [
+              {
+                "type": "Literal",
+                "value": "Plugin.info",
+                "raw": "'Plugin.info'",
+                "range": [
+                  724,
+                  737
+                ],
+                "loc": {
+                  "start": {
+                    "line": 22,
+                    "column": 19
+                  },
+                  "end": {
+                    "line": 22,
+                    "column": 32
+                  }
+                }
+              }
+            ],
+            "range": [
+              717,
+              738
+            ],
+            "loc": {
+              "start": {
+                "line": 22,
+                "column": 12
+              },
+              "end": {
+                "line": 22,
+                "column": 33
+              }
+            }
+          },
+          "range": [
+            709,
+            738
+          ],
+          "loc": {
+            "start": {
+              "line": 22,
+              "column": 4
+            },
+            "end": {
+              "line": 22,
+              "column": 33
+            }
+          }
+        }
+      ],
+      "kind": "var",
+      "range": [
+        670,
+        739
+      ],
+      "loc": {
+        "start": {
+          "line": 21,
+          "column": 0
+        },
+        "end": {
+          "line": 22,
+          "column": 34
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n *  ____            __        __                ____    ______\n * /\\  _`\\         /\\ \\__  __/\\ \\__            /\\  _`\\ /\\__  _\\\n * \\ \\ \\L\\_\\    ___\\ \\ ,_\\/\\_\\ \\ ,_\\  __  __   \\ \\ \\/\\_\\/_/\\ \\/\n *  \\ \\  _\\L  /' _ `\\ \\ \\/\\/\\ \\ \\ \\/ /\\ \\/\\ \\   \\ \\ \\/_/_ \\ \\ \\\n *   \\ \\ \\L\\ \\/\\ \\/\\ \\ \\ \\_\\ \\ \\ \\ \\_\\ \\ \\_\\ \\   \\ \\ \\L\\ \\ \\_\\ \\__\n *    \\ \\____/\\ \\_\\ \\_\\ \\__\\\\ \\_\\ \\__\\\\/`____ \\   \\ \\____/ /\\_____\\\n *     \\/___/  \\/_/\\/_/\\/__/ \\/_/\\/__/ `/___/> \\   \\/___/  \\/_____/\n *                                        /\\___/\n *                                        \\/__/\n *\n * Entity CI - Core\n ",
+          "range": [
+            0,
+            585
+          ],
+          "loc": {
+            "start": {
+              "line": 1,
+              "column": 0
+            },
+            "end": {
+              "line": 13,
+              "column": 3
+            }
+          }
+        },
+        {
+          "type": "Block",
+          "value": "*\n * The base plugin class.\n *\n * @author Orgun109uk <orgun109uk@gmail.com>\n ",
+          "range": [
+            587,
+            668
+          ],
+          "loc": {
+            "start": {
+              "line": 15,
+              "column": 0
+            },
+            "end": {
+              "line": 19,
+              "column": 3
+            }
+          }
+        }
+      ],
+      "trailingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * The plugin base class.\n ",
+          "range": [
+            741,
+            774
+          ],
+          "loc": {
+            "start": {
+              "line": 24,
+              "column": 0
+            },
+            "end": {
+              "line": 26,
+              "column": 3
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "ExportDefaultDeclaration",
+      "declaration": {
+        "type": "ClassDeclaration",
+        "id": {
+          "type": "Identifier",
+          "name": "Plugin",
+          "range": [
+            796,
+            802
+          ],
+          "loc": {
+            "start": {
+              "line": 27,
+              "column": 21
+            },
+            "end": {
+              "line": 27,
+              "column": 27
+            }
+          }
+        },
+        "superClass": null,
+        "body": {
+          "type": "ClassBody",
+          "body": [
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "constructor",
+                "range": [
+                  972,
+                  983
+                ],
+                "loc": {
+                  "start": {
+                    "line": 35,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 35,
+                    "column": 13
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "name",
+                    "range": [
+                      984,
+                      988
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 35,
+                        "column": 14
+                      },
+                      "end": {
+                        "line": 35,
+                        "column": 18
+                      }
+                    }
+                  },
+                  {
+                    "type": "Identifier",
+                    "name": "info",
+                    "range": [
+                      990,
+                      994
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 35,
+                        "column": 20
+                      },
+                      "end": {
+                        "line": 35,
+                        "column": 24
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "Literal",
+                        "value": "use strict",
+                        "raw": "'use strict'",
+                        "range": [
+                          1002,
+                          1014
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 36,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 36,
+                            "column": 16
+                          }
+                        }
+                      },
+                      "range": [
+                        1002,
+                        1015
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 36,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 36,
+                          "column": 17
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "computed": true,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              1021,
+                              1025
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 38,
+                                "column": 4
+                              },
+                              "end": {
+                                "line": 38,
+                                "column": 8
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "sName",
+                            "range": [
+                              1026,
+                              1031
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 38,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 38,
+                                "column": 14
+                              }
+                            }
+                          },
+                          "range": [
+                            1021,
+                            1032
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 38,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 38,
+                              "column": 15
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Identifier",
+                          "name": "name",
+                          "range": [
+                            1035,
+                            1039
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 38,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 38,
+                              "column": 22
+                            }
+                          }
+                        },
+                        "range": [
+                          1021,
+                          1039
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 38,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 38,
+                            "column": 22
+                          }
+                        }
+                      },
+                      "range": [
+                        1021,
+                        1040
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 38,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 38,
+                          "column": 23
+                        }
+                      }
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "AssignmentExpression",
+                        "operator": "=",
+                        "left": {
+                          "type": "MemberExpression",
+                          "computed": true,
+                          "object": {
+                            "type": "ThisExpression",
+                            "range": [
+                              1045,
+                              1049
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 39,
+                                "column": 4
+                              },
+                              "end": {
+                                "line": 39,
+                                "column": 8
+                              }
+                            }
+                          },
+                          "property": {
+                            "type": "Identifier",
+                            "name": "sInfo",
+                            "range": [
+                              1050,
+                              1055
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 39,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 39,
+                                "column": 14
+                              }
+                            }
+                          },
+                          "range": [
+                            1045,
+                            1056
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 39,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 39,
+                              "column": 15
+                            }
+                          }
+                        },
+                        "right": {
+                          "type": "Identifier",
+                          "name": "info",
+                          "range": [
+                            1059,
+                            1063
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 39,
+                              "column": 18
+                            },
+                            "end": {
+                              "line": 39,
+                              "column": 22
+                            }
+                          }
+                        },
+                        "range": [
+                          1045,
+                          1063
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 39,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 39,
+                            "column": 22
+                          }
+                        }
+                      },
+                      "range": [
+                        1045,
+                        1064
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 39,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 39,
+                          "column": 23
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    996,
+                    1068
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 35,
+                      "column": 26
+                    },
+                    "end": {
+                      "line": 40,
+                      "column": 3
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  983,
+                  1068
+                ],
+                "loc": {
+                  "start": {
+                    "line": 35,
+                    "column": 13
+                  },
+                  "end": {
+                    "line": 40,
+                    "column": 3
+                  }
+                }
+              },
+              "kind": "constructor",
+              "computed": false,
+              "range": [
+                972,
+                1068
+              ],
+              "loc": {
+                "start": {
+                  "line": 35,
+                  "column": 2
+                },
+                "end": {
+                  "line": 40,
+                  "column": 3
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * Constructor for the plugin class.\n   *\n   * @param {String} name The name of the plugin.\n   * @param {Object} info The info object for the plugin.\n   ",
+                  "range": [
+                    808,
+                    969
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 29,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 34,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * The name of the plugin.\n   *\n   * @type {String}\n   ",
+                  "range": [
+                    1072,
+                    1135
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 42,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 46,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "name",
+                "range": [
+                  1142,
+                  1146
+                ],
+                "loc": {
+                  "start": {
+                    "line": 47,
+                    "column": 6
+                  },
+                  "end": {
+                    "line": 47,
+                    "column": 10
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "Literal",
+                        "value": "use strict",
+                        "raw": "'use strict'",
+                        "range": [
+                          1155,
+                          1167
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 48,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 48,
+                            "column": 16
+                          }
+                        }
+                      },
+                      "range": [
+                        1155,
+                        1168
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 48,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 48,
+                          "column": 17
+                        }
+                      }
+                    },
+                    {
+                      "type": "ReturnStatement",
+                      "argument": {
+                        "type": "MemberExpression",
+                        "computed": true,
+                        "object": {
+                          "type": "ThisExpression",
+                          "range": [
+                            1181,
+                            1185
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 50,
+                              "column": 11
+                            },
+                            "end": {
+                              "line": 50,
+                              "column": 15
+                            }
+                          }
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "sName",
+                          "range": [
+                            1186,
+                            1191
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 50,
+                              "column": 16
+                            },
+                            "end": {
+                              "line": 50,
+                              "column": 21
+                            }
+                          }
+                        },
+                        "range": [
+                          1181,
+                          1192
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 50,
+                            "column": 11
+                          },
+                          "end": {
+                            "line": 50,
+                            "column": 22
+                          }
+                        }
+                      },
+                      "range": [
+                        1174,
+                        1193
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 50,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 50,
+                          "column": 23
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1149,
+                    1197
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 47,
+                      "column": 13
+                    },
+                    "end": {
+                      "line": 51,
+                      "column": 3
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1146,
+                  1197
+                ],
+                "loc": {
+                  "start": {
+                    "line": 47,
+                    "column": 10
+                  },
+                  "end": {
+                    "line": 51,
+                    "column": 3
+                  }
+                }
+              },
+              "kind": "get",
+              "computed": false,
+              "range": [
+                1138,
+                1197
+              ],
+              "loc": {
+                "start": {
+                  "line": 47,
+                  "column": 2
+                },
+                "end": {
+                  "line": 51,
+                  "column": 3
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * The name of the plugin.\n   *\n   * @type {String}\n   ",
+                  "range": [
+                    1072,
+                    1135
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 42,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 46,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * The plugin info object.\n   *\n   * @type {Object}\n   ",
+                  "range": [
+                    1201,
+                    1264
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 53,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 57,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "info",
+                "range": [
+                  1271,
+                  1275
+                ],
+                "loc": {
+                  "start": {
+                    "line": 58,
+                    "column": 6
+                  },
+                  "end": {
+                    "line": 58,
+                    "column": 10
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "Literal",
+                        "value": "use strict",
+                        "raw": "'use strict'",
+                        "range": [
+                          1284,
+                          1296
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 59,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 59,
+                            "column": 16
+                          }
+                        }
+                      },
+                      "range": [
+                        1284,
+                        1297
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 59,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 59,
+                          "column": 17
+                        }
+                      }
+                    },
+                    {
+                      "type": "ReturnStatement",
+                      "argument": {
+                        "type": "MemberExpression",
+                        "computed": true,
+                        "object": {
+                          "type": "ThisExpression",
+                          "range": [
+                            1310,
+                            1314
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 61,
+                              "column": 11
+                            },
+                            "end": {
+                              "line": 61,
+                              "column": 15
+                            }
+                          }
+                        },
+                        "property": {
+                          "type": "Identifier",
+                          "name": "sInfo",
+                          "range": [
+                            1315,
+                            1320
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 61,
+                              "column": 16
+                            },
+                            "end": {
+                              "line": 61,
+                              "column": 21
+                            }
+                          }
+                        },
+                        "range": [
+                          1310,
+                          1321
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 61,
+                            "column": 11
+                          },
+                          "end": {
+                            "line": 61,
+                            "column": 22
+                          }
+                        }
+                      },
+                      "range": [
+                        1303,
+                        1322
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 61,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 61,
+                          "column": 23
+                        }
+                      }
+                    }
+                  ],
+                  "range": [
+                    1278,
+                    1326
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 58,
+                      "column": 13
+                    },
+                    "end": {
+                      "line": 62,
+                      "column": 3
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1275,
+                  1326
+                ],
+                "loc": {
+                  "start": {
+                    "line": 58,
+                    "column": 10
+                  },
+                  "end": {
+                    "line": 62,
+                    "column": 3
+                  }
+                }
+              },
+              "kind": "get",
+              "computed": false,
+              "range": [
+                1267,
+                1326
+              ],
+              "loc": {
+                "start": {
+                  "line": 58,
+                  "column": 2
+                },
+                "end": {
+                  "line": 62,
+                  "column": 3
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * The plugin info object.\n   *\n   * @type {Object}\n   ",
+                  "range": [
+                    1201,
+                    1264
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 53,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 57,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * Boot the plugin, this is called by the plugin manager when the plugin is\n   * booting. This will run when enabling everytime.\n   *\n   * @param {Function} done The done callback.\n   * @param {Error} done.err Any raised errors.\n   ",
+                  "range": [
+                    1330,
+                    1570
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 64,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 70,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "boot",
+                "range": [
+                  1573,
+                  1577
+                ],
+                "loc": {
+                  "start": {
+                    "line": 71,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 71,
+                    "column": 6
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "done",
+                    "range": [
+                      1578,
+                      1582
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 71,
+                        "column": 7
+                      },
+                      "end": {
+                        "line": 71,
+                        "column": 11
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "Literal",
+                        "value": "use strict",
+                        "raw": "'use strict'",
+                        "range": [
+                          1590,
+                          1602
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 72,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 72,
+                            "column": 16
+                          }
+                        }
+                      },
+                      "range": [
+                        1590,
+                        1603
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 72,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 72,
+                          "column": 17
+                        }
+                      },
+                      "trailingComments": [
+                        {
+                          "type": "Line",
+                          "value": " @todo - does nothing.",
+                          "range": [
+                            1609,
+                            1633
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 74,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 74,
+                              "column": 28
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "done",
+                          "range": [
+                            1639,
+                            1643
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 76,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 76,
+                              "column": 8
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Literal",
+                            "value": null,
+                            "raw": "null",
+                            "range": [
+                              1644,
+                              1648
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 76,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 76,
+                                "column": 13
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          1639,
+                          1649
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 76,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 76,
+                            "column": 14
+                          }
+                        }
+                      },
+                      "range": [
+                        1639,
+                        1650
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 76,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 76,
+                          "column": 15
+                        }
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Line",
+                          "value": " @todo - does nothing.",
+                          "range": [
+                            1609,
+                            1633
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 74,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 74,
+                              "column": 28
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "range": [
+                    1584,
+                    1654
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 71,
+                      "column": 13
+                    },
+                    "end": {
+                      "line": 77,
+                      "column": 3
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1577,
+                  1654
+                ],
+                "loc": {
+                  "start": {
+                    "line": 71,
+                    "column": 6
+                  },
+                  "end": {
+                    "line": 77,
+                    "column": 3
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                1573,
+                1654
+              ],
+              "loc": {
+                "start": {
+                  "line": 71,
+                  "column": 2
+                },
+                "end": {
+                  "line": 77,
+                  "column": 3
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * Boot the plugin, this is called by the plugin manager when the plugin is\n   * booting. This will run when enabling everytime.\n   *\n   * @param {Function} done The done callback.\n   * @param {Error} done.err Any raised errors.\n   ",
+                  "range": [
+                    1330,
+                    1570
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 64,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 70,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * Enabling the plugin, this is called by the plugin manager when the plugin\n   * has been enabled for the first time the plugin is enabled or after being\n   * disabled.\n   *\n   * @param {Function} done The done callback.\n   * @param {Error} done.err Any raised errors.\n   ",
+                  "range": [
+                    1658,
+                    1939
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 79,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 86,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "enable",
+                "range": [
+                  1942,
+                  1948
+                ],
+                "loc": {
+                  "start": {
+                    "line": 87,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 87,
+                    "column": 8
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "done",
+                    "range": [
+                      1949,
+                      1953
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 87,
+                        "column": 9
+                      },
+                      "end": {
+                        "line": 87,
+                        "column": 13
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "Literal",
+                        "value": "use strict",
+                        "raw": "'use strict'",
+                        "range": [
+                          1961,
+                          1973
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 88,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 88,
+                            "column": 16
+                          }
+                        }
+                      },
+                      "range": [
+                        1961,
+                        1974
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 88,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 88,
+                          "column": 17
+                        }
+                      },
+                      "trailingComments": [
+                        {
+                          "type": "Line",
+                          "value": " @todo - does nothing.",
+                          "range": [
+                            1980,
+                            2004
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 90,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 90,
+                              "column": 28
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "done",
+                          "range": [
+                            2010,
+                            2014
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 92,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 92,
+                              "column": 8
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Literal",
+                            "value": null,
+                            "raw": "null",
+                            "range": [
+                              2015,
+                              2019
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 92,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 92,
+                                "column": 13
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          2010,
+                          2020
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 92,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 92,
+                            "column": 14
+                          }
+                        }
+                      },
+                      "range": [
+                        2010,
+                        2021
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 92,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 92,
+                          "column": 15
+                        }
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Line",
+                          "value": " @todo - does nothing.",
+                          "range": [
+                            1980,
+                            2004
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 90,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 90,
+                              "column": 28
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "range": [
+                    1955,
+                    2025
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 87,
+                      "column": 15
+                    },
+                    "end": {
+                      "line": 93,
+                      "column": 3
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  1948,
+                  2025
+                ],
+                "loc": {
+                  "start": {
+                    "line": 87,
+                    "column": 8
+                  },
+                  "end": {
+                    "line": 93,
+                    "column": 3
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                1942,
+                2025
+              ],
+              "loc": {
+                "start": {
+                  "line": 87,
+                  "column": 2
+                },
+                "end": {
+                  "line": 93,
+                  "column": 3
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * Enabling the plugin, this is called by the plugin manager when the plugin\n   * has been enabled for the first time the plugin is enabled or after being\n   * disabled.\n   *\n   * @param {Function} done The done callback.\n   * @param {Error} done.err Any raised errors.\n   ",
+                  "range": [
+                    1658,
+                    1939
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 79,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 86,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "trailingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * Disable the plugin, this is called by the plugin manager when the plugin is\n   * being disabled.\n   *\n   * @param {Function} done The done callback.\n   * @param {Error} done.err Any raised errors.\n   ",
+                  "range": [
+                    2029,
+                    2240
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 95,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 101,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "static": false
+            },
+            {
+              "type": "MethodDefinition",
+              "key": {
+                "type": "Identifier",
+                "name": "disable",
+                "range": [
+                  2243,
+                  2250
+                ],
+                "loc": {
+                  "start": {
+                    "line": 102,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 102,
+                    "column": 9
+                  }
+                }
+              },
+              "value": {
+                "type": "FunctionExpression",
+                "id": null,
+                "params": [
+                  {
+                    "type": "Identifier",
+                    "name": "done",
+                    "range": [
+                      2251,
+                      2255
+                    ],
+                    "loc": {
+                      "start": {
+                        "line": 102,
+                        "column": 10
+                      },
+                      "end": {
+                        "line": 102,
+                        "column": 14
+                      }
+                    }
+                  }
+                ],
+                "body": {
+                  "type": "BlockStatement",
+                  "body": [
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "Literal",
+                        "value": "use strict",
+                        "raw": "'use strict'",
+                        "range": [
+                          2263,
+                          2275
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 103,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 103,
+                            "column": 16
+                          }
+                        }
+                      },
+                      "range": [
+                        2263,
+                        2276
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 103,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 103,
+                          "column": 17
+                        }
+                      },
+                      "trailingComments": [
+                        {
+                          "type": "Line",
+                          "value": " @todo - does nothing.",
+                          "range": [
+                            2282,
+                            2306
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 105,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 105,
+                              "column": 28
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "ExpressionStatement",
+                      "expression": {
+                        "type": "CallExpression",
+                        "callee": {
+                          "type": "Identifier",
+                          "name": "done",
+                          "range": [
+                            2312,
+                            2316
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 107,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 107,
+                              "column": 8
+                            }
+                          }
+                        },
+                        "arguments": [
+                          {
+                            "type": "Literal",
+                            "value": null,
+                            "raw": "null",
+                            "range": [
+                              2317,
+                              2321
+                            ],
+                            "loc": {
+                              "start": {
+                                "line": 107,
+                                "column": 9
+                              },
+                              "end": {
+                                "line": 107,
+                                "column": 13
+                              }
+                            }
+                          }
+                        ],
+                        "range": [
+                          2312,
+                          2322
+                        ],
+                        "loc": {
+                          "start": {
+                            "line": 107,
+                            "column": 4
+                          },
+                          "end": {
+                            "line": 107,
+                            "column": 14
+                          }
+                        }
+                      },
+                      "range": [
+                        2312,
+                        2323
+                      ],
+                      "loc": {
+                        "start": {
+                          "line": 107,
+                          "column": 4
+                        },
+                        "end": {
+                          "line": 107,
+                          "column": 15
+                        }
+                      },
+                      "leadingComments": [
+                        {
+                          "type": "Line",
+                          "value": " @todo - does nothing.",
+                          "range": [
+                            2282,
+                            2306
+                          ],
+                          "loc": {
+                            "start": {
+                              "line": 105,
+                              "column": 4
+                            },
+                            "end": {
+                              "line": 105,
+                              "column": 28
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "range": [
+                    2257,
+                    2327
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 102,
+                      "column": 16
+                    },
+                    "end": {
+                      "line": 108,
+                      "column": 3
+                    }
+                  }
+                },
+                "generator": false,
+                "expression": false,
+                "range": [
+                  2250,
+                  2327
+                ],
+                "loc": {
+                  "start": {
+                    "line": 102,
+                    "column": 9
+                  },
+                  "end": {
+                    "line": 108,
+                    "column": 3
+                  }
+                }
+              },
+              "kind": "method",
+              "computed": false,
+              "range": [
+                2243,
+                2327
+              ],
+              "loc": {
+                "start": {
+                  "line": 102,
+                  "column": 2
+                },
+                "end": {
+                  "line": 108,
+                  "column": 3
+                }
+              },
+              "leadingComments": [
+                {
+                  "type": "Block",
+                  "value": "*\n   * Disable the plugin, this is called by the plugin manager when the plugin is\n   * being disabled.\n   *\n   * @param {Function} done The done callback.\n   * @param {Error} done.err Any raised errors.\n   ",
+                  "range": [
+                    2029,
+                    2240
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 95,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 101,
+                      "column": 5
+                    }
+                  }
+                }
+              ],
+              "static": false
+            }
+          ],
+          "range": [
+            803,
+            2330
+          ],
+          "loc": {
+            "start": {
+              "line": 27,
+              "column": 28
+            },
+            "end": {
+              "line": 110,
+              "column": 1
+            }
+          }
+        },
+        "range": [
+          790,
+          2330
+        ],
+        "loc": {
+          "start": {
+            "line": 27,
+            "column": 15
+          },
+          "end": {
+            "line": 110,
+            "column": 1
+          }
+        },
+        "leadingComments": [
+          {
+            "type": "Block",
+            "value": "*\n * The plugin base class.\n ",
+            "range": [
+              741,
+              774
+            ],
+            "loc": {
+              "start": {
+                "line": 24,
+                "column": 0
+              },
+              "end": {
+                "line": 26,
+                "column": 3
+              }
+            }
+          }
+        ],
+        "trailingComments": []
+      },
+      "range": [
+        775,
+        2330
+      ],
+      "loc": {
+        "start": {
+          "line": 27,
+          "column": 0
+        },
+        "end": {
+          "line": 110,
+          "column": 1
+        }
+      },
+      "leadingComments": [
+        {
+          "type": "Block",
+          "value": "*\n * The plugin base class.\n ",
+          "range": [
+            741,
+            774
+          ],
+          "loc": {
+            "start": {
+              "line": 24,
+              "column": 0
+            },
+            "end": {
+              "line": 26,
+              "column": 3
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "sourceType": "module",
+  "range": [
+    670,
+    2330
+  ],
+  "loc": {
+    "start": {
+      "line": 21,
+      "column": 0
+    },
+    "end": {
+      "line": 110,
+      "column": 1
+    }
+  },
+  "comments": [
+    {
+      "type": "Block",
+      "value": "*\n *  ____            __        __                ____    ______\n * /\\  _`\\         /\\ \\__  __/\\ \\__            /\\  _`\\ /\\__  _\\\n * \\ \\ \\L\\_\\    ___\\ \\ ,_\\/\\_\\ \\ ,_\\  __  __   \\ \\ \\/\\_\\/_/\\ \\/\n *  \\ \\  _\\L  /' _ `\\ \\ \\/\\/\\ \\ \\ \\/ /\\ \\/\\ \\   \\ \\ \\/_/_ \\ \\ \\\n *   \\ \\ \\L\\ \\/\\ \\/\\ \\ \\ \\_\\ \\ \\ \\ \\_\\ \\ \\_\\ \\   \\ \\ \\L\\ \\ \\_\\ \\__\n *    \\ \\____/\\ \\_\\ \\_\\ \\__\\\\ \\_\\ \\__\\\\/`____ \\   \\ \\____/ /\\_____\\\n *     \\/___/  \\/_/\\/_/\\/__/ \\/_/\\/__/ `/___/> \\   \\/___/  \\/_____/\n *                                        /\\___/\n *                                        \\/__/\n *\n * Entity CI - Core\n ",
+      "range": [
+        0,
+        585
+      ],
+      "loc": {
+        "start": {
+          "line": 1,
+          "column": 0
+        },
+        "end": {
+          "line": 13,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n * The base plugin class.\n *\n * @author Orgun109uk <orgun109uk@gmail.com>\n ",
+      "range": [
+        587,
+        668
+      ],
+      "loc": {
+        "start": {
+          "line": 15,
+          "column": 0
+        },
+        "end": {
+          "line": 19,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n * The plugin base class.\n ",
+      "range": [
+        741,
+        774
+      ],
+      "loc": {
+        "start": {
+          "line": 24,
+          "column": 0
+        },
+        "end": {
+          "line": 26,
+          "column": 3
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n   * Constructor for the plugin class.\n   *\n   * @param {String} name The name of the plugin.\n   * @param {Object} info The info object for the plugin.\n   ",
+      "range": [
+        808,
+        969
+      ],
+      "loc": {
+        "start": {
+          "line": 29,
+          "column": 2
+        },
+        "end": {
+          "line": 34,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n   * The name of the plugin.\n   *\n   * @type {String}\n   ",
+      "range": [
+        1072,
+        1135
+      ],
+      "loc": {
+        "start": {
+          "line": 42,
+          "column": 2
+        },
+        "end": {
+          "line": 46,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n   * The plugin info object.\n   *\n   * @type {Object}\n   ",
+      "range": [
+        1201,
+        1264
+      ],
+      "loc": {
+        "start": {
+          "line": 53,
+          "column": 2
+        },
+        "end": {
+          "line": 57,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n   * Boot the plugin, this is called by the plugin manager when the plugin is\n   * booting. This will run when enabling everytime.\n   *\n   * @param {Function} done The done callback.\n   * @param {Error} done.err Any raised errors.\n   ",
+      "range": [
+        1330,
+        1570
+      ],
+      "loc": {
+        "start": {
+          "line": 64,
+          "column": 2
+        },
+        "end": {
+          "line": 70,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " @todo - does nothing.",
+      "range": [
+        1609,
+        1633
+      ],
+      "loc": {
+        "start": {
+          "line": 74,
+          "column": 4
+        },
+        "end": {
+          "line": 74,
+          "column": 28
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n   * Enabling the plugin, this is called by the plugin manager when the plugin\n   * has been enabled for the first time the plugin is enabled or after being\n   * disabled.\n   *\n   * @param {Function} done The done callback.\n   * @param {Error} done.err Any raised errors.\n   ",
+      "range": [
+        1658,
+        1939
+      ],
+      "loc": {
+        "start": {
+          "line": 79,
+          "column": 2
+        },
+        "end": {
+          "line": 86,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " @todo - does nothing.",
+      "range": [
+        1980,
+        2004
+      ],
+      "loc": {
+        "start": {
+          "line": 90,
+          "column": 4
+        },
+        "end": {
+          "line": 90,
+          "column": 28
+        }
+      }
+    },
+    {
+      "type": "Block",
+      "value": "*\n   * Disable the plugin, this is called by the plugin manager when the plugin is\n   * being disabled.\n   *\n   * @param {Function} done The done callback.\n   * @param {Error} done.err Any raised errors.\n   ",
+      "range": [
+        2029,
+        2240
+      ],
+      "loc": {
+        "start": {
+          "line": 95,
+          "column": 2
+        },
+        "end": {
+          "line": 101,
+          "column": 5
+        }
+      }
+    },
+    {
+      "type": "Line",
+      "value": " @todo - does nothing.",
+      "range": [
+        2282,
+        2306
+      ],
+      "loc": {
+        "start": {
+          "line": 105,
+          "column": 4
+        },
+        "end": {
+          "line": 105,
+          "column": 28
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">entity-ci-core/tests/EntityManager/Entity.test.js | EntityCI API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  <a href="test.html" data-ice="testLink">Test</a>
+  <a data-ice="repoURL" href="git://github.com/entity-ci/entity-ci-core.git">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">entity-ci-core/tests/EntityManager/Entity.test.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ *  ____            __        __                ____    ______
+ * /\  _`\         /\ \__  __/\ \__            /\  _`\ /\__  _\
+ * \ \ \L\_\    ___\ \ ,_\/\_\ \ ,_\  __  __   \ \ \/\_\/_/\ \/
+ *  \ \  _\L  /&apos; _ `\ \ \/\/\ \ \ \/ /\ \/\ \   \ \ \/_/_ \ \ \
+ *   \ \ \L\ \/\ \/\ \ \ \_\ \ \ \ \_\ \ \_\ \   \ \ \L\ \ \_\ \__
+ *    \ \____/\ \_\ \_\ \__\\ \_\ \__\\/`____ \   \ \____/ /\_____\
+ *     \/___/  \/_/\/_/\/__/ \/_/\/__/ `/___/&gt; \   \/___/  \/_____/
+ *                                        /\___/
+ *                                        \/__/
+ *
+ * Entity CI - Core
+ */
+
+var async = require(&apos;async&apos;),
+    test = require(&apos;unit.js&apos;),
+    loader = require(&apos;nsloader&apos;),
+    Database = loader(&apos;EntityCI/Database&apos;),
+    Validators = loader(&apos;EntityCI/Validators&apos;),
+    Sanitizers = loader(&apos;EntityCI/Sanitizers&apos;),
+    EntityManager = loader(&apos;EntityCI/EntityManager&apos;),
+    Schema = loader(&apos;EntityCI/EntityManager/Schema&apos;),
+    Entity = loader(&apos;EntityCI/EntityManager/Entity&apos;),
+    EUnknownSchemaField = loader(
+      &apos;EntityCI/EntityManager/Errors/EUnknownSchemaField&apos;
+    );
+
+var sFieldData = Symbol.for(&apos;Entity.fieldData&apos;),
+    database, entityManager, schema;
+
+describe(&apos;entity-ci/entity-ci-core/EntityManager/Entity&apos;, function () {
+
+  &apos;use strict&apos;;
+
+  beforeEach(function (done) {
+
+    database = new Database();
+    database.connect(&apos;test&apos;, {
+      name: &apos;test&apos;,
+      host: &apos;0.0.0.0&apos;
+    }, true);
+
+    var validators = new Validators(),
+        sanitizers = new Sanitizers();
+
+    entityManager = new EntityManager(database, validators, sanitizers);
+
+    schema = new Schema(entityManager);
+    schema.machineName = &apos;test&apos;;
+    schema
+      .addField(
+        &apos;title&apos;,
+        &apos;Title&apos;,
+        &apos;A title of this entity.&apos;,
+        &apos;String&apos;,
+        {
+          &apos;default&apos;: &apos;&apos;
+        }
+      )
+      .addFieldSanitization(&apos;title&apos;, &apos;trim&apos;)
+      .addField(
+        &apos;description&apos;,
+        &apos;Description&apos;,
+        &apos;A description of this entity&apos;,
+        &apos;String&apos;
+      )
+      .addField(&apos;subentity&apos;, &apos;Sub&apos;, &apos;A sub entity.&apos;, &apos;Entity&apos;)
+      .addFieldValidation(&apos;subentity&apos;, &apos;entity&apos;, {
+        type: &apos;test&apos;
+      })
+      .save(done);
+
+  });
+
+  afterEach(function (done) {
+
+    var queue = [];
+
+    queue.push(function (next) {
+      database.collection(&apos;schemas&apos;, &apos;test&apos;).drop(function () {
+        next();
+      });
+    });
+
+    queue.push(function (next) {
+      database.collection(&apos;entity-test&apos;, &apos;test&apos;).drop(function () {
+        next();
+      });
+    });
+
+    async.series(queue, function (err) {
+      if (err) {
+        return done(err);
+      }
+
+      database.disconnect(&apos;test&apos;);
+      done();
+    });
+
+  });
+
+  describe(&apos;Entity.constructor()&apos;, function () {
+
+    it(&apos;shouldUseTheSchemaMachineNameAsTheEntityType&apos;, function () {
+
+      var entity = new Entity(entityManager, schema);
+
+      test.string(
+        entity.type
+      ).is(&apos;test&apos;);
+
+    });
+
+  });
+
+  describe(&apos;Entity.fields&apos;, function () {});
+
+  describe(&apos;Entity.get()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfTheFieldDoesntExist&apos;, function () {
+
+      var entity = new Entity(entityManager, schema);
+
+      test.error(function () {
+        entity.get(&apos;test&apos;);
+      }).isInstanceOf(EUnknownSchemaField);
+
+    });
+
+    it(&apos;shouldReturnNullIfNoValueOrDefaultValue&apos;, function () {
+
+      var entity = new Entity(entityManager, schema);
+
+      test.value(
+        entity.get(&apos;description&apos;)
+      ).isNull();
+
+    });
+
+    it(&apos;shouldReturnTheDefaultValue&apos;, function () {
+
+      var entity = new Entity(entityManager, schema);
+
+      test.string(
+        entity.get(&apos;title&apos;)
+      ).is(&apos;&apos;);
+
+    });
+
+    it(&apos;shouldReturnTheSetValue&apos;, function () {
+
+      var entity = new Entity(entityManager, schema);
+
+      entity[sFieldData].title = &apos;test&apos;;
+
+      test.string(
+        entity.get(&apos;title&apos;)
+      ).is(&apos;test&apos;);
+
+    });
+
+  });
+
+  describe(&apos;Entity.set()&apos;, function () {
+
+    it(&apos;shouldThrowAnErrorIfTheFieldDoesntExist&apos;, function () {
+
+      var entity = new Entity(entityManager, schema);
+
+      test.error(function () {
+        entity.set(&apos;test&apos;, &apos;value&apos;);
+      }).isInstanceOf(EUnknownSchemaField);
+
+    });
+
+    it(&apos;shouldSetTheFieldValue&apos;, function () {
+
+      var entity = new Entity(entityManager, schema);
+
+      entity.set(&apos;title&apos;, &apos;hello world&apos;);
+
+      test.string(
+        entity[sFieldData].title
+      ).is(&apos;hello world&apos;);
+
+    });
+
+  });
+
+  describe(&apos;Entity.save()&apos;, function () {
+
+    it(&apos;shouldSave&apos;, function (done) {
+
+      var entity = new Entity(entityManager, schema),
+          queue = [];
+
+      entity.machineName = &apos;test&apos;;
+      entity
+        .set(&apos;title&apos;, &apos;Test&apos;)
+        .set(&apos;description&apos;, &apos;A test entity.&apos;);
+
+      queue.push(function (next) {
+
+        entity.save(next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.collection.find(function (err, docs) {
+
+          if (err) {
+            return next(err);
+          }
+
+          test.array(
+            docs
+          ).hasLength(1);
+
+          test.object(docs[0])
+            .hasKey(&apos;type&apos;, &apos;test&apos;)
+            .hasKey(&apos;machineName&apos;, &apos;test&apos;);
+
+          next();
+
+        });
+
+      });
+
+      queue.push(function (next) {
+
+        entity = new Entity(entityManager, schema);
+        entity.machineName = &apos;test&apos;;
+        entity.load(next);
+
+      });
+
+      queue.push(function (next) {
+
+        test.string(
+          entity.machineName
+        ).is(&apos;test&apos;);
+
+        test.string(
+          entity.get(&apos;title&apos;)
+        ).is(&apos;Test&apos;);
+
+        test.string(
+          entity.get(&apos;description&apos;)
+        ).is(&apos;A test entity.&apos;);
+
+        next();
+
+      });
+
+      async.series(queue, done);
+
+    });
+
+    it(&apos;shouldSaveWithEntityFields&apos;, function (done) {
+
+      var entity1, entity2,
+          queue = [];
+
+      queue.push(function (next) {
+
+        entity1 = new Entity(entityManager, schema);
+        entity1.machineName = &apos;test1&apos;;
+        entity1
+          .set(&apos;title&apos;, &apos;Test 1&apos;)
+          .set(&apos;description&apos;, &apos;A test entity.&apos;);
+
+        entity1.save(next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity2 = new Entity(entityManager, schema);
+        entity2.machineName = &apos;test2&apos;;
+        entity2
+          .set(&apos;title&apos;, &apos;Test 2&apos;)
+          .set(&apos;description&apos;, &apos;A test entity.&apos;)
+          .set(&apos;subentity&apos;, entity1);
+
+        entity2.save(next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity1.collection.find(function (err, docs) {
+
+          if (err) {
+            return next(err);
+          }
+
+          test.array(
+            docs
+          ).hasLength(2);
+
+          test.object(docs[0])
+            .hasKey(&apos;type&apos;, &apos;test&apos;)
+            .hasKey(&apos;machineName&apos;, &apos;test1&apos;);
+
+          test.object(docs[1])
+            .hasKey(&apos;type&apos;, &apos;test&apos;)
+            .hasKey(&apos;machineName&apos;, &apos;test2&apos;);
+
+          test.object(
+            docs[1].fieldData
+          ).is({
+            title: &apos;Test 2&apos;,
+            description: &apos;A test entity.&apos;,
+            subentity: {
+              type: &apos;test&apos;,
+              machineName: &apos;test1&apos;
+            }
+          });
+
+          next();
+
+        });
+
+      });
+
+      queue.push(function (next) {
+
+        entity2 = new Entity(entityManager, schema);
+        entity2.machineName = &apos;test2&apos;;
+        entity2.load(next);
+
+      });
+
+      queue.push(function (next) {
+
+        test.string(
+          entity2.machineName
+        ).is(&apos;test2&apos;);
+
+        test.string(
+          entity2.get(&apos;title&apos;)
+        ).is(&apos;Test 2&apos;);
+
+        test.string(
+          entity2.get(&apos;description&apos;)
+        ).is(&apos;A test entity.&apos;);
+
+        test.object(entity2.get(&apos;subentity&apos;))
+          .isInstanceOf(Entity)
+          .hasKey(&apos;machineName&apos;, &apos;test1&apos;);
+
+        next();
+
+      });
+
+      async.series(queue, done);
+
+    });
+
+  });
+
+});
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.2.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
