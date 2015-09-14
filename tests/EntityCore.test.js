@@ -148,4 +148,123 @@ describe('entity/EntityCore', function () {
 
   });
 
+  describe('EntityCore.middleware()', function () {
+
+    it('shouldAddMiddlewareItem', function () {
+
+      var entityCore = new EntityCore(),
+          sMiddleware = Symbol.for('EntityCore.middleware'),
+          cb = function (core, next) {};
+
+      test.array(
+        entityCore[sMiddleware]
+      ).hasLength(0);
+
+      entityCore.middleware(cb);
+
+      test.array(
+        entityCore[sMiddleware]
+      ).hasLength(1).is([{
+        callback: cb,
+        weight: 0
+      }]);
+
+    });
+
+    it('shouldSortMiddlewareItems', function () {
+
+      var entityCore = new EntityCore(),
+          sMiddleware = Symbol.for('EntityCore.middleware'),
+          cb1 = function (core, next) {},
+          cb2 = function (core, next) {},
+          cb3 = function (core, next) {};
+
+      entityCore.middleware(cb1, 10);
+      entityCore.middleware(cb2, -10);
+      entityCore.middleware(cb3);
+
+      test.object(
+        entityCore[sMiddleware][0]
+      ).is({
+        callback: cb2,
+        weight: -10
+      });
+
+      test.object(
+        entityCore[sMiddleware][1]
+      ).is({
+        callback: cb3,
+        weight: 0
+      });
+
+      test.object(
+        entityCore[sMiddleware][2]
+      ).is({
+        callback: cb1,
+        weight: 10
+      });
+
+    });
+
+    it('shouldInitializeWithMiddleware', function (done) {
+
+      var entityCore = new EntityCore(),
+          called = [],
+          cb1 = function (core, next) {
+            called.push('cb1');
+            next();
+          },
+          cb2 = function (core, next) {
+            called.push('cb2');
+            next();
+          },
+          cb3 = function (core, next) {
+            called.push('cb3');
+            next();
+          };
+
+      entityCore.middleware(cb1, 10);
+      entityCore.middleware(cb2, -10);
+      entityCore.middleware(cb3);
+
+      entityCore._servers = function (done) {
+        // Don't setup servers for testing.
+
+        done();
+      };
+
+      entityCore.initialize(cfgFilename, function (err) {
+
+        test.value(
+          err
+        ).isNull();
+
+        test.bool(
+          entityCore.initialized
+        ).isTrue();
+
+        test.array(
+          called
+        ).hasLength(3);
+
+        test.string(
+          called[0]
+        ).is('cb2');
+
+        test.string(
+          called[1]
+        ).is('cb3');
+
+        test.string(
+          called[2]
+        ).is('cb1');
+
+        done();
+
+      });
+
+    });
+
+  });
+
 });
