@@ -54,10 +54,19 @@ describe('entity/PluginManager', function () {
       );
 
       fs.writeFileSync(path.join(tmpPath, 'plugin' + i, 'index.js'), '\n\
-        var loader = require(\'nsloader\');\n\
+        var util = require(\'util\'),\n\
+            loader = require(\'nsloader\');\n\
+        \n\
         var Plugin = loader(\'Entity/PluginManager/Plugin\');\n\
         \n\
-        module.exports = class Plugin' + i + ' extends Plugin {};\n\
+        function Plugin' + i + '() {\n\
+          \'use strict\';\n\
+          Plugin' + i + '.super_.apply(this, arguments);\n\
+        }\n\
+        \n\
+        util.inherits(Plugin' + i + ', Plugin);\n\
+        \n\
+        module.exports = Plugin' + i + ';\n\
       ');
     }
 
@@ -186,7 +195,7 @@ describe('entity/PluginManager', function () {
       queue.push(function (next) {
 
         test.array(
-          pluginManager.enabled
+          pluginManager._enabled
         ).is([]);
 
         next();
@@ -202,7 +211,7 @@ describe('entity/PluginManager', function () {
       queue.push(function (next) {
 
         test.array(
-          pluginManager.enabled
+          pluginManager._enabled
         ).is(['plugin1']);
 
         next();
@@ -297,7 +306,7 @@ describe('entity/PluginManager', function () {
           ).isNull();
 
           test.array(
-            pluginManager.enabled
+            pluginManager._enabled
           ).is(['plugin2', 'plugin3']);
 
           next();
@@ -320,7 +329,7 @@ describe('entity/PluginManager', function () {
       pluginManager.index(tmpPath, function (err) {
 
         test.array(
-          pluginManager.enabled
+          pluginManager._enabled
         ).is([]);
 
         pluginManager.initialize(['plugin1'], function (err) {
@@ -330,7 +339,7 @@ describe('entity/PluginManager', function () {
           ).isNull();
 
           test.array(
-            pluginManager.enabled
+            pluginManager._enabled
           ).is(['plugin1']);
 
           done();
@@ -395,9 +404,9 @@ describe('entity/PluginManager', function () {
 
       queue.push(function (next) {
 
-        test.object(
-          pluginManager.plugin('plugin1')
-        ).isInstanceOf(Plugin).hasKey('name', 'plugin1');
+        test.object(pluginManager.plugin('plugin1'))
+          .isInstanceOf(Plugin)
+          .hasKey('name', 'plugin1');
 
         next();
 
@@ -506,7 +515,7 @@ describe('entity/PluginManager', function () {
       queue.push(function (next) {
 
         test.array(
-          pluginManager.enabled
+          pluginManager._enabled
         ).is(['plugin1']);
 
         next();
@@ -522,7 +531,7 @@ describe('entity/PluginManager', function () {
       queue.push(function (next) {
 
         test.array(
-          pluginManager.enabled
+          pluginManager._enabled
         ).is([]);
 
         next();

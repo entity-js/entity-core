@@ -5,8 +5,7 @@
   },
   "env": {
     "node": true,
-    "mocha": true,
-    "es6": true
+    "mocha": true
   },
   "rules": {
     "block-scoped-var": 2,

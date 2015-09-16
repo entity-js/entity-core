@@ -17,8 +17,7 @@ var path = require('path'),
     os = require('os'),
     test = require('unit.js'),
     loader = require('nsloader'),
-    EntityCore = loader('Entity/index'),
-    Config = loader('Entity/Utils/Config');
+    EntityCore = loader('Entity/index');
 
 describe('entity/EntityCore', function () {
 
@@ -46,99 +45,25 @@ describe('entity/EntityCore', function () {
 
     });
 
-  describe('EntityCore.loadConfig()', function () {
-
-    it('shouldThrowAnErrorIfConfigDoesntExist', function (done) {
-
-      var entityCore = new EntityCore();
-
-      entityCore._loadConfig(cfgFilename, function (err) {
-
-        test.error(
-          err
-        ).isInstanceOf(Error);
-
-        done();
-
-      });
-
-    });
-
-    it('shouldLoadConfig', function (done) {
-
-      var entityCore = new EntityCore();
-
-      entityCore._loadConfig(cfgFilename, function (err) {
-
-        test.value(
-          err
-        ).isNull();
-
-        test.object(
-          entityCore.config
-        ).isInstanceOf(Config);
-
-        test.object(
-          entityCore.config.data
-        ).is(cfgData);
-
-        done();
-
-      });
-
-    });
-
-  });
-
   describe('EntityCore.initialize()', function () {
 
     it('shouldInitializeWithoutIssues', function (done) {
 
-      var entityCore = new EntityCore();
+      var entityCore = new EntityCore(cfgFilename);
 
       test.bool(
-        entityCore.initialized
+        entityCore.isInitialized
       ).isNotTrue();
 
-      entityCore.initialize(cfgFilename, function (err) {
+      entityCore.initialize(function (err) {
 
         test.value(
           err
         ).isNull();
 
         test.bool(
-          entityCore.initialized
+          entityCore.isInitialized
         ).isTrue();
-
-        done();
-
-      });
-
-    });
-
-  });
-
-  describe('EntityCore.config', function () {
-
-    it('shouldReturnNullBeforeInitialize', function () {
-
-      var entityCore = new EntityCore();
-
-      test.value(
-        entityCore.config
-      ).isNull();
-
-    });
-
-    it('shouldInitializeWithoutIssues', function (done) {
-
-      var entityCore = new EntityCore();
-
-      entityCore.initialize('', function (err) {
-
-        test.object(
-          entityCore.config
-        ).isInstanceOf(Config);
 
         done();
 
@@ -152,20 +77,20 @@ describe('entity/EntityCore', function () {
 
     it('shouldAddMiddlewareItem', function () {
 
-      var entityCore = new EntityCore(),
-          sMiddleware = Symbol.for('EntityCore.middleware'),
+      var entityCore = new EntityCore(cfgFilename),
           cb = function (core, next) {};
 
       test.array(
-        entityCore[sMiddleware]
+        entityCore._middleware
       ).hasLength(0);
 
       entityCore.middleware(cb);
 
       test.array(
-        entityCore[sMiddleware]
+        entityCore._middleware
       ).hasLength(1).is([{
         callback: cb,
+        config: {},
         weight: 0
       }]);
 
@@ -173,34 +98,36 @@ describe('entity/EntityCore', function () {
 
     it('shouldSortMiddlewareItems', function () {
 
-      var entityCore = new EntityCore(),
-          sMiddleware = Symbol.for('EntityCore.middleware'),
+      var entityCore = new EntityCore(cfgFilename),
           cb1 = function (core, next) {},
           cb2 = function (core, next) {},
           cb3 = function (core, next) {};
 
-      entityCore.middleware(cb1, 10);
-      entityCore.middleware(cb2, -10);
+      entityCore.middleware(cb1, {}, 10);
+      entityCore.middleware(cb2, {}, -10);
       entityCore.middleware(cb3);
 
       test.object(
-        entityCore[sMiddleware][0]
+        entityCore._middleware[0]
       ).is({
         callback: cb2,
+        config: {},
         weight: -10
       });
 
       test.object(
-        entityCore[sMiddleware][1]
+        entityCore._middleware[1]
       ).is({
         callback: cb3,
+        config: {},
         weight: 0
       });
 
       test.object(
-        entityCore[sMiddleware][2]
+        entityCore._middleware[2]
       ).is({
         callback: cb1,
+        config: {},
         weight: 10
       });
 
@@ -208,23 +135,23 @@ describe('entity/EntityCore', function () {
 
     it('shouldInitializeWithMiddleware', function (done) {
 
-      var entityCore = new EntityCore(),
+      var entityCore = new EntityCore(cfgFilename),
           called = [],
-          cb1 = function (core, next) {
+          cb1 = function (core, config, next) {
             called.push('cb1');
             next();
           },
-          cb2 = function (core, next) {
+          cb2 = function (core, config, next) {
             called.push('cb2');
             next();
           },
-          cb3 = function (core, next) {
+          cb3 = function (core, config, next) {
             called.push('cb3');
             next();
           };
 
-      entityCore.middleware(cb1, 10);
-      entityCore.middleware(cb2, -10);
+      entityCore.middleware(cb1, {}, 10);
+      entityCore.middleware(cb2, {}, -10);
       entityCore.middleware(cb3);
 
       entityCore._servers = function (done) {
@@ -233,14 +160,14 @@ describe('entity/EntityCore', function () {
         done();
       };
 
-      entityCore.initialize(cfgFilename, function (err) {
+      entityCore.initialize(function (err) {
 
         test.value(
           err
         ).isNull();
 
         test.bool(
-          entityCore.initialized
+          entityCore.isInitialized
         ).isTrue();
 
         test.array(

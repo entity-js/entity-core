@@ -12,26 +12,33 @@
  * Entity Core
  */
 
-var test = require('unit.js'),
+var util = require('util'),
+    test = require('unit.js'),
     loader = require('nsloader'),
     Validators = loader('Entity/Validators'),
     Entity = loader('Entity/EntityManager/Entity'),
     EntityRule = loader('Entity/EntityManager/Validators/Entity'),
-    EInvalidEntity = loader('Entity/EntityManager/Errors/EInvalidEntity'),
-    EFailedEntity = loader('Entity/EntityManager/Errors/EFailedEntity');
+    EInvalidEntity = loader(
+      'Entity/EntityManager/Errors/EInvalidEntity'
+    ),
+    EFailedEntity = loader(
+      'Entity/EntityManager/Errors/EFailedEntity'
+    );
 
-class TestEntity extends Entity {
+function TestEntity(type) {
+  'use strict';
 
-  constructor(type) {
-    super(null);
-    this._type = type || 'test';
-  }
-
-  get type() {
-    return this._type;
-  }
-
+  TestEntity.super_.call(this, null);
+  this._type = type || 'test';
 }
+
+util.inherits(TestEntity, Entity);
+
+TestEntity.prototype.type = function () {
+  'use strict';
+
+  return this._type;
+};
 
 function createValidator() {
   'use strict';

@@ -58,7 +58,11 @@ describe('entity/EntityManager/BaseEntity', function () {
 
     validators = new Validators();
     sanitizers = new Sanitizers();
-    entityManager = new EntityManager(database, validators, sanitizers);
+    entityManager = new EntityManager({
+      database: database,
+      validators: validators,
+      sanitizers: sanitizers
+    });
 
     done();
 
@@ -120,7 +124,7 @@ describe('entity/EntityManager/BaseEntity', function () {
       var entity = createBaseEntity();
 
       test.bool(
-        entity.isRenaming
+        entity._isRenaming
       ).isNotTrue();
 
     });

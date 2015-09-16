@@ -225,7 +225,7 @@ describe('entity/Utils/Config', function () {
 
     it('savesAnEmptyConfigFile', function (done) {
 
-      var config = new Config(path.join(tmpPath, 'config.json'));
+      var config = new Config(null, path.join(tmpPath, 'config.json'));
 
       config.save(function (err) {
 
@@ -242,7 +242,7 @@ describe('entity/Utils/Config', function () {
 
     it('savesPopulatedConfig', function (done) {
 
-      var config = new Config(path.join(tmpPath, 'config.json'));
+      var config = new Config(null, path.join(tmpPath, 'config.json'));
       config.data.test = {value: 'hello'};
 
       config.save(function (err) {
@@ -263,7 +263,7 @@ describe('entity/Utils/Config', function () {
 
     it('throwsAnErrorIfUnableToSave', function (done) {
 
-      var config = new Config(path.join('/etc', 'config.json'));
+      var config = new Config(null, path.join('/etc', 'config.json'));
 
       config.save(function (err) {
 
@@ -299,7 +299,7 @@ describe('entity/Utils/Config', function () {
 
     it('errorIsThrownIfTheConfigDoesntExist', function (done) {
 
-      var config = new Config(path.join(tmpPath, 'config2.json'));
+      var config = new Config(null, path.join(tmpPath, 'config2.json'));
 
       config.load(function (err) {
 
@@ -315,7 +315,7 @@ describe('entity/Utils/Config', function () {
 
     it('loadFromConfigFile', function (done) {
 
-      var config = new Config(path.join(tmpPath, 'config.json'));
+      var config = new Config(null, path.join(tmpPath, 'config.json'));
 
       config.load(function (err) {
 
@@ -335,7 +335,7 @@ describe('entity/Utils/Config', function () {
 
     it('loadFromConfigFileResetsExistingConfig', function (done) {
 
-      var config = new Config(path.join(tmpPath, 'config.json'));
+      var config = new Config(null, path.join(tmpPath, 'config.json'));
       config.data.hello = 'world';
 
       config.load(function (err) {
@@ -357,7 +357,7 @@ describe('entity/Utils/Config', function () {
 
       fs.writeFileSync(path.join(tmpPath, 'config.json'), 'test');
 
-      var config = new Config(path.join(tmpPath, 'config.json'));
+      var config = new Config(null, path.join(tmpPath, 'config.json'));
 
       config.load(function (err) {
 

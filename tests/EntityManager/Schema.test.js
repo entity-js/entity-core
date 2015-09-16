@@ -36,8 +36,7 @@ var async = require('async'),
       'Entity/Validators/Errors/EUnknownValidator'
     );
 
-var database, entityManager,
-    sFields = Symbol.for('Schema.fields');
+var database, entityManager;
 
 describe('entity/EntityManager/Schema', function () {
 
@@ -51,9 +50,11 @@ describe('entity/EntityManager/Schema', function () {
       host: '0.0.0.0'
     }, true);
 
-    var validators = new Validators(),
-        sanitizers = new Sanitizers();
-    entityManager = new EntityManager(database, validators, sanitizers);
+    entityManager = new EntityManager({
+      database: database,
+      validators: new Validators(),
+      sanitizers: new Sanitizers()
+    });
 
     done();
 
@@ -99,10 +100,10 @@ describe('entity/EntityManager/Schema', function () {
       );
 
       test.object(
-        schema[sFields]
+        schema._fields
       ).hasKey('test');
 
-      test.object(schema[sFields].test)
+      test.object(schema._fields.test)
         .hasKey('type', 'String')
         .hasKey('title', 'Test')
         .hasKey('description', 'A test field.');
@@ -213,7 +214,7 @@ describe('entity/EntityManager/Schema', function () {
       schema.getField('test').title = 'Hello';
 
       test.string(
-        schema[sFields].test.title
+        schema._fields.test.title
       ).is('Hello');
 
     });
@@ -247,7 +248,7 @@ describe('entity/EntityManager/Schema', function () {
       schema.delField('test');
 
       test.value(
-        schema[sFields].test
+        schema._fields.test
       ).isUndefined();
 
     });
@@ -319,11 +320,11 @@ describe('entity/EntityManager/Schema', function () {
         .addFieldSanitization('test', 'trim');
 
       test.array(
-        schema[sFields].test.sanitizers
+        schema._fields.test.sanitizers
       ).hasLength(1);
 
       test.object(
-        schema[sFields].test.sanitizers[0]
+        schema._fields.test.sanitizers[0]
       ).hasKey('rule', 'trim');
 
       done();
@@ -365,11 +366,11 @@ describe('entity/EntityManager/Schema', function () {
         .addFieldValidation('test', 'machine-name');
 
       test.array(
-        schema[sFields].test.validators
+        schema._fields.test.validators
       ).hasLength(1);
 
       test.object(
-        schema[sFields].test.validators[0]
+        schema._fields.test.validators[0]
       ).hasKey('rule', 'machine-name');
 
       done();

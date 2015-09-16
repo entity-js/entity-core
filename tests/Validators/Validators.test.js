@@ -17,8 +17,6 @@ var test = require('unit.js'),
     Validators = loader('Entity/Validators'),
     EUnknownValidator = loader('Entity/Validators/Errors/EUnknownValidator');
 
-var sRules = Symbol.for('Validators.rules');
-
 describe('entity/Validators', function () {
 
   'use strict';
@@ -33,7 +31,7 @@ describe('entity/Validators', function () {
       validators.register('test', validator);
 
       test.array(
-        validators[sRules].test
+        validators._rules.test
       ).hasLength(1).is([{
         callback: validator,
         weight: 0
@@ -54,7 +52,7 @@ describe('entity/Validators', function () {
         .register('test', validator3);
 
       test.array(
-        validators[sRules].test
+        validators._rules.test
       ).hasLength(3).is([{
         callback: validator1,
         weight: 0
@@ -80,7 +78,7 @@ describe('entity/Validators', function () {
         .register('test', validator2, -10)
         .register('test', validator3);
 
-      var rules = validators[sRules].test;
+      var rules = validators._rules.test;
       test.array(
         rules
       ).hasLength(3);
@@ -165,7 +163,7 @@ describe('entity/Validators', function () {
 
       validators.unregister('test');
       test.value(
-        validators[sRules].test
+        validators._rules.test
       ).isUndefined();
 
     });
@@ -184,7 +182,7 @@ describe('entity/Validators', function () {
 
       validators.unregister('test', validator2);
       test.array(
-        validators[sRules].test
+        validators._rules.test
       ).hasLength(2).is([{
         callback: validator3,
         weight: 0
@@ -210,7 +208,7 @@ describe('entity/Validators', function () {
 
       validators.unregister('test', validator2);
       test.array(
-        validators[sRules].test
+        validators._rules.test
       ).hasLength(2).is([{
         callback: validator3,
         weight: 0
@@ -230,7 +228,7 @@ describe('entity/Validators', function () {
 
       validators.unregister('test', validator);
       test.value(
-        validators[sRules].test
+        validators._rules.test
       ).isUndefined();
 
     });

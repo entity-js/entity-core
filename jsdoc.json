@@ -4,7 +4,7 @@
     "dictionaries": ["jsdoc", "closure"]
   },
   "source": {
-    "include": ["./lib/index.js", "./package.json"]
+    "include": ["./lib", "./package.json"]
   },
   "opts": {
     "readme": "./README.md",
@@ -17,7 +17,7 @@
     "plugins/summarize"
   ],
   "templates": {
-    "applicationName": "EntityCI",
+    "applicationName": "Entity Core",
     "disqus": "",
     "googleAnalytics": "",
     "openGraph": {

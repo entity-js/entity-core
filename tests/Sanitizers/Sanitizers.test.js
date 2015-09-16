@@ -17,8 +17,6 @@ var test = require('unit.js'),
     Sanitizers = loader('Entity/Sanitizers'),
     EUnknownSanitizer = loader('Entity/Sanitizers/Errors/EUnknownSanitizer');
 
-var sRules = Symbol.for('Sanitizers.rules');
-
 describe('entity/Sanitizers', function () {
 
   'use strict';
@@ -33,7 +31,7 @@ describe('entity/Sanitizers', function () {
       sanitizers.register('test', sanitizer);
 
       test.array(
-        sanitizers[sRules].test
+        sanitizers._rules.test
       ).hasLength(1).is([{
         callback: sanitizer,
         weight: 0
@@ -54,7 +52,7 @@ describe('entity/Sanitizers', function () {
         .register('test', sanitizer3);
 
       test.array(
-        sanitizers[sRules].test
+        sanitizers._rules.test
       ).hasLength(3).is([{
         callback: sanitizer1,
         weight: 0
@@ -80,7 +78,7 @@ describe('entity/Sanitizers', function () {
         .register('test', sanitizer3);
 
       test.array(
-        sanitizers[sRules].test
+        sanitizers._rules.test
       ).hasLength(3).is([{
         callback: sanitizer2,
         weight: -10
@@ -161,7 +159,7 @@ describe('entity/Sanitizers', function () {
 
       sanitizers.unregister('test');
       test.value(
-        sanitizers[sRules].test
+        sanitizers._rules.test
       ).isUndefined();
 
     });
@@ -180,7 +178,7 @@ describe('entity/Sanitizers', function () {
 
       sanitizers.unregister('test', sanitizer2);
       test.array(
-        sanitizers[sRules].test
+        sanitizers._rules.test
       ).hasLength(2).is([{
         callback: sanitizer3,
         weight: 0
@@ -205,7 +203,7 @@ describe('entity/Sanitizers', function () {
 
       sanitizers.unregister('test', sanitizer2);
       test.array(
-        sanitizers[sRules].test
+        sanitizers._rules.test
       ).hasLength(2).is([{
         callback: sanitizer3,
         weight: 0

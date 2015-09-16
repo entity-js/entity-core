@@ -17,6 +17,7 @@ var fs = require('fs'),
     async = require('async'),
     test = require('unit.js'),
     loader = require('nsloader'),
+    EntityCore = loader('Entity'),
     Locale = loader('Entity/Locale');
 
 var core;
@@ -31,7 +32,7 @@ describe('entity/Locale', function () {
 
   beforeEach(function (done) {
 
-    core = loader('Entity');
+    core = new EntityCore();
     core.database.connect('test', {
       name: 'test',
       host: '0.0.0.0'
@@ -83,7 +84,7 @@ describe('entity/Locale', function () {
 
     it('shouldProcessTheTranslationFile', function (done) {
 
-      var locale = new Locale(core.database);
+      var locale = new Locale(core);
 
       test.array(
         locale.languages
@@ -114,7 +115,7 @@ describe('entity/Locale', function () {
     it('shouldMergeButNotReplace', function (done) {
 
       var queue = [],
-          locale = new Locale(core.database);
+          locale = new Locale(core);
 
       queue.push(function (next) {
 
@@ -154,7 +155,7 @@ describe('entity/Locale', function () {
 
     it('shouldProcessAllTranslationFiles', function (done) {
 
-      var locale = new Locale(core.database);
+      var locale = new Locale(core);
 
       test.array(
         locale.languages
@@ -195,7 +196,7 @@ describe('entity/Locale', function () {
 
     it('shouldReturnAnEmptyArrayIfNoLanguages', function () {
 
-      var locale = new Locale(core.database);
+      var locale = new Locale(core);
 
       test.array(
         locale.languages
@@ -205,7 +206,7 @@ describe('entity/Locale', function () {
 
     it('shouldReturnLanguageNames', function (done) {
 
-      var locale = new Locale(core.database);
+      var locale = new Locale(core);
 
       locale.addFromDir(tmpPath, function (err) {
 
@@ -229,7 +230,7 @@ describe('entity/Locale', function () {
 
     it('shouldThrowAnErrorIfLocaleIsUndefined', function () {
 
-      var locale = new Locale(core.database);
+      var locale = new Locale(core);
 
       test.error(function () {
         locale.locales('fr');
@@ -243,12 +244,12 @@ describe('entity/Locale', function () {
 
     it('shouldAddTranslationToTheDatabase', function (done) {
 
-      var locale = new Locale(core.database),
+      var locale = new Locale(core),
           queue = [];
 
       queue.push(function (next) {
 
-        locale.database
+        locale.core.database
           .collection('locales')
           .find({}, function (err, docs) {
 
@@ -274,7 +275,7 @@ describe('entity/Locale', function () {
 
       queue.push(function (next) {
 
-        locale.database
+        locale.core.database
           .collection('locales')
           .find({}, function (err, docs) {
 
@@ -315,7 +316,7 @@ describe('entity/Locale', function () {
 
     it('shouldOverrideFileTranslation', function (done) {
 
-      var locale = new Locale(core.database),
+      var locale = new Locale(core),
           queue = [];
 
       queue.push(function (next) {
@@ -360,7 +361,7 @@ describe('entity/Locale', function () {
 
     it('translatingUpdatesDatabaseEntry', function (done) {
 
-      var locale = new Locale(core.database),
+      var locale = new Locale(core),
           queue = [];
 
       queue.push(function (next) {
@@ -371,7 +372,7 @@ describe('entity/Locale', function () {
 
       queue.push(function (next) {
 
-        locale.database
+        locale.core.database
           .collection('locales')
           .find({}, function (err, docs) {
 
@@ -414,7 +415,7 @@ describe('entity/Locale', function () {
 
       queue.push(function (next) {
 
-        locale.database
+        locale.core.database
           .collection('locales')
           .find({}, function (err, docs) {
 
@@ -455,7 +456,7 @@ describe('entity/Locale', function () {
 
     it('cantOverrideDatabaseTranslation', function (done) {
 
-      var locale = new Locale(core.database),
+      var locale = new Locale(core),
           queue = [];
 
       queue.push(function (next) {
@@ -492,12 +493,12 @@ describe('entity/Locale', function () {
 
     it('shouldLoadTranslationsFromDirectoryAndDatabase', function (done) {
 
-      var locale = new Locale(core.database),
+      var locale = new Locale(core),
           queue = [];
 
       queue.push(function (next) {
 
-        locale.database
+        locale.core.database
           .collection('locales')
           .save({
             language: 'fr',
@@ -546,7 +547,7 @@ describe('entity/Locale', function () {
 
     it('shouldReturnMsgWithNoParams', function () {
 
-      var locale = new Locale(core.database);
+      var locale = new Locale(core);
 
       test.string(
         locale._strtr('Hello world')
@@ -556,7 +557,7 @@ describe('entity/Locale', function () {
 
     it('shouldReturnMsgWithParams', function () {
 
-      var locale = new Locale(core.database);
+      var locale = new Locale(core);
 
       test.string(
         locale._strtr('Hello :arg', {'arg': 'world'})
@@ -570,7 +571,7 @@ describe('entity/Locale', function () {
 
     it('shouldReturnMsgIfNoTranslations', function () {
 
-      var locale = new Locale(core.database);
+      var locale = new Locale(core);
 
       test.string(
         locale.t('fr', 'Hello world')
@@ -580,7 +581,7 @@ describe('entity/Locale', function () {
 
     it('shouldReturnMsgIfNoTranslationsWithParams', function () {
 
-      var locale = new Locale(core.database);
+      var locale = new Locale(core);
 
       test.string(
         locale.t('fr', 'Hello :arg', {'arg': 'world'})
@@ -590,7 +591,7 @@ describe('entity/Locale', function () {
 
     it('shouldReturnTranslatedMsg', function (done) {
 
-      var locale = new Locale(core.database),
+      var locale = new Locale(core),
           queue = [];
 
       queue.push(function (next) {
@@ -615,7 +616,7 @@ describe('entity/Locale', function () {
 
     it('shouldReturnTranslatedMsgWithParams', function (done) {
 
-      var locale = new Locale(core.database),
+      var locale = new Locale(core),
           queue = [];
 
       queue.push(function (next) {

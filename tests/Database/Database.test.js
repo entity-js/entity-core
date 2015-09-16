@@ -17,7 +17,9 @@ var async = require('async'),
     loader = require('nsloader'),
     Database = loader('Entity/Database'),
     Connection = loader('Entity/Database/Connection'),
-    EDefinedConnection = loader('Entity/Database/Errors/EDefinedConnection'),
+    EDefinedConnection = loader(
+      'Entity/Database/Errors/EDefinedConnection'
+    ),
     EUndefinedConnection = loader(
       'Entity/Database/Errors/EUndefinedConnection'
     );
@@ -35,8 +37,10 @@ describe('entity/Database', function () {
 
     function clearAndDrop(name) {
       return function (next) {
+        console.info('DROP CONNECTION', name);
         database.collection('test', name).drop(function () {
           database.disconnect(name);
+          console.info('DROPPED');
           next();
         });
       };

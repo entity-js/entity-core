@@ -110,7 +110,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldReturnAnEmptyArray', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -137,7 +141,11 @@ describe('entity/EntityManager', function () {
 
     it('ShouldReturnAnArrayWithSchemaName', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -178,7 +186,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldThrowAnErrorIfTheSchemaIsUndefined', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers);
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          });
 
       entityManager.schema('test', function (err, schema) {
 
@@ -194,7 +206,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldReturnTheSchema', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -231,7 +247,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldThrowAnErrorIfTheSchemaIsUndefined', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers);
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          });
 
       entityManager.exists('test', 'test', function (err, exists) {
 
@@ -247,7 +267,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldReturnFalseIfEntityDoesntExist', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -280,7 +304,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldReturnTrueIfEntityExists', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           schema,
           queue = [];
 
@@ -333,7 +361,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldThrowAnErrorIfTheSchemaIsUndefined', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers);
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          });
 
       entityManager.count('test', function (err, count) {
 
@@ -349,7 +381,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldReturnZeroIfNoEntities', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -382,7 +418,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldReturnTrueIfEntityExists', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           schema,
           queue = [];
 
@@ -435,7 +475,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldThrowAnErrorIfTheSchemaIsUndefined', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers);
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          });
 
       entityManager.create(function (err, entity) {
 
@@ -451,7 +495,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldCreateTheEntity', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -473,7 +521,7 @@ describe('entity/EntityManager', function () {
           ).isInstanceOf(Entity);
 
           test.string(
-            entity.type
+            entity.type()
           ).is('test');
 
           next();
@@ -492,7 +540,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldThrowAnErrorIfTheSchemaIsUndefined', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers);
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          });
 
       entityManager.load('test', 'test', function (err, entity) {
 
@@ -508,7 +560,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldThrowAnErrorIfTheEntityIsUndefined', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -541,7 +597,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldCreateTheEntityIfForced', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -578,7 +638,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldLoadTheEntity', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -642,7 +706,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldThrowAnErrorIfTheSchemaIsUndefined', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers);
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          });
 
       entityManager.find('test', {}, function (err, entities) {
 
@@ -658,7 +726,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldReturnEmptyArrayIfNoMatches', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -691,7 +763,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldFindMultipleEntities', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -776,17 +852,14 @@ describe('entity/EntityManager', function () {
 
           test.object(entities[0])
             .isInstanceOf(Entity)
-            .hasKey('type', 'test')
             .hasKey('machineName', 'test');
 
           test.object(entities[1])
             .isInstanceOf(Entity)
-            .hasKey('type', 'test')
             .hasKey('machineName', 'test2');
 
           test.object(entities[2])
             .isInstanceOf(Entity)
-            .hasKey('type', 'test')
             .hasKey('machineName', 'test3');
 
           next();
@@ -801,7 +874,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldOrderResults', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -910,7 +987,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldLimitResults', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {
@@ -1029,7 +1110,11 @@ describe('entity/EntityManager', function () {
 
     it('shouldPageResults', function (done) {
 
-      var entityManager = new EntityManager(database, validators, sanitizers),
+      var entityManager = new EntityManager({
+            database: database,
+            validators: validators,
+            sanitizers: sanitizers
+          }),
           queue = [];
 
       queue.push(function (next) {

@@ -15,11 +15,15 @@
 var test = require('unit.js'),
     loader = require('nsloader'),
     Validators = loader('Entity/Validators'),
-    EInvalidLength = loader('Entity/Validators/Errors/EInvalidLength'),
+    EInvalidLength = loader(
+      'Entity/Validators/Errors/EInvalidLength'
+    ),
     EInvalidCharacters = loader(
       'Entity/Validators/Errors/EInvalidCharacters'
     ),
-    EMustContainDigit = loader('Entity/Validators/Errors/EMustContainDigit'),
+    EMustContainDigit = loader(
+      'Entity/Validators/Errors/EMustContainDigit'
+    ),
     EMustContainLowercase = loader(
       'Entity/Validators/Errors/EMustContainLowercase'
     ),

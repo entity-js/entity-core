@@ -262,6 +262,44 @@ describe('entity/EventManager', function () {
 
     });
 
+    it('shouldFireMultipleEvents', function (done) {
+
+      var eventManager = new EventManager(),
+          callbacks = {},
+          callback1 = function (next, params) {
+            callbacks.callback1 = params.msg1;
+            next();
+          },
+          callback2 = function (next, params) {
+            callbacks.callback2 = params.msg2;
+            next();
+          };
+
+      eventManager.listen('test', callback1);
+      eventManager.listen('test[2]', callback2);
+
+      eventManager.fire(['test', 'test[2]'], function (err) {
+
+        test.value(
+          err
+        ).isNull();
+
+        test.object(
+          callbacks
+        ).is({
+          callback1: 'hello',
+          callback2: 'world'
+        });
+
+        done();
+
+      }, {
+        msg1: 'hello',
+        msg2: 'world'
+      });
+
+    });
+
     it('shouldCatchErrors', function (done) {
 
       var eventManager = new EventManager(),

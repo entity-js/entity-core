@@ -25,8 +25,7 @@ var async = require('async'),
       'Entity/EntityManager/Errors/EUnknownSchemaField'
     );
 
-var sFieldData = Symbol.for('Entity.fieldData'),
-    database, entityManager, schema;
+var database, entityManager, schema;
 
 describe('entity/EntityManager/Entity', function () {
 
@@ -43,7 +42,11 @@ describe('entity/EntityManager/Entity', function () {
     var validators = new Validators(),
         sanitizers = new Sanitizers();
 
-    entityManager = new EntityManager(database, validators, sanitizers);
+    entityManager = new EntityManager({
+      database: database,
+      validators: validators,
+      sanitizers: sanitizers
+    });
 
     schema = new Schema(entityManager);
     schema.machineName = 'test';
@@ -106,7 +109,7 @@ describe('entity/EntityManager/Entity', function () {
       var entity = new Entity(entityManager, schema);
 
       test.string(
-        entity.type
+        entity.type()
       ).is('test');
 
     });
@@ -151,7 +154,7 @@ describe('entity/EntityManager/Entity', function () {
 
       var entity = new Entity(entityManager, schema);
 
-      entity[sFieldData].title = 'test';
+      entity._fieldData.title = 'test';
 
       test.string(
         entity.get('title')
@@ -180,7 +183,7 @@ describe('entity/EntityManager/Entity', function () {
       entity.set('title', 'hello world');
 
       test.string(
-        entity[sFieldData].title
+        entity._fieldData.title
       ).is('hello world');
 
     });
