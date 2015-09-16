@@ -34,7 +34,6 @@
     "socket.io-events": "^0.4.6"
   },
   "devDependencies": {
-    "babel-eslint": "^4.1.1",
     "eslint": "^1.2.1",
     "istanbul": "^0.3.19",
     "jaguarjs-jsdoc": "git+https://github.com/davidshimjs/jaguarjs-jsdoc.git",
