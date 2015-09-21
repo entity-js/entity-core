@@ -198,9 +198,18 @@ describe('entity/EntityManager/Entity', function () {
           queue = [];
 
       entity.machineName = 'test';
-      entity
-        .set('title', 'Test')
-        .set('description', 'A test entity.');
+
+      queue.push(function (next) {
+
+        entity.set('title', 'Test', next);
+
+      });
+
+      queue.push(function (next) {
+
+        entity.set('description', 'A test entity.', next);
+
+      });
 
       queue.push(function (next) {
 
@@ -267,26 +276,65 @@ describe('entity/EntityManager/Entity', function () {
 
       queue.push(function (next) {
 
+        var q2 = [];
+
         entity1 = new Entity(entityManager, schema);
         entity1.machineName = 'test1';
-        entity1
-          .set('title', 'Test 1')
-          .set('description', 'A test entity.');
 
-        entity1.save(next);
+        q2.push(function (nxt) {
+
+          entity1.set('title', 'Test 1', nxt);
+
+        });
+
+        q2.push(function (nxt) {
+
+          entity1.set('description', 'A test entity.', nxt);
+
+        });
+
+        q2.push(function (nxt) {
+
+          entity1.save(nxt);
+
+        });
+
+        async.series(q2, next);
 
       });
 
       queue.push(function (next) {
 
+        var q2 = [];
+
         entity2 = new Entity(entityManager, schema);
         entity2.machineName = 'test2';
-        entity2
-          .set('title', 'Test 2')
-          .set('description', 'A test entity.')
-          .set('subentity', entity1);
 
-        entity2.save(next);
+        q2.push(function (nxt) {
+
+          entity2.set('title', 'Test 2', nxt);
+
+        });
+
+        q2.push(function (nxt) {
+
+          entity2.set('description', 'A test entity.', nxt);
+
+        });
+
+        q2.push(function (nxt) {
+
+          entity2.set('subentity', entity1, nxt);
+
+        });
+
+        q2.push(function (nxt) {
+
+          entity2.save(nxt);
+
+        });
+
+        async.series(q2, next);
 
       });
 
@@ -317,6 +365,7 @@ describe('entity/EntityManager/Entity', function () {
             description: 'A test entity.',
             subentity: {
               type: 'test',
+              subtype: null,
               machineName: 'test1'
             }
           });
